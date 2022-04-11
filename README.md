@@ -3,12 +3,12 @@
 TODO:
 - prepare demo collection with assets
 - update the demo app
-- improve loading of the data on the mint page after logging in
-- test logic when the drop is enabled and maybe allowlist
-- prepare elven-toools-cli commands for it, keep track the version, the same as for the sc
 - write basic docs
 
 TODO (for later):
+- prepare elven-toools-cli commands for it, keep track the version, the same as for the sc
+- test logic when the drop is enabled and maybe allowlist
+- improve loading of the data on the mint page after logging in
 - clear TODOs
 - write more hooks for particular queries (swr)
 - serialization for the data which commes from the smart contract?

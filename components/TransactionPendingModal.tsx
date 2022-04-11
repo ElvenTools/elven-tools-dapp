@@ -1,0 +1,103 @@
+import {
+  Modal,
+  Text,
+  ModalContent,
+  Flex,
+  Spinner,
+  ModalBody,
+  useDisclosure,
+  ModalOverlay,
+  ModalCloseButton,
+} from '@chakra-ui/react';
+import { FC } from 'react';
+import { networkConfig, chainType } from '../config/network';
+import { useEffectOnlyOnUpdate } from '../hooks/tools/useEffectOnlyOnUpdate';
+import { shortenHash } from '../utils/shortenHash';
+
+interface TransactionPendingModalProps {
+  isOpen: boolean;
+  successTxHash?: string;
+  txError?: string;
+}
+
+const CustomModalOverlay = () => {
+  return <ModalOverlay bg="blackAlpha.700" backdropFilter="blur(5px)" />;
+};
+
+export const TransactionPendingModal: FC<TransactionPendingModalProps> = ({
+  isOpen = false,
+  successTxHash,
+  txError,
+}) => {
+  const { isOpen: opened, onOpen, onClose } = useDisclosure();
+
+  useEffectOnlyOnUpdate(() => {
+    if (isOpen || successTxHash || txError) {
+      onOpen();
+    }
+  }, [isOpen, successTxHash, txError]);
+
+  const txTitle = () => {
+    if (txError) {
+      return `Transaction error: ${txError}.`;
+    }
+    if (successTxHash) {
+      return 'Transaction success. Check explorer for details.';
+    }
+    return 'Transaction pending.';
+  };
+
+  return (
+    <Modal isOpen={opened} size="sm" onClose={onClose} isCentered>
+      <CustomModalOverlay />
+      <ModalContent
+        bgColor="elvenTools.dark.darker"
+        px={6}
+        pt={7}
+        pb={10}
+        position="relative"
+      >
+        <ModalCloseButton _focus={{ outline: 'none' }} />
+        <ModalBody>
+          <Text textAlign="center" fontWeight="semibold" fontSize="xl">
+            {txTitle()}
+          </Text>
+
+          {!txError && (
+            <Flex alignItems="center" justifyContent="center" mt={8}>
+              {successTxHash && (
+                <Text
+                  as="a"
+                  href={`${networkConfig[chainType].explorerAddress}/transactions/${successTxHash}`}
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  borderColor="elvenTools.color2.darker"
+                  borderWidth={2}
+                  bgColor="transparent"
+                  py={2}
+                  px={6}
+                  rounded="xl"
+                  fontWeight="normal"
+                  color="elvenTools.white"
+                  userSelect="none"
+                  _hover={{ bg: 'elvenTools.color2.darker' }}
+                  transition="background-color .3s"
+                >
+                  {shortenHash(successTxHash)}
+                </Text>
+              )}
+              {!successTxHash && !txError && (
+                <Spinner
+                  thickness="3px"
+                  speed="0.4s"
+                  color="elvenTools.color2.base"
+                  size="xl"
+                />
+              )}
+            </Flex>
+          )}
+        </ModalBody>
+      </ModalContent>
+    </Modal>
+  );
+};

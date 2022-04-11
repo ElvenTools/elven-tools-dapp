@@ -1,0 +1,82 @@
+import { useMintTransaction } from '../hooks/interaction/useMintTransaction';
+import { useCallback, FC, useState } from 'react';
+import { ActionButton } from './ActionButton';
+import { ScTransactionCb } from '../hooks/interaction/useScTransaction';
+import { MobileAppConfirmModal } from './MobileAppConfirmModal';
+import { useLoginInfo } from '../hooks/auth/useLoginInfo';
+import { LoginMethodsEnum } from '../types/enums';
+import {
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
+  Box,
+} from '@chakra-ui/react';
+import { TransactionPendingModal } from '../components/TransactionPendingModal';
+
+interface MintFormProps {
+  leftToMintForUser: number;
+  cb?: (params: ScTransactionCb) => void;
+}
+
+export const MintForm: FC<MintFormProps> = ({ leftToMintForUser, cb }) => {
+  const [amount, setAmount] = useState(1);
+  const { mint, pending, transaction, error } = useMintTransaction(cb);
+  const { loginMethod } = useLoginInfo();
+
+  const handleMint = useCallback(() => {
+    mint(amount);
+  }, [amount, mint]);
+
+  const setAmountHandler = useCallback((value) => setAmount(value), []);
+
+  return (
+    <>
+      <Box
+        display="flex"
+        gap={5}
+        alignItems="center"
+        justifyContent={{ base: 'center', md: 'flex-start' }}
+      >
+        <NumberInput
+          maxW="100px"
+          min={1}
+          max={leftToMintForUser}
+          value={amount}
+          onChange={setAmountHandler}
+        >
+          <NumberInputField
+            py={5}
+            _focus={{ outline: 'none' }}
+            disabled={leftToMintForUser <= 0}
+            placeholder="Amount of tokens to mint..."
+          />
+          {leftToMintForUser <= 0 ? null : (
+            <NumberInputStepper>
+              <NumberIncrementStepper borderColor="elvenTools.base.dark" />
+              <NumberDecrementStepper />
+            </NumberInputStepper>
+          )}
+        </NumberInput>
+        <ActionButton
+          onClick={handleMint}
+          disabled={pending || leftToMintForUser <= 0}
+        >
+          {pending ? 'Pending...' : 'Mint'}
+        </ActionButton>
+      </Box>
+      <MobileAppConfirmModal
+        isOpen={loginMethod === LoginMethodsEnum.walletconnect && pending}
+      />
+      {/* TODO: test mobile pending states */}
+      {loginMethod !== LoginMethodsEnum.walletconnect && (
+        <TransactionPendingModal
+          isOpen={pending}
+          successTxHash={transaction?.getHash().toString()}
+          txError={error}
+        />
+      )}
+    </>
+  );
+};

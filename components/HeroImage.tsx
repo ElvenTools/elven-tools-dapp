@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { Box } from '@chakra-ui/react';
 
 export const HeroImage = () => {
@@ -24,7 +23,7 @@ export const HeroImage = () => {
         display="flex"
         bgGradient="linear-gradient(90deg, elvenTools.dark.base 0%, elvenTools.dark.darker 70%);"
       >
-        <Image src="/img.gif" alt="" width="300px" height="300px" />
+        <Box as="img" src="/img.gif" alt="" width="300px" height="300px" />
       </Box>
     </Box>
   );

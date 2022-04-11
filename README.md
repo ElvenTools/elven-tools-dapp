@@ -1,8 +1,9 @@
 ### Elven Tools Dapp
 
 TODO:
-- configure subdomain and deploy
-
+- prepare demo collection with assets
+- update the demo app
+- improve loading of the data on the mint page after logging in
 - test logic when the drop is enabled and maybe allowlist
 - prepare elven-toools-cli commands for it, keep track the version, the same as for the sc
 - write basic docs
@@ -33,6 +34,7 @@ TODO (for later):
 
 
 Done:
+- configure subdomain and deploy
 - when at least three auth services are ready test switching between the chains
 - test mobile auth on phone with deeplinks
 - prepare proper package.json file

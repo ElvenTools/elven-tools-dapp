@@ -15,6 +15,7 @@ The Dapp is built using Nextjs and a couple of helpful tools. For now, there is 
 - it uses erdjs 9.* without the dapp-core library. It will be migrated to erdjs 10.* asap
 - it uses backed side redirections to hide the API endpoint. The only exposed one is `/api`
 - it uses .env file - there is an example in the repo
+- it uses a couple of config files in the 'config' directory
 - it uses chakra-ui
 
 #### Here are rough notes on what would be done. It will be cleaned up and prioritized soon:

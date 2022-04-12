@@ -18,6 +18,7 @@ interface TransactionPendingModalProps {
   isOpen: boolean;
   successTxHash?: string;
   txError?: string;
+  additionalMessage?: string;
 }
 
 const CustomModalOverlay = () => {
@@ -28,6 +29,7 @@ export const TransactionPendingModal: FC<TransactionPendingModalProps> = ({
   isOpen = false,
   successTxHash,
   txError,
+  additionalMessage,
 }) => {
   const { isOpen: opened, onOpen, onClose } = useDisclosure();
 
@@ -95,6 +97,11 @@ export const TransactionPendingModal: FC<TransactionPendingModalProps> = ({
                 />
               )}
             </Flex>
+          )}
+          {additionalMessage && !successTxHash && (
+            <Text textAlign="center" mt={5} fontWeight="semibold" fontSize="md">
+              {additionalMessage}
+            </Text>
           )}
         </ModalBody>
       </ModalContent>

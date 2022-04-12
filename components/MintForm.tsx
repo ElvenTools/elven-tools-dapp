@@ -2,7 +2,6 @@ import { useMintTransaction } from '../hooks/interaction/useMintTransaction';
 import { useCallback, FC, useState } from 'react';
 import { ActionButton } from './ActionButton';
 import { ScTransactionCb } from '../hooks/interaction/useScTransaction';
-import { MobileAppConfirmModal } from './MobileAppConfirmModal';
 import { useLoginInfo } from '../hooks/auth/useLoginInfo';
 import { LoginMethodsEnum } from '../types/enums';
 import {
@@ -66,17 +65,16 @@ export const MintForm: FC<MintFormProps> = ({ leftToMintForUser, cb }) => {
           {pending ? 'Pending...' : 'Mint'}
         </ActionButton>
       </Box>
-      <MobileAppConfirmModal
-        isOpen={loginMethod === LoginMethodsEnum.walletconnect && pending}
+      <TransactionPendingModal
+        isOpen={pending}
+        successTxHash={transaction?.getHash().toString()}
+        txError={error}
+        additionalMessage={
+          loginMethod === LoginMethodsEnum.walletconnect
+            ? 'Sign the transaction using Maiar mobile app. It will take some time to finish. You can always close this message. You will get the transaction hash when finished.'
+            : 'It will take some time to finish. You can always close this message. You will get the transaction hash when finished.'
+        }
       />
-      {/* TODO: test mobile pending states */}
-      {loginMethod !== LoginMethodsEnum.walletconnect && (
-        <TransactionPendingModal
-          isOpen={pending}
-          successTxHash={transaction?.getHash().toString()}
-          txError={error}
-        />
-      )}
     </>
   );
 };

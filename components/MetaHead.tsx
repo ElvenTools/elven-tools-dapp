@@ -13,7 +13,7 @@ export const MetaHead: FC<MetaHeadProps> = memo(
   ({ metaTitle, metaDescription, metaImage, metaUrl }) => {
     return (
       <Head>
-        <title>{metaTitle}</title>
+        <title>{metaTitle || defaultMetaTags.title}</title>
         <meta
           name="description"
           content={metaDescription || defaultMetaTags.description}

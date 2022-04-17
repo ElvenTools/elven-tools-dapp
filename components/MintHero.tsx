@@ -1,4 +1,4 @@
-import { Box, Text } from '@chakra-ui/react';
+import { Box, Text, useBreakpointValue } from '@chakra-ui/react';
 import { useCallback } from 'react';
 import { Address } from '@elrondnetwork/erdjs';
 import { useScQuery, SCQueryType } from '../hooks/interaction/useScQuery';
@@ -15,6 +15,10 @@ import {
   isMintingStarted,
 } from '../config/nftSmartContract';
 import { networkConfig, chainType } from '../config/network';
+import { NFTLeftToMint } from './NFTLeftToMint';
+import { NFTAllowlistEnabled } from './NFTAllowlistEnabled';
+import { NFTMintedAlready } from './NFTMintedAlready';
+import { NFTLeftToMintPerAddress } from './NFTLeftToMintPerAddress';
 
 // TODO: Prepare sc query hooks for all cases
 // TODO: Prepare separate components for the segments here
@@ -22,7 +26,11 @@ import { networkConfig, chainType } from '../config/network';
 
 export const MintHero = () => {
   const { address } = useAccount();
-  const { data, mutate: refreshData } = useScQuery({
+  const {
+    data,
+    mutate: refreshData,
+    isLoading: totalIsLoading,
+  } = useScQuery({
     type: SCQueryType.INT,
     payload: {
       scAddress: smartContractAddress,
@@ -31,16 +39,25 @@ export const MintHero = () => {
     },
   });
 
-  const { data: dropData, mutate: refreshDropData } = useScQuery({
+  const {
+    data: dropData,
+    mutate: refreshDropData,
+    isLoading: dropIsLoading,
+  } = useScQuery({
     type: SCQueryType.INT,
     payload: {
       scAddress: smartContractAddress,
       funcName: 'getDropTokensLeft',
       args: [],
     },
+    autoInit: isDropActive,
   });
 
-  const { data: mintedData, mutate: refreshMintedData } = useScQuery({
+  const {
+    data: mintedData,
+    mutate: refreshMintedData,
+    isLoading: mintedDataLoading,
+  } = useScQuery({
     type: SCQueryType.INT,
     payload: {
       scAddress: smartContractAddress,
@@ -58,18 +75,19 @@ export const MintHero = () => {
         funcName: 'getMintedPerAddressPerDrop',
         args: address ? [Address.fromBech32(address)?.hex()] : [],
       },
-      autoInit: Boolean(address),
+      autoInit: Boolean(address && isDropActive),
     });
 
-  const { data: allowlistCheckData } = useScQuery({
-    type: SCQueryType.INT,
-    payload: {
-      scAddress: smartContractAddress,
-      funcName: 'getAllowlistAddressCheck',
-      args: address ? [Address.fromBech32(address)?.hex()] : [],
-    },
-    autoInit: Boolean(address),
-  });
+  const { data: allowlistCheckData, isLoading: allowlistCheckLoading } =
+    useScQuery({
+      type: SCQueryType.INT,
+      payload: {
+        scAddress: smartContractAddress,
+        funcName: 'getAllowlistAddressCheck',
+        args: address ? [Address.fromBech32(address)?.hex()] : [],
+      },
+      autoInit: Boolean(address && isAllowlistEnabled),
+    });
 
   const handleRefreshData = useCallback(() => {
     refreshData();
@@ -108,6 +126,8 @@ export const MintHero = () => {
     mintedPerDropData?.data.data,
   ]);
 
+  const isContentCentered = useBreakpointValue({ base: true, md: false });
+
   return (
     <Box width="100%">
       <Text
@@ -133,103 +153,35 @@ export const MintHero = () => {
       </Text>
       {isMintingStarted ? (
         <Box mt={6}>
-          <Box
-            display="flex"
-            alignItems="center"
-            justifyContent={{ base: 'center', md: 'flex-start' }}
-          >
-            <Text fontSize={{ base: 'md', sm: 'xl' }} fontWeight="bold">
-              {isDropActive ? 'Current drop' : 'Total'} NFTs left to mint:{' '}
-            </Text>
-            <Text
-              color="elvenTools.color2.base"
-              fontSize="3xl"
-              fontWeight="black"
-              ml={3}
-            >
-              {isDropActive ? dropData?.data.data : data?.data?.data}
-            </Text>
-          </Box>
+          <NFTLeftToMint
+            data={data}
+            dropData={dropData}
+            dataLoading={isDropActive ? dropIsLoading : totalIsLoading}
+          />
           <Box>
             <Authenticated
               fallback={
-                <Box mt={6}>
+                <Box
+                  mt={6}
+                  display="flex"
+                  justifyContent={isContentCentered ? 'center' : 'flex-start'}
+                >
                   <LoginModalButton />
                 </Box>
               }
+              spinnerCentered={isContentCentered}
             >
-              {isAllowlistEnabled && (
-                <Box
-                  display="flex"
-                  alignItems="center"
-                  mt={2}
-                  mb={2}
-                  justifyContent={{ base: 'center', md: 'flex-start' }}
-                >
-                  <Text fontSize={{ base: 'md', sm: 'xl' }} fontWeight="bold">
-                    Allowlist is enabled. You are{' '}
-                    {Number(allowlistCheckData?.data?.data) !== 0 ? (
-                      <Text color="elvenTools.color2.base" as="span">
-                        on
-                      </Text>
-                    ) : (
-                      <Text color="elvenTools.color3.base" as="span">
-                        not on
-                      </Text>
-                    )}{' '}
-                    the list!
-                  </Text>
-                </Box>
-              )}
-              <Box
-                display="flex"
-                alignItems="center"
-                justifyContent={{ base: 'center', md: 'flex-start' }}
-              >
-                <Text fontSize={{ base: 'md', sm: 'xl' }} fontWeight="bold">
-                  You have minted:{' '}
-                </Text>
-                <Text
-                  color="elvenTools.color2.base"
-                  fontSize="3xl"
-                  fontWeight="black"
-                  ml={3}
-                >
-                  {mintedData?.data?.data}
-                </Text>
-                <Text
-                  fontSize={{ base: 'md', sm: 'xl' }}
-                  fontWeight="bold"
-                  ml={3}
-                >
-                  in total
-                </Text>
-              </Box>
-              <Box
-                display="flex"
-                alignItems="center"
-                mb={6}
-                justifyContent={{ base: 'center', md: 'flex-start' }}
-              >
-                <Text fontSize={{ base: 'md', sm: 'xl' }} fontWeight="bold">
-                  You can mint:
-                </Text>
-                <Text
-                  color="elvenTools.color2.base"
-                  fontSize="3xl"
-                  fontWeight="black"
-                  ml={3}
-                >
-                  {getLeftToMintForUser()}
-                </Text>
-                <Text
-                  fontSize={{ base: 'md', sm: 'xl' }}
-                  fontWeight="bold"
-                  ml={3}
-                >
-                  NFTs
-                </Text>
-              </Box>
+              <NFTAllowlistEnabled
+                data={allowlistCheckData}
+                dataLoading={allowlistCheckLoading}
+              />
+              <NFTMintedAlready
+                data={mintedData}
+                dataLoading={mintedDataLoading}
+              />
+              <NFTLeftToMintPerAddress
+                leftToMintForUser={getLeftToMintForUser()}
+              />
               <MintForm
                 cb={handleRefreshData}
                 leftToMintForUser={getLeftToMintForUser()}

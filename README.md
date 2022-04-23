@@ -7,9 +7,14 @@
 The Dapp is built using Nextjs and a couple of helpful tools. More docs soon!
 
 ### How to start it locally:
-- cp .env.example .env.local
-- npm install
-- npm run dev
+- Clone/Download the repository code
+- Install npm dependencies
+- Configure basic .env variables
+- Configure smart contract information (optionally other things too).
+- Run the dapp locally
+- Prepare it for deployment
+
+More docs on it: [How to start with the Dapp](https://www.elven.tools/docs/how-to-start-with-the-dapp.html)
 
 ### Main assumption for the dapp:
 - it works on Nextjs
@@ -18,3 +23,5 @@ The Dapp is built using Nextjs and a couple of helpful tools. More docs soon!
 - it uses .env file - there is an example in the repo
 - it uses a couple of config files in the 'config' directory
 - it uses chakra-ui
+
+More docs on it: [Minter Dapp introduction](https://www.elven.tools/docs/minter-dapp-introduction.html)

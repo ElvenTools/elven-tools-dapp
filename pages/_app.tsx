@@ -12,9 +12,11 @@ import type { AppProps } from 'next/app';
 import { ChakraProvider } from '@chakra-ui/react';
 import { useElrondNetworkSync } from '../hooks/auth/useElrondNetworkSync';
 import { theme } from '../config/chakraTheme';
+import { useAccessToken } from '../hooks/auth/useAccessToken';
 
 const ElvenToolsDapp = ({ Component, pageProps }: AppProps) => {
   useElrondNetworkSync();
+  useAccessToken();
   return (
     <ChakraProvider theme={theme}>
       <Component {...pageProps} />

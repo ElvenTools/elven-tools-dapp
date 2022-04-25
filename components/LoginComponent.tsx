@@ -6,9 +6,17 @@ import { useLogin } from '../hooks/auth/useLogin';
 import { LoginMethodsEnum } from '../types/enums';
 import { MobileLoginQR } from './MobileLoginQR';
 import { ActionButton } from './ActionButton';
+import { ApiQueryType, useApiQuery } from '../hooks/interaction/useApiQuery';
 
 export const LoginComponent = memo(() => {
-  const { login, isLoggedIn, error, walletConnectUri } = useLogin();
+  const { data } = useApiQuery({
+    path: '/api/auth/issueRandomToken',
+    type: ApiQueryType.GET,
+  });
+
+  const { login, isLoggedIn, error, walletConnectUri } = useLogin({
+    token: String(data?.data.token),
+  });
 
   const handleLogin = useCallback(
     (type: LoginMethodsEnum) => () => {

@@ -3,6 +3,7 @@ import { useSnapshot } from 'valtio';
 import { useEffect, useState, useRef } from 'react';
 import {
   accountState,
+  clearAuthStates,
   loginInfoState,
   setAccountState,
   setLoggingInState,
@@ -30,8 +31,12 @@ import { WcOnLogin } from '../../utils/walletConnectCbs';
 import { useLogout } from './useLogout';
 import { useEffectOnlyOnUpdate } from '../tools/useEffectOnlyOnUpdate';
 import { isLoginExpired } from '../../utils/expiresAt';
-import { clearDappProvider } from '../../store/network';
-import { clearAuthStates } from '../../store/auth';
+import { useApiQuery, ApiQueryType } from '../interaction/useApiQuery';
+
+const unsupportedSignMethods = [
+  LoginMethodsEnum.ledger,
+  LoginMethodsEnum.wallet,
+];
 
 export const useElrondNetworkSync = () => {
   const { logout } = useLogout();
@@ -43,6 +48,24 @@ export const useElrondNetworkSync = () => {
 
   const dappProviderRef = useRef<any>();
   const proxyProviderRef = useRef<any>();
+
+  const { data: accessTokenData } = useApiQuery({
+    path: '/api/auth/issueJsonWebToken',
+    type: ApiQueryType.POST,
+    payload: {
+      address: accountSnap.address,
+      loginToken: loginInfoSnap.loginToken,
+      signature: loginInfoSnap.signature,
+      data: {},
+    },
+    autoInit:
+      !unsupportedSignMethods.includes(loginInfoSnap.loginMethod) &&
+      Boolean(
+        loginInfoSnap.loginToken &&
+          loginInfoSnap.signature &&
+          accountSnap.address
+      ),
+  });
 
   useEffect(() => {
     const accountStorage = localStorage.getItem('elven_tools_dapp__account');
@@ -68,6 +91,7 @@ export const useElrondNetworkSync = () => {
       setLoginInfoState('expires', parsedStorage.expires);
       setLoginInfoState('loginToken', parsedStorage.loginToken);
       setLoginInfoState('signature', parsedStorage.signature);
+      setLoginInfoState('jwt', parsedStorage.jwt);
       setLoginInfoDone(true);
     }
   }, []);
@@ -89,7 +113,15 @@ export const useElrondNetworkSync = () => {
     loginInfoSnap.expires,
     loginInfoSnap.loginToken,
     loginInfoSnap.signature,
+    loginInfoSnap.jwt,
   ]);
+
+  // store access token after it has been fetched
+  useEffect(() => {
+    if (accessTokenData?.data) {
+      setLoginInfoState('jwt', accessTokenData?.data);
+    }
+  }, [accessTokenData]);
 
   // Proxy provider sync
   useEffect(() => {
@@ -123,12 +155,15 @@ export const useElrondNetworkSync = () => {
   useEffectOnlyOnUpdate(() => {
     const askForDappProvider = async () => {
       const loginMethod = loginInfoSnap.loginMethod;
-      const loginExpires = loginInfoSnap.expires;
+
       let dappProvider = dappProviderRef?.current;
 
-      if (loginExpires && isLoginExpired(loginExpires)) {
-        clearAuthStates();
-        clearDappProvider();
+      const loginExpires = loginInfoSnap.expires;
+      const accessTokenExpires = loginInfoSnap?.jwt?.expiresAt;
+      if (
+        (loginExpires && isLoginExpired(loginExpires)) ||
+        (accessTokenExpires && isLoginExpired(accessTokenExpires))
+      ) {
         return;
       }
 
@@ -218,7 +253,11 @@ export const useElrondNetworkSync = () => {
       const loginExpires = loginInfoSnap.expires;
       const proxyProvider = proxyProviderRef.current;
       const loginExpired = loginExpires && isLoginExpired(loginExpires);
-      if (!loginExpired && address && proxyProvider) {
+      const accessTokenExpires = loginInfoSnap?.jwt?.expiresAt;
+      const accessTokenExpired =
+        accessTokenExpires && isLoginExpired(accessTokenExpires);
+
+      if (!loginExpired && !accessTokenExpired && address && proxyProvider) {
         const userAddressInstance = new Address(address);
         const userAccountInstance = new Account(userAddressInstance);
         try {
@@ -235,5 +274,19 @@ export const useElrondNetworkSync = () => {
       setLoggingInState('pending', false);
     };
     askForAccount();
-  }, [accountSnap?.address]);
+  }, [accountSnap?.address, loginInfoSnap.jwt]);
+
+  // log out whenever one of the tokens is expired
+  useEffect(() => {
+    const loginExpires = loginInfoSnap.expires;
+    const accessTokenExpires = loginInfoSnap?.jwt?.expiresAt;
+    if (
+      (loginExpires && isLoginExpired(loginExpires)) ||
+      (accessTokenExpires && isLoginExpired(accessTokenExpires))
+    ) {
+      clearAuthStates();
+      network.clearDappProvider();
+      localStorage.clear();
+    }
+  });
 };

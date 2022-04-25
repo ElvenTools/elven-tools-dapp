@@ -3,6 +3,12 @@
 export const apiCall = {
   baseEndpoint: `${process.env.NEXT_PUBLIC_ELROND_API}`,
 
+  getEndpoint(url: string) {
+    if (url.includes('/vm-values')) {
+      return this.baseEndpoint + url;
+    } else return url;
+  },
+
   async get(endpoint: string, options?: Record<string, unknown>) {
     if (typeof fetch !== 'undefined') {
       const defaultOptions = {
@@ -14,7 +20,9 @@ export const apiCall = {
       };
 
       const response = await fetch(
-        this.baseEndpoint + endpoint,
+        this.getEndpoint(endpoint),
+        // here, no deep merge happens, meaning that when I set the "headers" in options they OVERWRITE the default headers instead of merging with them
+        // if desired, you can try with lodash merge
         Object.assign(defaultOptions, options || {})
       );
 
@@ -45,7 +53,7 @@ export const apiCall = {
       };
 
       const response = await fetch(
-        this.baseEndpoint + endpoint,
+        this.getEndpoint(endpoint),
         Object.assign(defaultOptions, options || {})
       );
 
@@ -59,6 +67,7 @@ export const apiCall = {
       return result;
     }
   },
+
   async put(
     endpoint: string,
     payload: Record<string, unknown>,
@@ -75,7 +84,7 @@ export const apiCall = {
       };
 
       const response = await fetch(
-        this.baseEndpoint + endpoint,
+        this.getEndpoint(endpoint),
         Object.assign(defaultOptions, options || {})
       );
 
@@ -89,6 +98,7 @@ export const apiCall = {
       return result;
     }
   },
+
   async delete(endpoint: string, options?: Record<string, unknown>) {
     if (typeof fetch !== 'undefined') {
       const defaultOptions = {
@@ -100,7 +110,7 @@ export const apiCall = {
       };
 
       const response = await fetch(
-        this.baseEndpoint + endpoint,
+        this.getEndpoint(endpoint),
         Object.assign(defaultOptions, options || {})
       );
 

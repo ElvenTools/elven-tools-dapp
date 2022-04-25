@@ -1,6 +1,7 @@
 import { proxy } from 'valtio';
 import { LoginMethodsEnum } from '../types/enums';
 import cloneDeep from 'lodash.clonedeep';
+import { LoginResponse } from '../pages/api/auth/issueJsonWebToken';
 
 // Account info state + persistance
 
@@ -36,6 +37,7 @@ interface LoginInfoState extends Record<string, any> {
   expires: number;
   loginToken: string;
   signature: string;
+  jwt: LoginResponse;
 }
 
 const loginInfoInitialState: LoginInfoState = {
@@ -43,6 +45,7 @@ const loginInfoInitialState: LoginInfoState = {
   expires: 0,
   loginToken: '',
   signature: '',
+  jwt: null,
 };
 
 export const loginInfoState = proxy(loginInfoInitialState);

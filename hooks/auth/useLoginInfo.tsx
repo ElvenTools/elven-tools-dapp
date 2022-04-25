@@ -9,5 +9,6 @@ export const useLoginInfo = () => {
     expires: loginInfoSnap.expires,
     loginToken: loginInfoSnap.loginToken,
     signature: loginInfoSnap.signature,
+    jwt: loginInfoSnap.jwt,
   };
 };

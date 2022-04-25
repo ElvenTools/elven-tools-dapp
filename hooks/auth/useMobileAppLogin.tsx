@@ -57,10 +57,13 @@ export const useMobileAppLogin = (params?: Login) => {
         setAccountState('address', address);
         setAccountState('balance', account.balance.toString());
         setAccountState('nonce', account.nonce.valueOf());
-
         setLoggingInState('loggedIn', Boolean(address));
+
         if (signature) {
           setLoginInfoState('signature', signature);
+        }
+        if (params?.token) {
+          setLoginInfoState('loginToken', params?.token);
         }
 
         setNetworkState('dappProvider', dappProviderRef.current);

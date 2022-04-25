@@ -31,10 +31,11 @@ export const WcOnLogin = async (
     }
   }
 
-  if (signature) {
+  // Julian, possibly not needed anymore?
+  /* if (signature) {
     setLoginInfoState('loginToken', String(token));
     setLoginInfoState('signature', signature);
-  }
+  } */
 
   setLoginInfoState('loginMethod', LoginMethodsEnum.walletconnect);
 

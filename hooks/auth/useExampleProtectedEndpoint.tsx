@@ -1,7 +1,7 @@
 import { ApiQueryType, useApiQuery } from '../interaction/useApiQuery';
 import { useLoginInfo } from './useLoginInfo';
 
-export const useAccessToken = () => {
+export const useExampleProtectedEndpoint = () => {
   const { jwt } = useLoginInfo();
 
   useApiQuery({

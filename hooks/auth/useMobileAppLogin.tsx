@@ -62,13 +62,15 @@ export const useMobileAppLogin = (params?: Login) => {
         if (signature) {
           setLoginInfoState('signature', signature);
         }
+        if (params?.token) {
+          setLoginInfoState('loginToken', params?.token);
+        }
 
         setNetworkState('dappProvider', dappProviderRef.current);
 
         WcOnLogin(
           dappProviderRef.current,
           proxyProvider,
-          params?.token,
           params?.callbackRoute
         );
       },

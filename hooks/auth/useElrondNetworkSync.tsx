@@ -24,7 +24,7 @@ import {
   DAPP_INIT_ROUTE,
 } from '../../config/network';
 import { getBridgeAddressFromNetwork } from '../../utils/bridgeAddress';
-import { getAddressFromUrl } from '../../utils/getAddressFromUrl';
+import { getParamFromUrl } from '../../utils/getParamFromUrl';
 import { LoginMethodsEnum } from '../../types/enums';
 import { WcOnLogin } from '../../utils/walletConnectCbs';
 import { useLogout } from './useLogout';
@@ -129,6 +129,7 @@ export const useElrondNetworkSync = () => {
       if (loginExpires && isLoginExpired(loginExpires)) {
         clearAuthStates();
         clearDappProvider();
+        localStorage.clear();
         return;
       }
 
@@ -187,7 +188,11 @@ export const useElrondNetworkSync = () => {
             break;
           // Web wallet auth
           case LoginMethodsEnum.wallet:
-            const address = getAddressFromUrl() || accountSnap?.address;
+            const address = getParamFromUrl('address') || accountSnap?.address;
+            const signature = getParamFromUrl('signature');
+            if (signature) {
+              setLoginInfoState('signature', signature);
+            }
             if (address) {
               dappProvider = new WalletProvider(
                 `${networkConfig[chainType].walletAddress}${DAPP_INIT_ROUTE}`

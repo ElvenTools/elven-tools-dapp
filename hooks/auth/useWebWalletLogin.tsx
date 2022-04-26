@@ -37,7 +37,9 @@ export const useWebWalletLogin = (params?: Login) => {
       setLoginInfoState('loginMethod', LoginMethodsEnum.wallet);
       await providerInstance.login(providerLoginData);
       setLoginInfoState('expires', getNewLoginExpiresTimestamp());
-      setLoggingInState('loggedIn', true);
+      if (params?.token) {
+        setLoginInfoState('loginToken', params.token);
+      }
     } catch (e: any) {
       setLoggingInState('error', `Error logging in ${e?.message}`);
       setLoginInfoState('loginMethod', '');

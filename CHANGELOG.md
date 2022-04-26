@@ -1,3 +1,6 @@
+### [1.0.3](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v1.0.3) (2022-04-26)
+- improvements for loginToken and signatures, thanks to @borispoehland !
+
 ### [1.0.2](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v1.0.2) (2022-04-24)
 - fix missing dependency
 

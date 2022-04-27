@@ -25,3 +25,7 @@ More docs on it: [How to start with the Dapp](https://www.elven.tools/docs/how-t
 - it uses chakra-ui
 
 More docs on it: [Minter Dapp introduction](https://www.elven.tools/docs/minter-dapp-introduction.html)
+
+### Community
+
+- Example with auth verification on the backend side: [elven-tools-dapp-with-auth](https://github.com/borispoehland/elven-tools-dapp-with-auth) thanks to [@borispoehland](https://github.com/borispoehland)

@@ -7,14 +7,20 @@
 The Dapp is built using Nextjs and a couple of helpful tools. More docs soon!
 
 ### How to start it locally:
-- Clone/Download the repository code
-- Install npm dependencies
-- Configure basic .env variables
-- Configure smart contract information (optionally other things too).
-- Run the dapp locally
-- Prepare it for deployment
+1. npm install -g elven-tools
+2. elven-tools init-dapp
+3. cd your-dapp-directory
+5. npm run dev
 
-More docs on it: [How to start with the Dapp](https://www.elven.tools/docs/how-to-start-with-the-dapp.html)
+--- or ---
+
+1. git clone the repo
+2. cd elven-tools-dap
+3. npm install
+4. configure .env.local (you can copy the contents of the .env.example)
+6. npm run dev
+
+Check detailed docs on it here: [How to start with the Dapp](https://www.elven.tools/docs/how-to-start-with-the-dapp.html)
 
 ### Main assumption for the dapp:
 - it works on Nextjs

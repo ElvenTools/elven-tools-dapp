@@ -14,8 +14,8 @@ The Dapp is built using Nextjs and a couple of helpful tools. More docs soon!
 
 --- or ---
 
-1. git clone the repo
-2. cd elven-tools-dap
+1. clone or download the repo code
+2. cd elven-tools-dapp
 3. npm install
 4. configure .env.local (you can copy the contents of the .env.example)
 6. npm run dev

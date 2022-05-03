@@ -1,9 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {
-  WalletConnectProvider,
-  ProxyProvider,
-  Account,
-} from '@elrondnetwork/erdjs';
+import { Account } from '@elrondnetwork/erdjs';
+import { ApiNetworkProvider } from '@elrondnetwork/erdjs-network-providers';
+import { WalletConnectProvider } from '@elrondnetwork/erdjs-wallet-connect-provider';
 import { useState, useRef } from 'react';
 import { networkConfig, chainType } from '../../config/network';
 import { LoginMethodsEnum } from '../../types/enums';
@@ -25,7 +23,8 @@ export const useMobileAppLogin = (params?: Login) => {
   const { isLoggedIn, isLoggingIn, error } = useLoggingIn();
   const [walletConnectUri, setWalletConnectUri] = useState('');
 
-  const proxyProvider = getNetworkState<ProxyProvider>('proxyProvider');
+  const apiNetworkProvider =
+    getNetworkState<ApiNetworkProvider>('apiNetworkProvider');
   const dappProvider = getNetworkState<WalletConnectProvider>('dappProvider');
 
   const dappProviderRef = useRef<any>(dappProvider);
@@ -42,9 +41,9 @@ export const useMobileAppLogin = (params?: Login) => {
       networkConfig[chainType].walletConnectBridgeAddresses
     );
 
-    if (!bridgeAddress || !proxyProvider) {
+    if (!bridgeAddress || !apiNetworkProvider) {
       throw Error(
-        "Something wen't wrong with the initialization (ProxyProvider or Wallet Connect Bridge address), plese try to refresh the page!"
+        "Something wen't wrong with the initialization (ApiNetworkProvider or Wallet Connect Bridge address), plese try to refresh the page!"
       );
     }
 
@@ -70,7 +69,7 @@ export const useMobileAppLogin = (params?: Login) => {
 
         WcOnLogin(
           dappProviderRef.current,
-          proxyProvider,
+          apiNetworkProvider,
           params?.callbackRoute
         );
       },
@@ -78,7 +77,6 @@ export const useMobileAppLogin = (params?: Login) => {
     };
 
     const providerInstance = new WalletConnectProvider(
-      proxyProvider,
       bridgeAddress,
       providerHandlers
     );

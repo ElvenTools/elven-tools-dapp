@@ -1,16 +1,14 @@
 import {
   SmartContract,
-  GasLimit,
-  Nonce,
   ContractFunction,
   Address,
-  Balance,
   Transaction,
-  IDappProvider,
   Account,
-  ProxyProvider,
   TypedValue,
+  TokenPayment,
+  TransactionWatcher,
 } from '@elrondnetwork/erdjs';
+import { ApiNetworkProvider } from '@elrondnetwork/erdjs-network-providers';
 import { useSnapshot } from 'valtio';
 import {
   accountState,
@@ -22,14 +20,15 @@ import {
   smartContractAddress,
   mintTxBaseGasLimit,
 } from '../../config/nftSmartContract';
+import { chainType, networkConfig } from '../../config/network';
 import { LoginMethodsEnum } from '../../types/enums';
 import { useState } from 'react';
 
 interface ScTransactionParams {
   func: ContractFunction;
-  gasLimit: GasLimit;
+  gasLimit: number;
   args: TypedValue[] | undefined;
-  value: Balance | undefined;
+  value: TokenPayment | undefined;
 }
 
 export interface ScTransactionCb {
@@ -44,8 +43,9 @@ export function useScTransaction(cb?: (params: ScTransactionCb) => void) {
   const accountSnap = useSnapshot(accountState);
   const loginInfoSnap = useSnapshot(loginInfoState);
 
-  const dappProvider = getNetworkState<IDappProvider>('dappProvider');
-  const proxyProvider = getNetworkState<ProxyProvider>('proxyProvider');
+  const dappProvider = getNetworkState<any>('dappProvider'); // TODO: prepare common interface
+  const apiNetworkProvider =
+    getNetworkState<ApiNetworkProvider>('apiNetworkProvider');
   let currentNonce = accountSnap.nonce;
 
   const triggerTx = async ({
@@ -57,8 +57,8 @@ export function useScTransaction(cb?: (params: ScTransactionCb) => void) {
     setTransaction(null);
     setError('');
     if (
-      dappProvider?.isInitialized() &&
-      proxyProvider &&
+      dappProvider &&
+      apiNetworkProvider &&
       currentNonce !== undefined &&
       mintTxBaseGasLimit &&
       smartContractAddress &&
@@ -75,27 +75,31 @@ export function useScTransaction(cb?: (params: ScTransactionCb) => void) {
         gasLimit,
         args,
         value,
+        chainID: networkConfig[chainType].shortId,
       });
 
-      tx.setNonce(new Nonce(currentNonce));
+      tx.setNonce(currentNonce);
 
       try {
         if (loginInfoSnap.loginMethod === LoginMethodsEnum.wallet) {
-          await dappProvider.sendTransaction(tx);
+          // TODO: there is no send transaction anymore in web wallet provider
+          // It has to be handled based on the uri response data
+          await dappProvider.signTransaction(tx);
         } else {
-          const transaction = await dappProvider.signTransaction(tx);
-          await proxyProvider.sendTransaction(transaction);
-          await transaction.awaitNotarized(proxyProvider);
-          setTransaction(transaction);
-          cb?.({ transaction });
-          const sender = transaction.getSender();
+          await dappProvider.signTransaction(tx);
+          await apiNetworkProvider.sendTransaction(tx);
+          let transactionWatcher = new TransactionWatcher(apiNetworkProvider);
+          await transactionWatcher.awaitCompleted(tx);
+          setTransaction(tx);
+          cb?.({ transaction: tx });
+          const sender = tx.getSender();
           const senderAccount = new Account(sender);
-          await senderAccount.sync(proxyProvider);
-          setAccountState('address', senderAccount.address.toString());
-          setAccountState(
-            'nonce',
-            transaction.getNonce().increment().valueOf()
+          const userAccountOnNetwork = await apiNetworkProvider.getAccount(
+            sender
           );
+          senderAccount.update(userAccountOnNetwork);
+          setAccountState('address', senderAccount.address.bech32());
+          setAccountState('nonce', senderAccount.getNonceThenIncrement());
           setAccountState('balance', senderAccount.balance.toString());
         }
       } catch (e: any) {

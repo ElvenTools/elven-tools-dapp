@@ -1,5 +1,6 @@
 export interface BaseNetworkType {
   id: string;
+  shortId: string;
   name: string;
   egldLabel: string;
   egldDenomination: string;

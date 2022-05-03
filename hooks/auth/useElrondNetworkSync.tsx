@@ -9,15 +9,11 @@ import {
   setLoginInfoState,
 } from '../../store/auth';
 import * as network from '../../store/network';
-import {
-  ExtensionProvider,
-  ProxyProvider,
-  NetworkConfig,
-  WalletConnectProvider,
-  Address,
-  Account,
-  WalletProvider,
-} from '@elrondnetwork/erdjs';
+import { Address, Account } from '@elrondnetwork/erdjs';
+import { WalletProvider } from '@elrondnetwork/erdjs-web-wallet-provider';
+import { WalletConnectProvider } from '@elrondnetwork/erdjs-wallet-connect-provider';
+import { ExtensionProvider } from '@elrondnetwork/erdjs-extension-provider';
+import { ApiNetworkProvider } from '@elrondnetwork/erdjs-network-providers';
 import {
   networkConfig,
   chainType,
@@ -42,7 +38,7 @@ export const useElrondNetworkSync = () => {
   const loginInfoSnap = useSnapshot(loginInfoState);
 
   const dappProviderRef = useRef<any>();
-  const proxyProviderRef = useRef<any>();
+  const apiNetworkProviderRef = useRef<any>();
 
   useEffect(() => {
     const accountStorage = localStorage.getItem('elven_tools_dapp__account');
@@ -93,21 +89,16 @@ export const useElrondNetworkSync = () => {
 
   // Proxy provider sync
   useEffect(() => {
-    const askForProxyProvider = async () => {
-      let proxyProvider = proxyProviderRef?.current;
-      if (!proxyProvider) {
+    const askForApiNetworkProvider = async () => {
+      let apiNetworkProvider = apiNetworkProviderRef?.current;
+      if (!apiNetworkProvider) {
         const publicApiEndpoint = process.env.NEXT_PUBLIC_ELROND_API;
         if (publicApiEndpoint) {
-          proxyProvider = new ProxyProvider(publicApiEndpoint, {
+          apiNetworkProvider = new ApiNetworkProvider(publicApiEndpoint, {
             timeout: Number(networkConfig[chainType].apiTimeout),
           });
-          proxyProviderRef.current = proxyProvider;
-          network.setNetworkState('proxyProvider', proxyProvider);
-          try {
-            await NetworkConfig.getDefault().sync(proxyProvider);
-          } catch {
-            console.warn("Can't synchronize the proxy provider!");
-          }
+          apiNetworkProviderRef.current = apiNetworkProvider;
+          network.setNetworkState('apiNetworkProvider', apiNetworkProvider);
         } else {
           throw Error(
             'There is no public api configured! Check env vars and README file.'
@@ -115,7 +106,7 @@ export const useElrondNetworkSync = () => {
         }
       }
     };
-    askForProxyProvider();
+    askForApiNetworkProvider();
   }, []);
 
   // Dapp Providers sync
@@ -158,32 +149,29 @@ export const useElrondNetworkSync = () => {
             break;
           // Maiar mobile app auth
           case LoginMethodsEnum.walletconnect:
-            if (proxyProviderRef?.current) {
-              const providerHandlers = {
-                onClientLogin: () =>
-                  WcOnLogin(
-                    dappProviderRef?.current,
-                    proxyProviderRef?.current
-                  ),
-                onClientLogout: () =>
-                  logout({ dappProvider: dappProviderRef?.current }),
-              };
+            const providerHandlers = {
+              onClientLogin: () =>
+                WcOnLogin(
+                  dappProviderRef?.current,
+                  apiNetworkProviderRef?.current
+                ),
+              onClientLogout: () =>
+                logout({ dappProvider: dappProviderRef?.current }),
+            };
 
-              const bridgeAddress = getBridgeAddressFromNetwork(
-                networkConfig[chainType].walletConnectBridgeAddresses
-              );
-              dappProvider = new WalletConnectProvider(
-                proxyProviderRef?.current,
-                bridgeAddress,
-                providerHandlers
-              );
-              dappProviderRef.current = dappProvider;
-              network.setNetworkState('dappProvider', dappProvider);
-              try {
-                await dappProvider.init();
-              } catch {
-                console.warn("Can't initialize the Dapp Provider!");
-              }
+            const bridgeAddress = getBridgeAddressFromNetwork(
+              networkConfig[chainType].walletConnectBridgeAddresses
+            );
+            dappProvider = new WalletConnectProvider(
+              bridgeAddress,
+              providerHandlers
+            );
+            dappProviderRef.current = dappProvider;
+            network.setNetworkState('dappProvider', dappProvider);
+            try {
+              await dappProvider.init();
+            } catch {
+              console.warn("Can't initialize the Dapp Provider!");
             }
             break;
           // Web wallet auth
@@ -201,10 +189,7 @@ export const useElrondNetworkSync = () => {
               network.setNetworkState('dappProvider', dappProvider);
               const userAddressInstance = new Address(address);
               const userAccountInstance = new Account(userAddressInstance);
-              setAccountState(
-                'address',
-                userAccountInstance.address.toString()
-              );
+              setAccountState('address', userAccountInstance.address.bech32());
             }
             break;
           case LoginMethodsEnum.ledger:
@@ -221,13 +206,16 @@ export const useElrondNetworkSync = () => {
     const askForAccount = async () => {
       const address = accountSnap?.address;
       const loginExpires = loginInfoSnap.expires;
-      const proxyProvider = proxyProviderRef.current;
+      const apiNetworkProvider = apiNetworkProviderRef.current;
       const loginExpired = loginExpires && isLoginExpired(loginExpires);
-      if (!loginExpired && address && proxyProvider) {
+      if (!loginExpired && address && apiNetworkProvider) {
         const userAddressInstance = new Address(address);
         const userAccountInstance = new Account(userAddressInstance);
         try {
-          await userAccountInstance.sync(proxyProvider);
+          const userAccountOnNetwork = await apiNetworkProvider.getAccount(
+            userAddressInstance
+          );
+          userAccountInstance.update(userAccountOnNetwork);
           setAccountState('nonce', userAccountInstance.nonce.valueOf());
           setAccountState('balance', userAccountInstance.balance.toString());
           setLoggingInState('loggedIn', Boolean(address));

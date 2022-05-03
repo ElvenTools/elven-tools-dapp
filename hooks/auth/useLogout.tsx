@@ -1,5 +1,4 @@
 import { getNetworkState, clearDappProvider } from '../../store/network';
-import { IDappProvider } from '@elrondnetwork/erdjs';
 import { useSnapshot } from 'valtio';
 import {
   clearAuthStates,
@@ -8,14 +7,14 @@ import {
 } from '../../store/auth';
 
 interface Logout {
-  dappProvider?: IDappProvider;
+  dappProvider?: any; // TODO: prepare commont interface
   callbackRoute?: string;
   redirectFn?: (callbackRoute?: string) => void;
 }
 
 export const useLogout = () => {
   const loggingInSnap = useSnapshot(loggingInState);
-  const dappProviderInstance = getNetworkState<IDappProvider>('dappProvider');
+  const dappProviderInstance = getNetworkState('dappProvider');
 
   const logout = async (params?: Logout) => {
     const provider = params?.dappProvider || dappProviderInstance;

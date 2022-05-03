@@ -62,7 +62,7 @@ export const MintHero = () => {
     payload: {
       scAddress: smartContractAddress,
       funcName: 'getMintedPerAddressTotal',
-      args: address ? [Address.fromString(address)?.hex()] : [],
+      args: address ? [Address.fromBech32(address)?.hex()] : [],
     },
     autoInit: Boolean(address),
   });

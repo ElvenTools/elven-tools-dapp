@@ -24,10 +24,10 @@ Check detailed docs on it here: [How to start with the Dapp](https://www.elven.t
 
 ### Main assumption for the dapp:
 - it works on Nextjs
-- it uses erdjs 9.* without the dapp-core library. It will be migrated to erdjs 10.* asap
+- it uses erdjs 10.* without the dapp-core library.
 - it uses backed side redirections to hide the API endpoint. The only exposed one is `/api`
 - it uses .env file - there is an example in the repo
-- it uses a couple of config files in the 'config' directory
+- it uses a couple of config files in the 'config' directory (it will be simplified in the future)
 - it uses chakra-ui
 
 More docs on it: [Minter Dapp introduction](https://www.elven.tools/docs/minter-dapp-introduction.html)

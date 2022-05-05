@@ -1,14 +1,10 @@
-import {
-  GasLimit,
-  ContractFunction,
-  Balance,
-  U32Value,
-} from '@elrondnetwork/erdjs';
+import { ContractFunction, TokenPayment, U32Value } from '@elrondnetwork/erdjs';
 import {
   mintTxBaseGasLimit,
   mintFunctionName,
   tokenSellingPrice,
 } from '../../config/nftSmartContract';
+import BigNumber from 'bignumber.js';
 import { useScTransaction, ScTransactionCb } from './useScTransaction';
 
 export function useMintTransaction(cb?: (params: ScTransactionCb) => void) {
@@ -16,13 +12,13 @@ export function useMintTransaction(cb?: (params: ScTransactionCb) => void) {
 
   const mint = async (tokensAmount: number) => {
     const tokens = tokensAmount || 1;
+    const totalPayment = new BigNumber(tokenSellingPrice).times(tokens);
     triggerTx({
       func: new ContractFunction(mintFunctionName),
-      gasLimit: new GasLimit(
-        mintTxBaseGasLimit + (mintTxBaseGasLimit / 1.4) * (tokensAmount - 1)
-      ),
+      gasLimit:
+        mintTxBaseGasLimit + (mintTxBaseGasLimit / 1.4) * (tokensAmount - 1),
       args: [new U32Value(tokens)],
-      value: Balance.fromString(tokenSellingPrice).times(tokens),
+      value: TokenPayment.egldFromBigInteger(totalPayment),
     });
   };
 

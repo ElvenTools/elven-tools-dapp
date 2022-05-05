@@ -1,9 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {
-  WalletConnectProvider,
-  ProxyProvider,
-  Account,
-} from '@elrondnetwork/erdjs';
+import { Account, Address } from '@elrondnetwork/erdjs';
+import { ApiNetworkProvider } from '@elrondnetwork/erdjs-network-providers';
+import { WalletConnectProvider } from '@elrondnetwork/erdjs-wallet-connect-provider';
 import { useState, useRef } from 'react';
 import { networkConfig, chainType } from '../../config/network';
 import { LoginMethodsEnum } from '../../types/enums';
@@ -19,16 +17,18 @@ import { WcOnLogin } from '../../utils/walletConnectCbs';
 import { useLogout } from './useLogout';
 import { Login } from '../../types/account';
 import { useLoggingIn } from './useLoggingIn';
+import { DappProvider } from '../../types/network';
 
 export const useMobileAppLogin = (params?: Login) => {
   const { logout } = useLogout();
   const { isLoggedIn, isLoggingIn, error } = useLoggingIn();
   const [walletConnectUri, setWalletConnectUri] = useState('');
 
-  const proxyProvider = getNetworkState<ProxyProvider>('proxyProvider');
+  const apiNetworkProvider =
+    getNetworkState<ApiNetworkProvider>('apiNetworkProvider');
   const dappProvider = getNetworkState<WalletConnectProvider>('dappProvider');
 
-  const dappProviderRef = useRef<any>(dappProvider);
+  const dappProviderRef = useRef<DappProvider>(dappProvider);
 
   const handleOnLogout = () => {
     logout({
@@ -42,43 +42,44 @@ export const useMobileAppLogin = (params?: Login) => {
       networkConfig[chainType].walletConnectBridgeAddresses
     );
 
-    if (!bridgeAddress || !proxyProvider) {
+    if (!bridgeAddress || !apiNetworkProvider) {
       throw Error(
-        "Something wen't wrong with the initialization (ProxyProvider or Wallet Connect Bridge address), plese try to refresh the page!"
+        "Something wen't wrong with the initialization (ApiNetworkProvider or Wallet Connect Bridge address), plese try to refresh the page!"
       );
     }
 
     const providerHandlers = {
       onClientLogin: async () => {
-        const address = await dappProviderRef.current.getAddress();
-        const signature = await dappProviderRef.current.getSignature();
-        const account = new Account(address);
+        if (dappProviderRef.current instanceof WalletConnectProvider) {
+          const address = await dappProviderRef.current.getAddress();
+          const signature = await dappProviderRef.current.getSignature();
+          const account = new Account(new Address(address));
 
-        setAccountState('address', address);
-        setAccountState('balance', account.balance.toString());
-        setAccountState('nonce', account.nonce.valueOf());
+          setAccountState('address', address);
+          setAccountState('balance', account.balance.toString());
+          setAccountState('nonce', account.nonce.valueOf());
 
-        setLoggingInState('loggedIn', Boolean(address));
-        if (signature) {
-          setLoginInfoState('signature', signature);
+          setLoggingInState('loggedIn', Boolean(address));
+          if (signature) {
+            setLoginInfoState('signature', signature);
+          }
+          if (params?.token) {
+            setLoginInfoState('loginToken', params?.token);
+          }
+
+          setNetworkState('dappProvider', dappProviderRef.current);
+
+          WcOnLogin(
+            apiNetworkProvider,
+            dappProviderRef.current,
+            params?.callbackRoute
+          );
         }
-        if (params?.token) {
-          setLoginInfoState('loginToken', params?.token);
-        }
-
-        setNetworkState('dappProvider', dappProviderRef.current);
-
-        WcOnLogin(
-          dappProviderRef.current,
-          proxyProvider,
-          params?.callbackRoute
-        );
       },
       onClientLogout: handleOnLogout,
     };
 
     const providerInstance = new WalletConnectProvider(
-      proxyProvider,
       bridgeAddress,
       providerHandlers
     );

@@ -98,7 +98,7 @@ export const TransactionPendingModal: FC<TransactionPendingModalProps> = ({
               )}
             </Flex>
           )}
-          {additionalMessage && !successTxHash && (
+          {additionalMessage && !successTxHash && !txError && (
             <Text textAlign="center" mt={5} fontWeight="semibold" fontSize="md">
               {additionalMessage}
             </Text>

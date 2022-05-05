@@ -1,9 +1,5 @@
-import {
-  ExtensionProvider,
-  Address,
-  Account,
-  ProxyProvider,
-} from '@elrondnetwork/erdjs';
+import { Address, Account } from '@elrondnetwork/erdjs';
+import { ExtensionProvider } from '@elrondnetwork/erdjs-extension-provider';
 import { LoginMethodsEnum } from '../../types/enums';
 import { optionalRedirect } from '../../utils/optionalRedirect';
 import {
@@ -16,13 +12,15 @@ import { getNewLoginExpiresTimestamp } from '../../utils/expiresAt';
 import { useLogout } from './useLogout';
 import { Login } from '../../types/account';
 import { useLoggingIn } from './useLoggingIn';
+import { ApiNetworkProvider } from '@elrondnetwork/erdjs-network-providers';
 
 export const useExtensionLogin = (params?: Login) => {
   const { logout } = useLogout();
   const { isLoggedIn, isLoggingIn, error } = useLoggingIn();
 
   const login = async () => {
-    const proxyProvider = getNetworkState<ProxyProvider>('proxyProvider');
+    const apiNetworkProvider =
+      getNetworkState<ApiNetworkProvider>('apiNetworkProvider');
     const providerInstance = ExtensionProvider.getInstance();
 
     try {
@@ -64,11 +62,16 @@ export const useExtensionLogin = (params?: Login) => {
       const userAddressInstance = new Address(address);
       const userAccountInstance = new Account(userAddressInstance);
 
-      if (proxyProvider) {
+      if (apiNetworkProvider) {
         try {
           setLoggingInState('pending', true);
-          await userAccountInstance.sync(proxyProvider);
-          setAccountState('address', userAccountInstance.address.toString());
+
+          const userAccountOnNetwork = await apiNetworkProvider.getAccount(
+            userAddressInstance
+          );
+          userAccountInstance.update(userAccountOnNetwork);
+
+          setAccountState('address', userAccountInstance.address.bech32());
         } catch (e: any) {
           console.warn(
             `Something went wrong trying to synchronize the user account: ${e?.message}`

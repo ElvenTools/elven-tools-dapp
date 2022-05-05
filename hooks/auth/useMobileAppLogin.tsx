@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Account } from '@elrondnetwork/erdjs';
+import { Account, Address } from '@elrondnetwork/erdjs';
 import { ApiNetworkProvider } from '@elrondnetwork/erdjs-network-providers';
 import { WalletConnectProvider } from '@elrondnetwork/erdjs-wallet-connect-provider';
 import { useState, useRef } from 'react';
@@ -17,6 +17,7 @@ import { WcOnLogin } from '../../utils/walletConnectCbs';
 import { useLogout } from './useLogout';
 import { Login } from '../../types/account';
 import { useLoggingIn } from './useLoggingIn';
+import { DappProvider } from '../../types/network';
 
 export const useMobileAppLogin = (params?: Login) => {
   const { logout } = useLogout();
@@ -27,7 +28,7 @@ export const useMobileAppLogin = (params?: Login) => {
     getNetworkState<ApiNetworkProvider>('apiNetworkProvider');
   const dappProvider = getNetworkState<WalletConnectProvider>('dappProvider');
 
-  const dappProviderRef = useRef<any>(dappProvider);
+  const dappProviderRef = useRef<DappProvider>(dappProvider);
 
   const handleOnLogout = () => {
     logout({
@@ -49,29 +50,31 @@ export const useMobileAppLogin = (params?: Login) => {
 
     const providerHandlers = {
       onClientLogin: async () => {
-        const address = await dappProviderRef.current.getAddress();
-        const signature = await dappProviderRef.current.getSignature();
-        const account = new Account(address);
+        if (dappProviderRef.current instanceof WalletConnectProvider) {
+          const address = await dappProviderRef.current.getAddress();
+          const signature = await dappProviderRef.current.getSignature();
+          const account = new Account(new Address(address));
 
-        setAccountState('address', address);
-        setAccountState('balance', account.balance.toString());
-        setAccountState('nonce', account.nonce.valueOf());
+          setAccountState('address', address);
+          setAccountState('balance', account.balance.toString());
+          setAccountState('nonce', account.nonce.valueOf());
 
-        setLoggingInState('loggedIn', Boolean(address));
-        if (signature) {
-          setLoginInfoState('signature', signature);
+          setLoggingInState('loggedIn', Boolean(address));
+          if (signature) {
+            setLoginInfoState('signature', signature);
+          }
+          if (params?.token) {
+            setLoginInfoState('loginToken', params?.token);
+          }
+
+          setNetworkState('dappProvider', dappProviderRef.current);
+
+          WcOnLogin(
+            apiNetworkProvider,
+            dappProviderRef.current,
+            params?.callbackRoute
+          );
         }
-        if (params?.token) {
-          setLoginInfoState('loginToken', params?.token);
-        }
-
-        setNetworkState('dappProvider', dappProviderRef.current);
-
-        WcOnLogin(
-          dappProviderRef.current,
-          apiNetworkProvider,
-          params?.callbackRoute
-        );
       },
       onClientLogout: handleOnLogout,
     };

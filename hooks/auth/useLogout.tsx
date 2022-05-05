@@ -5,16 +5,17 @@ import {
   loggingInState,
   setLoggingInState,
 } from '../../store/auth';
+import { DappProvider } from '../../types/network';
 
 interface Logout {
-  dappProvider?: any; // TODO: prepare commont interface
+  dappProvider?: DappProvider;
   callbackRoute?: string;
   redirectFn?: (callbackRoute?: string) => void;
 }
 
 export const useLogout = () => {
   const loggingInSnap = useSnapshot(loggingInState);
-  const dappProviderInstance = getNetworkState('dappProvider');
+  const dappProviderInstance = getNetworkState<DappProvider>('dappProvider');
 
   const logout = async (params?: Logout) => {
     const provider = params?.dappProvider || dappProviderInstance;

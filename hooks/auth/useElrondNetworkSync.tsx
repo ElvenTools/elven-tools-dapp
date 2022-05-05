@@ -28,6 +28,7 @@ import { useEffectOnlyOnUpdate } from '../tools/useEffectOnlyOnUpdate';
 import { isLoginExpired } from '../../utils/expiresAt';
 import { clearDappProvider } from '../../store/network';
 import { clearAuthStates } from '../../store/auth';
+import { DappProvider } from '../../types/network';
 
 export const useElrondNetworkSync = () => {
   const { logout } = useLogout();
@@ -37,8 +38,8 @@ export const useElrondNetworkSync = () => {
   const accountSnap = useSnapshot(accountState);
   const loginInfoSnap = useSnapshot(loginInfoState);
 
-  const dappProviderRef = useRef<any>();
-  const apiNetworkProviderRef = useRef<any>();
+  const dappProviderRef = useRef<DappProvider>();
+  const apiNetworkProviderRef = useRef<ApiNetworkProvider>();
 
   useEffect(() => {
     const accountStorage = localStorage.getItem('elven_tools_dapp__account');
@@ -132,9 +133,7 @@ export const useElrondNetworkSync = () => {
             try {
               const isSuccessfullyInitialized: boolean =
                 await dappProvider.init();
-              (dappProvider as ExtensionProvider).setAddress(
-                accountSnap.address
-              ); // TODO: remove cast
+              dappProvider.setAddress(accountSnap.address);
 
               if (!isSuccessfullyInitialized) {
                 console.warn(
@@ -152,8 +151,8 @@ export const useElrondNetworkSync = () => {
             const providerHandlers = {
               onClientLogin: () =>
                 WcOnLogin(
-                  dappProviderRef?.current,
-                  apiNetworkProviderRef?.current
+                  apiNetworkProviderRef?.current,
+                  dappProviderRef?.current as WalletConnectProvider
                 ),
               onClientLogout: () =>
                 logout({ dappProvider: dappProviderRef?.current }),

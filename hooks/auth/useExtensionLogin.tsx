@@ -12,7 +12,7 @@ import { getNewLoginExpiresTimestamp } from '../../utils/expiresAt';
 import { useLogout } from './useLogout';
 import { Login } from '../../types/account';
 import { useLoggingIn } from './useLoggingIn';
-import { ApiNetworkProvider } from '@elrondnetwork/erdjs-network-providers/out';
+import { ApiNetworkProvider } from '@elrondnetwork/erdjs-network-providers';
 
 export const useExtensionLogin = (params?: Login) => {
   const { logout } = useLogout();

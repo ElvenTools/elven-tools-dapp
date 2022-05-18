@@ -6,6 +6,10 @@
 
 The Dapp is built using Nextjs and a couple of helpful tools. More docs soon!
 
+### Tracking the progress
+
+- [Elven Tools Dapp kanban](https://github.com/orgs/ElvenTools/projects/2)
+
 ### How to start it locally:
 1. npm install -g elven-tools
 2. elven-tools init-dapp

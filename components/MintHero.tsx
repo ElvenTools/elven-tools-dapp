@@ -28,7 +28,7 @@ export const MintHero = () => {
   const { address } = useAccount();
   const {
     data,
-    mutate: refreshData,
+    fetch: refreshData,
     isLoading: totalIsLoading,
   } = useScQuery({
     type: SCQueryType.INT,
@@ -41,7 +41,7 @@ export const MintHero = () => {
 
   const {
     data: dropData,
-    mutate: refreshDropData,
+    fetch: refreshDropData,
     isLoading: dropIsLoading,
   } = useScQuery({
     type: SCQueryType.INT,
@@ -55,7 +55,7 @@ export const MintHero = () => {
 
   const {
     data: mintedData,
-    mutate: refreshMintedData,
+    fetch: refreshMintedData,
     isLoading: mintedDataLoading,
   } = useScQuery({
     type: SCQueryType.INT,
@@ -67,7 +67,7 @@ export const MintHero = () => {
     autoInit: Boolean(address),
   });
 
-  const { data: mintedPerDropData, mutate: refreshMintedPerDropData } =
+  const { data: mintedPerDropData, fetch: refreshMintedPerDropData } =
     useScQuery({
       type: SCQueryType.INT,
       payload: {
@@ -105,26 +105,21 @@ export const MintHero = () => {
     let leftPerDrop = 0;
     let leftInTotal = 0;
 
-    if (isAllowlistEnabled && Number(allowlistCheckData?.data?.data) === 0) {
+    if (isAllowlistEnabled && Number(allowlistCheckData) === 0) {
       return 0;
     }
 
-    if (mintedPerDropData?.data?.data) {
-      leftPerDrop =
-        tokensLimitPerAddressPerDrop - Number(mintedPerDropData.data.data);
+    if (mintedPerDropData) {
+      leftPerDrop = tokensLimitPerAddressPerDrop - Number(mintedPerDropData);
     }
-    if (mintedData?.data?.data) {
-      leftInTotal = tokensLimitPerAddressTotal - Number(mintedData.data.data);
+    if (mintedData) {
+      leftInTotal = tokensLimitPerAddressTotal - Number(mintedData);
     }
     if (!isDropActive || leftPerDrop > leftInTotal) {
       return leftInTotal;
     }
     return leftPerDrop;
-  }, [
-    allowlistCheckData?.data?.data,
-    mintedData?.data.data,
-    mintedPerDropData?.data.data,
-  ]);
+  }, [allowlistCheckData, mintedData, mintedPerDropData]);
 
   const isContentCentered = useBreakpointValue({ base: true, md: false });
 
@@ -186,7 +181,7 @@ export const MintHero = () => {
                 cb={handleRefreshData}
                 leftToMintForUser={getLeftToMintForUser()}
               />
-              {mintedData?.data?.data && mintedData.data.data > 0 && (
+              {mintedData && mintedData > 0 && (
                 <Box
                   display="flex"
                   alignItems="center"

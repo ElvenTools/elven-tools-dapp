@@ -1,4 +1,4 @@
-import { Text, Box } from '@chakra-ui/react';
+import { Text, Box, background, color } from '@chakra-ui/react';
 import { FC } from 'react';
 
 interface HomeSectionTitleProps {
@@ -11,8 +11,12 @@ export const HomeSectionTitle: FC<HomeSectionTitleProps> = ({ title }) => {
       as="h2"
       fontSize={{ base: '5xl', lg: '7xl' }}
       fontWeight="black"
-      mb={16}
+      mr={8}
       textAlign="center"
+      position="relative"
+      transition=".3s ease-out"
+      bottom={'0px'}
+      padding="36px"
     >
       {title}{' '}
       <Box

@@ -5,30 +5,45 @@ import { accountState } from '../store/auth';
 export const Profil = () => {
   const [herotag, setHerotag] = useState('');
   const [nonce, setNonce] = useState('');
+  const [shard, setShard] = useState('');
 
   async function getHerotag() {
-    const res = await fetch(`https://api.elrond.com/accounts/${accountState.address}`);
+    const res = await fetch(
+      `https://api.elrond.com/accounts/${accountState.address}`
+    );
     const data = await res.json();
-    const herotag = data?.username?.split('.')[0] ?? "";
+    const herotag = data?.username?.split('.')[0] ?? '';
     setHerotag(herotag);
     setNonce(data?.nonce);
+    setShard(data?.shard);
+    console.log(data);
   }
 
   useEffect(() => {
-    getHerotag()
-  }, [])
+    getHerotag();
+  }, []);
 
   return (
-     <Box>
-      <WrapItem justifyContent='center'>
-        <Avatar size='xl' name='NaaQ' src='https://res.cloudinary.com/naaq/image/upload/v1653986673/t%C3%A9l%C3%A9chargement_aahft1.jpg' />
+    <Box>
+      <WrapItem justifyContent="center">
+        <Avatar
+          size="xl"
+          name="NaaQ"
+          src="https://res.cloudinary.com/naaq/image/upload/v1653986673/t%C3%A9l%C3%A9chargement_aahft1.jpg"
+        />
       </WrapItem>
-      <Text mt='10px' textAlign='center'>{accountState.address}</Text>
-      <Text mt='10px' textAlign='center'>@{herotag}</Text>
-      <Text mt='10px' textAlign='center'>Nonce : {nonce}</Text>
-     </Box>
-     
+      <Text mt="10px" textAlign="center">
+        {accountState.address}
+      </Text>
+      <Text mt="10px" textAlign="center">
+        @{herotag}
+      </Text>
+      <Text mt="10px" textAlign="center">
+        Nonce : {nonce}
+      </Text>
+      <Text mt="10px" textAlign="center">
+        Shard : {shard}
+      </Text>
+    </Box>
   );
 };
-
-

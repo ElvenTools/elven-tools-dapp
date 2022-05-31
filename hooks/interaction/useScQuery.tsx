@@ -1,5 +1,4 @@
 import useSWR, { Fetcher } from 'swr';
-import useSwrMutation from 'swr/mutation';
 import { apiCall } from '../../utils/apiCall';
 
 export enum SCQueryType {
@@ -15,8 +14,8 @@ interface SCQueryData {
 }
 
 interface FetcherArgs {
-  url: string;
-  payload: Record<string, unknown> | undefined;
+  url: SCQueryType;
+  payload: Record<string, unknown>;
 }
 
 export interface VMOutput {
@@ -28,7 +27,7 @@ export interface VMOutput {
 export const fetcher: Fetcher<VMOutput, FetcherArgs> = async ({
   url,
   payload,
-}) => await apiCall.post(url, payload || {});
+}) => await apiCall.post(url, payload);
 
 export const useScQuery = ({
   type,
@@ -47,7 +46,7 @@ export const useScQuery = ({
       break;
   }
 
-  const { data, error, mutate, isValidating, isLoading } = useSWR(
+  const { data, error, mutate } = useSWR(
     autoInit ? { url, payload } : null,
     fetcher,
     {
@@ -58,21 +57,10 @@ export const useScQuery = ({
     }
   );
 
-  const {
-    data: mutationData,
-    error: mutationError,
-    trigger,
-    isMutating,
-  } = useSwrMutation({ url, payload }, fetcher, {
-    populateCache: true,
-    revalidate: true,
-  });
-
   return {
-    data: data?.data?.data || mutationData?.data?.data,
-    isLoading: isLoading,
-    isValidating: isValidating || isMutating,
-    error: error || mutationError,
-    fetch: autoInit ? mutate : trigger,
+    data: data,
+    isLoading: !error && !data,
+    isError: error,
+    mutate: mutate,
   };
 };

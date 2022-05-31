@@ -1,4 +1,4 @@
-import { WalletProvider } from '@elrondnetwork/erdjs-web-wallet-provider';
+import { WalletProvider } from '@elrondnetwork/erdjs';
 import { LoginMethodsEnum } from '../../types/enums';
 import { getNewLoginExpiresTimestamp } from '../../utils/expiresAt';
 import {
@@ -37,9 +37,7 @@ export const useWebWalletLogin = (params?: Login) => {
       setLoginInfoState('loginMethod', LoginMethodsEnum.wallet);
       await providerInstance.login(providerLoginData);
       setLoginInfoState('expires', getNewLoginExpiresTimestamp());
-      if (params?.token) {
-        setLoginInfoState('loginToken', params.token);
-      }
+      setLoggingInState('loggedIn', true);
     } catch (e: any) {
       setLoggingInState('error', `Error logging in ${e?.message}`);
       setLoginInfoState('loginMethod', '');

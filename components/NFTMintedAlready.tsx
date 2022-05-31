@@ -1,8 +1,9 @@
 import { Box, Spinner, Text } from '@chakra-ui/react';
 import { FC } from 'react';
+import { VMOutput } from '../hooks/interaction/useScQuery';
 
 interface NFTMintedAlreadyProps {
-  data?: string | number;
+  data?: VMOutput;
   dataLoading?: boolean;
 }
 
@@ -29,7 +30,7 @@ export const NFTMintedAlready: FC<NFTMintedAlreadyProps> = ({
           fontWeight="black"
           ml={3}
         >
-          {data}
+          {data?.data?.data}
         </Text>
       )}
 

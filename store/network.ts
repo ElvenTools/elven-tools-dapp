@@ -1,12 +1,12 @@
 interface NetworkState<T> {
   dappProvider: T;
-  apiNetworkProvider: T;
+  proxyProvider: T;
 }
 
 // It doesn't have to be tracked or persistent, it will init on every hard refresh
 const networkState: NetworkState<any> = {
   dappProvider: null,
-  apiNetworkProvider: null,
+  proxyProvider: null,
 };
 
 export function getNetworkState<T>(
@@ -21,7 +21,7 @@ export function setNetworkState<T>(key: keyof NetworkState<T>, value: any) {
 
 export const clearNetworkState = () => {
   networkState.dappProvider = null;
-  networkState.apiNetworkProvider = null;
+  networkState.proxyProvider = null;
 };
 
 export const clearDappProvider = () => {

@@ -26,9 +26,10 @@ import { NFTLeftToMintPerAddress } from './NFTLeftToMintPerAddress';
 
 export const MintHero = () => {
   const { address } = useAccount();
+  
   const {
     data,
-    fetch: refreshData,
+    mutate: refreshData,
     isLoading: totalIsLoading,
   } = useScQuery({
     type: SCQueryType.INT,
@@ -41,7 +42,7 @@ export const MintHero = () => {
 
   const {
     data: dropData,
-    fetch: refreshDropData,
+    mutate: refreshDropData,
     isLoading: dropIsLoading,
   } = useScQuery({
     type: SCQueryType.INT,
@@ -55,7 +56,7 @@ export const MintHero = () => {
 
   const {
     data: mintedData,
-    fetch: refreshMintedData,
+    mutate: refreshMintedData,
     isLoading: mintedDataLoading,
   } = useScQuery({
     type: SCQueryType.INT,
@@ -67,7 +68,7 @@ export const MintHero = () => {
     autoInit: Boolean(address),
   });
 
-  const { data: mintedPerDropData, fetch: refreshMintedPerDropData } =
+  const { data: mintedPerDropData, mutate: refreshMintedPerDropData } =
     useScQuery({
       type: SCQueryType.INT,
       payload: {
@@ -105,21 +106,26 @@ export const MintHero = () => {
     let leftPerDrop = 0;
     let leftInTotal = 0;
 
-    if (isAllowlistEnabled && Number(allowlistCheckData) === 0) {
+    if (isAllowlistEnabled && Number(allowlistCheckData?.data?.data) === 0) {
       return 0;
     }
 
-    if (mintedPerDropData) {
-      leftPerDrop = tokensLimitPerAddressPerDrop - Number(mintedPerDropData);
+    if (mintedPerDropData?.data?.data) {
+      leftPerDrop =
+        tokensLimitPerAddressPerDrop - Number(mintedPerDropData.data.data);
     }
-    if (mintedData) {
-      leftInTotal = tokensLimitPerAddressTotal - Number(mintedData);
+    if (mintedData?.data?.data) {
+      leftInTotal = tokensLimitPerAddressTotal - Number(mintedData.data.data);
     }
     if (!isDropActive || leftPerDrop > leftInTotal) {
       return leftInTotal;
     }
     return leftPerDrop;
-  }, [allowlistCheckData, mintedData, mintedPerDropData]);
+  }, [
+    allowlistCheckData?.data?.data,
+    mintedData?.data.data,
+    mintedPerDropData?.data.data,
+  ]);
 
   const isContentCentered = useBreakpointValue({ base: true, md: false });
 
@@ -181,7 +187,7 @@ export const MintHero = () => {
                 cb={handleRefreshData}
                 leftToMintForUser={getLeftToMintForUser()}
               />
-              {mintedData && mintedData > 0 && (
+              {mintedData?.data?.data && mintedData.data.data > 0 && (
                 <Box
                   display="flex"
                   alignItems="center"

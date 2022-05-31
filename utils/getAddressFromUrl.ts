@@ -1,7 +1,7 @@
-export const getParamFromUrl = (paramName: string) => {
+export const getAddressFromUrl = () => {
   if (typeof window !== 'undefined') {
     const url = new URL(window.location.href);
     const params = new URLSearchParams(url.search);
-    return params.get(paramName);
+    return params.get('address');
   }
 };

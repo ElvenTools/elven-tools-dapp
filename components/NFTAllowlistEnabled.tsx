@@ -1,9 +1,10 @@
 import { Box, Spinner, Text } from '@chakra-ui/react';
 import { FC } from 'react';
+import { VMOutput } from '../hooks/interaction/useScQuery';
 import { isAllowlistEnabled } from '../config/nftSmartContract';
 
 interface NFTAllowlistEnabledProps {
-  data?: string | number;
+  data?: VMOutput;
   dataLoading?: boolean;
 }
 
@@ -31,7 +32,7 @@ export const NFTAllowlistEnabled: FC<NFTAllowlistEnabledProps> = ({
             </Text>
             {dataLoading ? (
               <Spinner ml={3} color="elvenTools.color2.base" />
-            ) : Number(data) !== 0 ? (
+            ) : Number(data?.data?.data) !== 0 ? (
               <Text
                 color="elvenTools.color2.base"
                 as="span"

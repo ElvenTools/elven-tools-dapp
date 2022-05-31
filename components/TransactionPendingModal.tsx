@@ -41,7 +41,7 @@ export const TransactionPendingModal: FC<TransactionPendingModalProps> = ({
 
   const txTitle = () => {
     if (txError) {
-      return `Transaction error: ${txError}.`;
+      return `Transaction status: ${txError}.`;
     }
     if (successTxHash) {
       return 'Transaction success. Check explorer for details.';
@@ -98,7 +98,7 @@ export const TransactionPendingModal: FC<TransactionPendingModalProps> = ({
               )}
             </Flex>
           )}
-          {additionalMessage && !successTxHash && (
+          {additionalMessage && !successTxHash && !txError && (
             <Text textAlign="center" mt={5} fontWeight="semibold" fontSize="md">
               {additionalMessage}
             </Text>

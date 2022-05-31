@@ -1,11 +1,10 @@
 import { Box, Spinner, Text } from '@chakra-ui/react';
 import { FC } from 'react';
-import { VMOutput } from '../hooks/interaction/useScQuery';
 import { isDropActive } from '../config/nftSmartContract';
 
 interface NFTLeftToMintProps {
-  data?: VMOutput;
-  dropData?: VMOutput;
+  data?: string | number;
+  dropData?: string | number;
   dataLoading?: boolean;
 }
 
@@ -32,7 +31,7 @@ export const NFTLeftToMint: FC<NFTLeftToMintProps> = ({
           fontWeight="black"
           ml={3}
         >
-          {isDropActive ? dropData?.data.data : data?.data?.data}
+          {isDropActive ? dropData : data}
         </Text>
       )}
     </Box>

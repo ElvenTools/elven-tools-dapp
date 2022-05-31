@@ -4,7 +4,6 @@ import { useCallback, FC } from 'react';
 import { ActionButton } from '../components/ActionButton';
 import { SocialMediaIcons } from '../components/SocialMediaIcons';
 import { LoginModalButton } from '../components/LoginModalButton';
-import { useLoggingIn } from '../hooks/auth/useLoggingIn';
 
 interface HeaderMenuButtonsProps {
   enabled: string[];
@@ -12,7 +11,6 @@ interface HeaderMenuButtonsProps {
 
 export const HeaderMenuButtons: FC<HeaderMenuButtonsProps> = ({ enabled }) => {
   const router = useRouter();
-  const { isLoggedIn } = useLoggingIn();
 
   const handleMintClick = useCallback(() => {
     router.push('/mint');
@@ -20,10 +18,6 @@ export const HeaderMenuButtons: FC<HeaderMenuButtonsProps> = ({ enabled }) => {
 
   const handleAboutClick = useCallback(() => {
     router.push('/about');
-  }, [router]);
-
-  const handleProfilClick = useCallback(() => {
-    router.push('/profil');
   }, [router]);
 
   return (
@@ -53,12 +47,6 @@ export const HeaderMenuButtons: FC<HeaderMenuButtonsProps> = ({ enabled }) => {
 
       {enabled.includes('mint') && (
         <ActionButton onClick={handleMintClick}>Mint</ActionButton>
-      )}
-
-      {/* TODO: Protect the /profil routes */}
-      {(enabled.includes('profil') && isLoggedIn) && (
-        <ActionButton onClick={handleProfilClick}>Profil</ActionButton>
-         
       )}
       {enabled.includes('auth') && <LoginModalButton />}
     </Box>

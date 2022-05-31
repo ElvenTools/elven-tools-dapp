@@ -13,6 +13,7 @@ export const chainType = process.env.NEXT_PUBLIC_ELROND_CHAIN || 'devnet';
 export const networkConfig: Record<string, NetworkType> = {
   devnet: {
     id: 'devnet',
+    shortId: 'D',
     name: 'Devnet',
     egldLabel: 'xEGLD',
     egldDenomination: '18',
@@ -30,6 +31,7 @@ export const networkConfig: Record<string, NetworkType> = {
 
   testnet: {
     id: 'testnet',
+    shortId: 'T',
     name: 'Testnet',
     egldLabel: 'xEGLD',
     egldDenomination: '18',
@@ -47,6 +49,7 @@ export const networkConfig: Record<string, NetworkType> = {
 
   mainnet: {
     id: 'mainnet',
+    shortId: '1',
     name: 'Mainnet',
     egldLabel: 'EGLD',
     egldDenomination: '18',

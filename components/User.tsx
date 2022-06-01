@@ -1,28 +1,12 @@
-import {
-  Avatar,
-  Box,
-  Fade,
-  Flex,
-  ListItem,
-  Slide,
-  SlideFade,
-  Text,
-  UnorderedList,
-  WrapItem,
-} from '@chakra-ui/react';
-import { copyFile } from 'fs';
+import { Avatar, Box, Flex, Text, WrapItem } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { accountState } from '../store/auth';
 import { HomeSectionTitle } from './HomeSectionTitle';
 
-export const Profil = () => {
+export const User = () => {
   const [herotag, setHerotag] = useState('');
   const [nonce, setNonce] = useState('');
   const [shard, setShard] = useState('');
-
-  const [isHovering, setIsHovered] = useState(false);
-  const onMouseEnter = () => setIsHovered(true);
-  const onMouseLeave = () => setIsHovered(false);
 
   async function getHerotag() {
     const res = await fetch(
@@ -41,12 +25,7 @@ export const Profil = () => {
 
   return (
     <Box>
-      <WrapItem
-        justifyContent="center"
-        alignItems="center"
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-      >
+      <WrapItem justifyContent="center" alignItems="center">
         <Avatar
           size="xl"
           name="NaaQ"
@@ -80,10 +59,10 @@ export const Profil = () => {
           <Text mt="10px" textAlign="center">
             {accountState.address}{' '}
           </Text>
-          <Box mt={8}>
-            <Text textAlign="left">Nonce : {nonce}</Text>
-            <Text textAlign="left">Shard : {shard}</Text>{' '}
-          </Box>
+          <Flex justifyContent={'space-evenly'} mt={8}>
+            <Text textAlign="center">Nonce : {nonce}</Text>
+            <Text textAlign="center">Shard : {shard}</Text>{' '}
+          </Flex>
         </Box>
       </Box>
     </Box>

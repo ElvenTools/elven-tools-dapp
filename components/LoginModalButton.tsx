@@ -37,6 +37,12 @@ export const LoginModalButton: FC<LoginModalButtonProps> = ({
     onClose: close,
   } = useDisclosure({ onClose, onOpen });
 
+  //Redirect to home when logged out
+  const handleLogout = () => {
+    logout();
+    window.location.href = '/';
+  };
+
   useEffectOnlyOnUpdate(() => {
     if (isLoggedIn) {
       close();
@@ -46,7 +52,7 @@ export const LoginModalButton: FC<LoginModalButtonProps> = ({
   return (
     <>
       {isLoggedIn ? (
-        <ActionButton onClick={logout}>Disconnect</ActionButton>
+        <ActionButton onClick={handleLogout}>Disconnect</ActionButton>
       ) : (
         <ActionButton onClick={open}>Connect</ActionButton>
       )}

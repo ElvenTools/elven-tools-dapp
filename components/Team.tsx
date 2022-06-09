@@ -1,7 +1,7 @@
 import { Box, SimpleGrid } from '@chakra-ui/react';
 import { TeamMember } from './TeamMember';
 import { team } from '../config/dappUi';
-import { HomeSectionTitle } from '../components/HomeSectionTitle';
+import { HomeSectionTitle } from './HomeSectionTitle';
 
 export const Team = () => {
   if (!Array.isArray(team)) return null;

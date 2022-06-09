@@ -1,7 +1,7 @@
 import { useEffect, useState, FunctionComponent } from 'react';
 import { Flex, Box } from '@chakra-ui/react';
-import { networkConfig, chainType } from '../config/network';
-import { isMobile } from '../utils/isMobile';
+import { networkConfig, chainType } from '../../config/network';
+import { isMobile } from '../../utils/isMobile';
 import QRCode from 'qrcode';
 
 interface MobileLoginQRProps {

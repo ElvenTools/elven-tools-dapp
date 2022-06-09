@@ -1,5 +1,5 @@
 import NextLink from 'next/link';
-import { Box, Text, keyframes } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 
 export const Logo = () => {
   return (

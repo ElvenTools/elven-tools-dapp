@@ -4,7 +4,20 @@
 - Demo: [dapp-demo.elven.tools](https://dapp-demo.elven.tools)
 - Sneak peek: [youtu.be/ATSxD3mD4dc](https://youtu.be/ATSxD3mD4dc)
 
-The Dapp is built using Nextjs and a couple of helpful tools. More docs soon!
+The Dapp is built using Nextjs and a couple of helpful tools. It allows you to interact with the Elrond blockchain, smart contracts, and especially it is prepared for the [Elven Tools Smart Contract](https://github.com/ElvenTools/elven-nft-minter-sc). But you can always modify it and adjust for your needs.
+
+### It provides:
+- Auth with 4 Elrond blockchain providers
+  - Web Wallet
+  - Maiar mobile app
+  - Maiar DeFi browser extension
+  - Ledger Nano
+- React hooks for making transactions
+- React hooks for querying smart contracts
+- Tools and React hooks for app state synchronization
+- API endpoint rewrites and 'guard' middleware
+- Preconfigured UI based on Chakra UI
+- The template with sections mainly used on minter dapps (it will be developed further)
 
 ### Tracking the progress
 
@@ -29,7 +42,7 @@ Check detailed docs on it here: [How to start with the Dapp](https://www.elven.t
 ### Main assumption for the dapp:
 - it works on Nextjs
 - it uses erdjs 10.* without the dapp-core library.
-- it uses backed side redirections to hide the API endpoint. The only exposed one is `/api`
+- it uses backend side rewrites to hide the API endpoint. The only exposed one is `/api`
 - it uses .env file - there is an example in the repo
 - it uses a couple of config files in the 'config' directory (it will be simplified in the future)
 - it uses chakra-ui

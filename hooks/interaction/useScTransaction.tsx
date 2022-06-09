@@ -33,6 +33,7 @@ import { getParamFromUrl } from '../../utils/getParamFromUrl';
 import { useEffect, useState, useCallback } from 'react';
 import { ExtensionProvider } from '@elrondnetwork/erdjs-extension-provider/out';
 import { WalletConnectProvider } from '@elrondnetwork/erdjs-wallet-connect-provider/out';
+import { HWProvider } from '@elrondnetwork/erdjs-hw-provider/out';
 
 interface ScTransactionParams {
   func: ContractFunction;
@@ -156,6 +157,9 @@ export function useScTransaction(cb?: (params: ScTransactionCb) => void) {
           await dappProvider.signTransaction(tx);
         }
         if (dappProvider instanceof WalletConnectProvider) {
+          await dappProvider.signTransaction(tx);
+        }
+        if (dappProvider instanceof HWProvider) {
           await dappProvider.signTransaction(tx);
         }
         if (loginInfoSnap.loginMethod !== LoginMethodsEnum.wallet) {

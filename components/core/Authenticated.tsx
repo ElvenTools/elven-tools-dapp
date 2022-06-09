@@ -1,6 +1,6 @@
 import { FC, ReactElement } from 'react';
 import { Spinner, Flex } from '@chakra-ui/react';
-import { useLoggingIn } from '../hooks/auth/useLoggingIn';
+import { useLoggingIn } from '../../hooks/auth/useLoggingIn';
 
 interface AuthenticatedProps {
   fallback?: ReactElement;
@@ -14,7 +14,7 @@ export const Authenticated: FC<AuthenticatedProps> = ({
   noSpinner = false,
   spinnerCentered = false,
 }) => {
-  const { isLoggingIn, isLoggedIn, error } = useLoggingIn();
+  const { isLoggingIn, isLoggedIn } = useLoggingIn();
 
   if (isLoggingIn)
     return noSpinner ? null : (
@@ -28,11 +28,6 @@ export const Authenticated: FC<AuthenticatedProps> = ({
         />
       </Flex>
     );
-
-  if (error) {
-    console.log(error);
-    return null;
-  }
 
   if (!isLoggedIn) return fallback;
 

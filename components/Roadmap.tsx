@@ -1,7 +1,7 @@
 import { Box, SimpleGrid } from '@chakra-ui/react';
 import { RoadmapItem } from './RoadmapItem';
 import { roadmap } from '../config/dappUi';
-import { HomeSectionTitle } from '../components/HomeSectionTitle';
+import { HomeSectionTitle } from './HomeSectionTitle';
 
 export const Roadmap = () => {
   if (!Array.isArray(roadmap)) return null;

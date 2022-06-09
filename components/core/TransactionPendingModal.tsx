@@ -40,7 +40,7 @@ export const TransactionPendingModal: FC<TransactionPendingModalProps> = ({
   }, [isOpen, successTxHash, txError]);
 
   const txTitle = () => {
-    // TODO: refactor and improve catching errors from Ledger
+    // TODO: refactor and improve catching errors (from ledger and standard ones)
     if (txError === 'Ledger device: UNKNOWN_ERROR (0x6e07)') {
       return 'Contract data disabled in app options. Please enable it on your Ledger device.';
     }
@@ -49,6 +49,9 @@ export const TransactionPendingModal: FC<TransactionPendingModalProps> = ({
       'Ledger device: Condition of use not satisfied (denied by the user?) (0x6985)'
     ) {
       return 'Transaction was rejected by user.';
+    }
+    if (txError === 'Request error on url [transactions]: [{"statusCode":400,"message":""}]') {
+      return "The transaction can't be processed. Check if there are funds on chosen wallet address.";
     }
     if (txError) {
       return `Transaction status: ${txError}.`;

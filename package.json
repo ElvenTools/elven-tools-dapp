@@ -21,7 +21,7 @@
     "@chakra-ui/theme-tools": "^1.3.6",
     "@elrondnetwork/erdjs": "10.2.2",
     "@elrondnetwork/erdjs-extension-provider": "2.0.1",
-    "@elrondnetwork/erdjs-hw-provider": "^2.0.1",
+    "@elrondnetwork/erdjs-hw-provider": "2.0.1",
     "@elrondnetwork/erdjs-network-providers": "0.1.5",
     "@elrondnetwork/erdjs-wallet-connect-provider": "2.0.1",
     "@elrondnetwork/erdjs-web-wallet-provider": "2.0.0",

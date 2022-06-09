@@ -3,9 +3,9 @@ import { useCallback } from 'react';
 import { Address } from '@elrondnetwork/erdjs';
 import { useScQuery, SCQueryType } from '../hooks/interaction/useScQuery';
 import { MintForm } from './MintForm';
-import { Authenticated } from './Authenticated';
+import { Authenticated } from './core/Authenticated';
 import { useAccount } from '../hooks/auth/useAccount';
-import { LoginModalButton } from './LoginModalButton';
+import { LoginModalButton } from './core/LoginModalButton';
 import {
   isDropActive,
   smartContractAddress,

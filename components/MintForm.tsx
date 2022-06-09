@@ -12,7 +12,7 @@ import {
   NumberDecrementStepper,
   Box,
 } from '@chakra-ui/react';
-import { TransactionPendingModal } from '../components/TransactionPendingModal';
+import { TransactionPendingModal } from './core/TransactionPendingModal';
 
 interface MintFormProps {
   leftToMintForUser: number;
@@ -29,6 +29,16 @@ export const MintForm: FC<MintFormProps> = ({ leftToMintForUser, cb }) => {
   }, [amount, mint]);
 
   const setAmountHandler = useCallback((value) => setAmount(value), []);
+
+  const getAdditionalPendingMessage = () => {
+    if (loginMethod === LoginMethodsEnum.walletconnect) {
+      return 'Sign the transaction using Maiar mobile app. It will take some time to finish. You can always close this message. You will get the transaction hash when finished.';
+    }
+    if (loginMethod === LoginMethodsEnum.ledger) {
+      return 'Sign the transaction using Ledger HW. It will take some time to finish. You can always close this message. You will get the transaction hash when finished.';
+    }
+    return 'It will take some time to finish. You can always close this message. You will get the transaction hash when finished.';
+  };
 
   return (
     <>
@@ -69,11 +79,7 @@ export const MintForm: FC<MintFormProps> = ({ leftToMintForUser, cb }) => {
         isOpen={pending}
         successTxHash={transaction?.getHash().toString()}
         txError={error}
-        additionalMessage={
-          loginMethod === LoginMethodsEnum.walletconnect
-            ? 'Sign the transaction using Maiar mobile app. It will take some time to finish. You can always close this message. You will get the transaction hash when finished.'
-            : 'It will take some time to finish. You can always close this message. You will get the transaction hash when finished.'
-        }
+        additionalMessage={getAdditionalPendingMessage()}
       />
     </>
   );

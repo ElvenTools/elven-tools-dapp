@@ -1,3 +1,6 @@
+### [2.2.0](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v2.2.0) (2022-06-09)
+- Hardware Wallet (Ledger) support
+
 ### [2.1.0](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v2.1.0) (2022-05-27)
 - `useScQuery` wrapper now also incorporates `useSwrMutation` to be able to trigger calls without an initial call on the component mount
 - response from `useScQuery` is now shallowed

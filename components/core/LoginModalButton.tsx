@@ -8,13 +8,15 @@ import {
   useDisclosure,
   Spinner,
   Flex,
+  ModalHeader,
 } from '@chakra-ui/react';
 import { FC } from 'react';
-import { ActionButton } from '../components/ActionButton';
-import { LoginComponent } from '../components/LoginComponent';
-import { useEffectOnlyOnUpdate } from '../hooks/tools/useEffectOnlyOnUpdate';
-import { useLogin } from '../hooks/auth/useLogin';
-import { useLogout } from '../hooks/auth/useLogout';
+import { ActionButton } from '../ActionButton';
+import { LoginComponent } from './LoginComponent';
+import { useEffectOnlyOnUpdate } from '../../hooks/tools/useEffectOnlyOnUpdate';
+import { useLogin } from '../../hooks/auth/useLogin';
+import { useLogout } from '../../hooks/auth/useLogout';
+import { setLoggingInState } from '../../store/auth';
 
 interface LoginModalButtonProps {
   onClose?: () => void;
@@ -41,7 +43,10 @@ export const LoginModalButton: FC<LoginModalButtonProps> = ({
     if (isLoggedIn) {
       close();
     }
-  }, [isLoggedIn]);
+    if (!opened) {
+      setLoggingInState('error', '');
+    }
+  }, [opened, isLoggedIn]);
 
   return (
     <>
@@ -50,20 +55,28 @@ export const LoginModalButton: FC<LoginModalButtonProps> = ({
       ) : (
         <ActionButton onClick={open}>Connect</ActionButton>
       )}
-      <Modal isOpen={opened} size="sm" onClose={close} isCentered>
+      <Modal
+        isOpen={opened}
+        size="sm"
+        onClose={close}
+        isCentered
+        scrollBehavior="inside"
+      >
         <CustomModalOverlay />
         <ModalContent
           bgColor="elvenTools.dark.darker"
-          px={6}
           pt={7}
           pb={10}
+          px={0}
           position="relative"
         >
           <ModalCloseButton _focus={{ outline: 'none' }} />
-          <ModalBody>
-            <Text textAlign="center" mb={7} fontWeight="black" fontSize="2xl">
-              Connect you wallet
+          <ModalHeader>
+            <Text textAlign="center" fontWeight="black" fontSize="2xl">
+              Connect your wallet
             </Text>
+          </ModalHeader>
+          <ModalBody px={10}>
             {isLoggingIn && (
               <Flex
                 alignItems="center"

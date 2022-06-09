@@ -13,6 +13,7 @@ import { Address, Account } from '@elrondnetwork/erdjs';
 import { WalletProvider } from '@elrondnetwork/erdjs-web-wallet-provider';
 import { WalletConnectProvider } from '@elrondnetwork/erdjs-wallet-connect-provider';
 import { ExtensionProvider } from '@elrondnetwork/erdjs-extension-provider';
+import { HWProvider } from '@elrondnetwork/erdjs-hw-provider';
 import { ApiNetworkProvider } from '@elrondnetwork/erdjs-network-providers';
 import {
   networkConfig,
@@ -48,6 +49,7 @@ export const useElrondNetworkSync = () => {
       setAccountState('address', parsedStorage.address);
       setAccountState('nonce', parsedStorage.nonce);
       setAccountState('balance', parsedStorage.balance);
+      setAccountState('addressIndex', parsedStorage.addressIndex);
       if (!parsedStorage.address) setLoggingInState('pending', false);
       setAccountDone(true);
     } else {
@@ -192,7 +194,15 @@ export const useElrondNetworkSync = () => {
             }
             break;
           case LoginMethodsEnum.ledger:
-            // TODO: implement the ledger auth
+            dappProvider = new HWProvider();
+            dappProviderRef.current = dappProvider;
+            network.setNetworkState<DappProvider>('dappProvider', dappProvider);
+            try {
+              await dappProvider.init();
+              dappProvider.setAddressIndex(accountSnap.addressIndex);
+            } catch {
+              console.warn("Can't initialize the Dapp Provider!");
+            }
             break;
         }
       }

@@ -1,7 +1,7 @@
-import { Box } from '@chakra-ui/react';
+import { Box, BoxProps } from '@chakra-ui/react';
 import { FC, useCallback } from 'react';
 
-interface ActionButtonProps {
+interface ActionButtonProps extends BoxProps {
   onClick: () => void;
   isFullWidth?: boolean;
   disabled?: boolean;

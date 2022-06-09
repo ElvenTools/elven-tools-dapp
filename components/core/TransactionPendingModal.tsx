@@ -10,9 +10,9 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react';
 import { FC } from 'react';
-import { networkConfig, chainType } from '../config/network';
-import { useEffectOnlyOnUpdate } from '../hooks/tools/useEffectOnlyOnUpdate';
-import { shortenHash } from '../utils/shortenHash';
+import { networkConfig, chainType } from '../../config/network';
+import { useEffectOnlyOnUpdate } from '../../hooks/tools/useEffectOnlyOnUpdate';
+import { shortenHash } from '../../utils/shortenHash';
 
 interface TransactionPendingModalProps {
   isOpen: boolean;
@@ -40,6 +40,16 @@ export const TransactionPendingModal: FC<TransactionPendingModalProps> = ({
   }, [isOpen, successTxHash, txError]);
 
   const txTitle = () => {
+    // TODO: refactor and improve catching errors from Ledger
+    if (txError === 'Ledger device: UNKNOWN_ERROR (0x6e07)') {
+      return 'Contract data disabled in app options. Please enable it on your Ledger device.';
+    }
+    if (
+      txError ===
+      'Ledger device: Condition of use not satisfied (denied by the user?) (0x6985)'
+    ) {
+      return 'Transaction was rejected by user.';
+    }
     if (txError) {
       return `Transaction status: ${txError}.`;
     }

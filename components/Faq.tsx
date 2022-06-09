@@ -1,7 +1,7 @@
 import { Box, Accordion } from '@chakra-ui/react';
 import { FaqItem } from './FaqItem';
 import { faq } from '../config/dappUi';
-import { HomeSectionTitle } from '../components/HomeSectionTitle';
+import { HomeSectionTitle } from './HomeSectionTitle';
 
 export const Faq = () => {
   if (!Array.isArray(faq)) return null;

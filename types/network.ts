@@ -3,6 +3,7 @@ import { WalletConnectProvider } from '@elrondnetwork/erdjs-wallet-connect-provi
 import { ExtensionProvider } from '@elrondnetwork/erdjs-extension-provider';
 import { ApiNetworkProvider } from '@elrondnetwork/erdjs-network-providers';
 import { ProxyNetworkProvider } from '@elrondnetwork/erdjs-network-providers';
+import { HWProvider } from '@elrondnetwork/erdjs-hw-provider/out';
 
 export interface BaseNetworkType {
   id: string;
@@ -26,5 +27,6 @@ export interface NetworkType extends BaseNetworkType {
 export type DappProvider =
   | ExtensionProvider
   | WalletConnectProvider
-  | WalletProvider;
+  | WalletProvider
+  | HWProvider;
 export type NetworkProvider = ApiNetworkProvider | ProxyNetworkProvider;

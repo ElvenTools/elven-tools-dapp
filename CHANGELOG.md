@@ -1,3 +1,6 @@
+### [2.2.1](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v2.2.1) (2022-06-17)
+- bugfix for web wallet signing, it is now required to provide the sender when creating a transaction
+
 ### [2.2.0](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v2.2.0) (2022-06-09)
 - Hardware Wallet (Ledger) support
 

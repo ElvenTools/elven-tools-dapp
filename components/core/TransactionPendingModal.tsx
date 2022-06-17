@@ -50,7 +50,10 @@ export const TransactionPendingModal: FC<TransactionPendingModalProps> = ({
     ) {
       return 'Transaction was rejected by user.';
     }
-    if (txError === 'Request error on url [transactions]: [{"statusCode":400,"message":""}]') {
+    if (
+      txError ===
+      'Request error on url [transactions]: [{"statusCode":400,"message":""}]'
+    ) {
       return "The transaction can't be processed. Check if there are funds on chosen wallet address.";
     }
     if (txError) {

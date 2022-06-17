@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {
-  SmartContract,
   ContractFunction,
   Address,
   Transaction,
@@ -8,6 +7,7 @@ import {
   TypedValue,
   TokenPayment,
   TransactionWatcher,
+  ContractCallPayloadBuilder,
 } from '@elrondnetwork/erdjs';
 import { ApiNetworkProvider } from '@elrondnetwork/erdjs-network-providers';
 import {
@@ -131,19 +131,23 @@ export function useScTransaction(cb?: (params: ScTransactionCb) => void) {
       currentNonce !== undefined &&
       mintTxBaseGasLimit &&
       smartContractAddress &&
+      accountSnap.address &&
+      args &&
       !pending
     ) {
       setPending(true);
 
-      const contract = new SmartContract({
-        address: new Address(smartContractAddress),
-      });
+      const data = new ContractCallPayloadBuilder()
+        .setFunction(func)
+        .setArgs(args)
+        .build();
 
-      let tx = contract.call({
-        func,
+      let tx = new Transaction({
+        data,
         gasLimit,
-        args,
         value,
+        receiver: new Address(smartContractAddress),
+        sender: new Address(accountSnap.address),
         chainID: networkConfig[chainType].shortId,
       });
 

@@ -1,4 +1,4 @@
-import { useMintTransaction } from '../hooks/interaction/useMintTransaction';
+import { useMintTransaction } from '../hooks/interaction/elvenScHooks/useMintTransaction';
 import { useCallback, FC, useState } from 'react';
 import { ActionButton } from './ActionButton';
 import { ScTransactionCb } from '../hooks/interaction/useScTransaction';

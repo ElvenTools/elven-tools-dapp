@@ -22,10 +22,6 @@ import {
   setAccountState,
 } from '../../store/auth';
 import { getNetworkState } from '../../store/network';
-import {
-  smartContractAddress,
-  mintTxBaseGasLimit,
-} from '../../config/nftSmartContract';
 import { chainType, networkConfig } from '../../config/network';
 import { LoginMethodsEnum } from '../../types/enums';
 import { DappProvider } from '../../types/network';
@@ -46,6 +42,9 @@ export interface ScTransactionCb {
   transaction?: Transaction | null;
   error?: string;
 }
+
+const smartContractAddress = process.env.NEXT_PUBLIC_NFT_SMART_CONTRACT;
+const mintTxBaseGasLimit = Number(process.env.NEXT_PUBLIC_MINT_BASE_GAS_LIMIT);
 
 export function useScTransaction(cb?: (params: ScTransactionCb) => void) {
   const [pending, setPending] = useState(false);
@@ -129,7 +128,7 @@ export function useScTransaction(cb?: (params: ScTransactionCb) => void) {
       dappProvider &&
       apiNetworkProvider &&
       currentNonce !== undefined &&
-      mintTxBaseGasLimit &&
+      !Number.isNaN(mintTxBaseGasLimit) &&
       smartContractAddress &&
       accountSnap.address &&
       args &&

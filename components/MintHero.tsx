@@ -1,93 +1,152 @@
 import { Box, Text, useBreakpointValue } from '@chakra-ui/react';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { Address } from '@elrondnetwork/erdjs';
-import { useScQuery, SCQueryType } from '../hooks/interaction/useScQuery';
+import { SCQueryType } from '../hooks/interaction/useScQuery';
+import { useElvenScQuery } from '../hooks/interaction/elvenScHooks/useElvenScQuery';
 import { MintForm } from './MintForm';
 import { Authenticated } from './core/Authenticated';
 import { useAccount } from '../hooks/auth/useAccount';
 import { LoginModalButton } from './core/LoginModalButton';
-import {
-  isDropActive,
-  smartContractAddress,
-  tokensLimitPerAddressTotal,
-  tokensLimitPerAddressPerDrop,
-  isAllowlistEnabled,
-  isMintingStarted,
-} from '../config/nftSmartContract';
 import { networkConfig, chainType } from '../config/network';
 import { NFTLeftToMint } from './NFTLeftToMint';
 import { NFTAllowlistEnabled } from './NFTAllowlistEnabled';
 import { NFTMintedAlready } from './NFTMintedAlready';
 import { NFTLeftToMintPerAddress } from './NFTLeftToMintPerAddress';
 
-// TODO: Prepare sc query hooks for all cases
 // TODO: Prepare separate components for the segments here
-// TODO: refactor it a bit
+// TODO: rebuild the useElvenScQuery to be more responsive and with boolean output option
+// TODO: use Valtio for global smart contract config state + dispatchers to be able to trigger changes from each component
 
 export const MintHero = () => {
   const { address } = useAccount();
+
+  const { data: mintingPausedState, isLoading: mintingPausedLoading } =
+    useElvenScQuery({
+      funcName: 'isMintingPaused',
+      type: SCQueryType.INT,
+    });
+
+  const {
+    data: dropState,
+    fetch: refreshDropState,
+    isLoading: dropStateLoading,
+  } = useElvenScQuery({
+    funcName: 'isDropActive',
+    type: SCQueryType.INT,
+    autoInit: !mintingPausedLoading && Number(mintingPausedState) !== 1,
+  });
+
+  const {
+    data: allowlistState,
+    fetch: refreshAllowlistState,
+    isLoading: allowlistStateLoading,
+  } = useElvenScQuery({
+    funcName: 'isAllowlistEnabled',
+    type: SCQueryType.INT,
+    autoInit: !mintingPausedLoading && Number(mintingPausedState) !== 1,
+  });
+
+  const {
+    data: tokensLimitPerAddressTotal,
+    fetch: refreshTokensLimitPerAddressTotal,
+    isLoading: isLoadingTokensLimitPerAddressTotal,
+  } = useElvenScQuery({
+    funcName: 'getTokensLimitPerAddressTotal',
+    type: SCQueryType.INT,
+    autoInit: !mintingPausedLoading && Number(mintingPausedState) !== 1,
+  });
+
+  const {
+    data: tokensLimitPerAddressPerDrop,
+    fetch: refreshTokensLimitPerAddressPerDrop,
+    isLoading: tokensLimitPerAddressPerDropLoading,
+  } = useElvenScQuery({
+    funcName: 'getTokensLimitPerAddressPerDrop',
+    type: SCQueryType.INT,
+    autoInit: !dropStateLoading && Number(dropState) === 1,
+  });
+
   const {
     data,
     fetch: refreshData,
     isLoading: totalIsLoading,
-  } = useScQuery({
+  } = useElvenScQuery({
     type: SCQueryType.INT,
-    payload: {
-      scAddress: smartContractAddress,
-      funcName: 'getTotalTokensLeft',
-      args: [],
-    },
+    funcName: 'getTotalTokensLeft',
+    autoInit: !mintingPausedLoading && Number(mintingPausedState) !== 1,
   });
 
   const {
     data: dropData,
     fetch: refreshDropData,
     isLoading: dropIsLoading,
-  } = useScQuery({
+  } = useElvenScQuery({
     type: SCQueryType.INT,
-    payload: {
-      scAddress: smartContractAddress,
-      funcName: 'getDropTokensLeft',
-      args: [],
-    },
-    autoInit: isDropActive,
+    funcName: 'getDropTokensLeft',
+    autoInit: !dropStateLoading && Number(dropState) === 1,
   });
 
   const {
     data: mintedData,
     fetch: refreshMintedData,
     isLoading: mintedDataLoading,
-  } = useScQuery({
+  } = useElvenScQuery({
     type: SCQueryType.INT,
-    payload: {
-      scAddress: smartContractAddress,
-      funcName: 'getMintedPerAddressTotal',
-      args: address ? [Address.fromBech32(address)?.hex()] : [],
-    },
-    autoInit: Boolean(address),
+    funcName: 'getMintedPerAddressTotal',
+    args: address ? [Address.fromBech32(address)?.hex()] : [],
+    autoInit: Boolean(
+      address && !mintingPausedLoading && Number(mintingPausedState) !== 1
+    ),
   });
 
   const { data: mintedPerDropData, fetch: refreshMintedPerDropData } =
-    useScQuery({
+    useElvenScQuery({
       type: SCQueryType.INT,
-      payload: {
-        scAddress: smartContractAddress,
-        funcName: 'getMintedPerAddressPerDrop',
-        args: address ? [Address.fromBech32(address)?.hex()] : [],
-      },
-      autoInit: Boolean(address && isDropActive),
+      funcName: 'getMintedPerAddressPerDrop',
+      args: address ? [Address.fromBech32(address)?.hex()] : [],
+      autoInit: Boolean(
+        address && !dropStateLoading && Number(dropState) === 1
+      ),
     });
 
-  const { data: allowlistCheckData, isLoading: allowlistCheckLoading } =
-    useScQuery({
-      type: SCQueryType.INT,
-      payload: {
-        scAddress: smartContractAddress,
-        funcName: 'getAllowlistAddressCheck',
-        args: address ? [Address.fromBech32(address)?.hex()] : [],
-      },
-      autoInit: Boolean(address && isAllowlistEnabled),
-    });
+  const {
+    data: allowlistCheckData,
+    fetch: refreshAllowlistCheckData,
+    isLoading: allowlistCheckLoading,
+  } = useElvenScQuery({
+    type: SCQueryType.INT,
+    funcName: 'getAllowlistAddressCheck',
+    args: address ? [Address.fromBech32(address)?.hex()] : [],
+    autoInit: Boolean(
+      address && !allowlistStateLoading && Number(allowlistState) === 1
+    ),
+  });
+
+  useEffect(() => {
+    if (!mintingPausedLoading && Number(mintingPausedState) !== 1) {
+      refreshDropState();
+      refreshAllowlistState();
+      refreshTokensLimitPerAddressTotal();
+      refreshMintedData();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mintingPausedState]);
+
+  useEffect(() => {
+    if (!dropStateLoading && Number(dropState) === 1) {
+      refreshDropData();
+      refreshMintedPerDropData();
+      refreshTokensLimitPerAddressPerDrop();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dropState]);
+
+  useEffect(() => {
+    if (!allowlistStateLoading && Number(allowlistState) === 1) {
+      refreshAllowlistCheckData();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allowlistState]);
 
   const handleRefreshData = useCallback(() => {
     refreshData();
@@ -105,23 +164,40 @@ export const MintHero = () => {
     let leftPerDrop = 0;
     let leftInTotal = 0;
 
-    if (isAllowlistEnabled && Number(allowlistCheckData) === 0) {
+    if (Number(allowlistState) === 1 && Number(allowlistCheckData) === 0) {
       return 0;
     }
 
-    if (mintedPerDropData) {
-      leftPerDrop = tokensLimitPerAddressPerDrop - Number(mintedPerDropData);
+    if (
+      !Number.isNaN(mintedPerDropData) &&
+      !Number.isNaN(tokensLimitPerAddressPerDrop)
+    ) {
+      leftPerDrop =
+        Number(tokensLimitPerAddressPerDrop) - Number(mintedPerDropData);
     }
-    if (mintedData) {
-      leftInTotal = tokensLimitPerAddressTotal - Number(mintedData);
+    if (
+      !Number.isNaN(mintedData) &&
+      !Number.isNaN(tokensLimitPerAddressTotal)
+    ) {
+      leftInTotal = Number(tokensLimitPerAddressTotal) - Number(mintedData);
     }
-    if (!isDropActive || leftPerDrop > leftInTotal) {
+    if (Number(dropState) !== 1 || leftPerDrop > leftInTotal) {
       return leftInTotal;
     }
     return leftPerDrop;
-  }, [allowlistCheckData, mintedData, mintedPerDropData]);
+  }, [
+    allowlistCheckData,
+    mintedData,
+    mintedPerDropData,
+    tokensLimitPerAddressTotal,
+    dropState,
+    tokensLimitPerAddressPerDrop,
+    allowlistState,
+  ]);
 
   const isContentCentered = useBreakpointValue({ base: true, md: false });
+
+  const tokensLeftPerUser = getLeftToMintForUser();
 
   return (
     <Box width="100%">
@@ -146,12 +222,14 @@ export const MintHero = () => {
         to connect using one of the methods and the devnet address with some
         xEGLD funds.
       </Text>
-      {isMintingStarted ? (
+      {Number(mintingPausedState) !== 1 ? (
         <Box mt={6}>
           <NFTLeftToMint
             data={data}
             dropData={dropData}
-            dataLoading={isDropActive ? dropIsLoading : totalIsLoading}
+            dataLoading={
+              Number(dropState) === 1 ? dropIsLoading : totalIsLoading
+            }
           />
           <Box>
             <Authenticated
@@ -174,13 +252,19 @@ export const MintHero = () => {
                 data={mintedData}
                 dataLoading={mintedDataLoading}
               />
-              <NFTLeftToMintPerAddress
-                leftToMintForUser={getLeftToMintForUser()}
-              />
-              <MintForm
-                cb={handleRefreshData}
-                leftToMintForUser={getLeftToMintForUser()}
-              />
+              {!isLoadingTokensLimitPerAddressTotal &&
+                !tokensLimitPerAddressPerDropLoading &&
+                !Number.isNaN(tokensLeftPerUser) && (
+                  <>
+                    <NFTLeftToMintPerAddress
+                      leftToMintForUser={tokensLeftPerUser}
+                    />
+                    <MintForm
+                      cb={handleRefreshData}
+                      leftToMintForUser={tokensLeftPerUser}
+                    />
+                  </>
+                )}
               {mintedData && mintedData > 0 && (
                 <Box
                   display="flex"
@@ -215,10 +299,19 @@ export const MintHero = () => {
         </Box>
       ) : (
         <Box>
-          <Text fontSize="2xl" fontWeight="bold" mt={10}>
-            Minting was not started yet.
+          <Text
+            fontSize="xl"
+            fontWeight="bold"
+            mt={10}
+            textAlign={{ base: 'center', md: 'left' }}
+          >
+            Minting was not started yet or is paused at the moment.
           </Text>
-          <Text fontSize="2xl" fontWeight="bold">
+          <Text
+            fontSize="xl"
+            fontWeight="bold"
+            textAlign={{ base: 'center', md: 'left' }}
+          >
             Please be back soon!
           </Text>
         </Box>

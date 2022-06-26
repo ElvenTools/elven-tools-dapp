@@ -1,3 +1,6 @@
+// This one is a general smart contract query hook where you can provide any smart contract address
+// There is also useElvenScQuery which is specific to the Elven Tools smart contract and uses this hook under the hood
+
 import useSWR, { Fetcher } from 'swr';
 import useSwrMutation from 'swr/mutation';
 import { apiCall } from '../../utils/apiCall';

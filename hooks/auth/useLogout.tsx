@@ -6,6 +6,7 @@ import {
   setLoggingInState,
 } from '../../store/auth';
 import { DappProvider } from '../../types/network';
+import { errorParse } from '../../utils/errorParse';
 
 interface Logout {
   dappProvider?: DappProvider;
@@ -22,7 +23,6 @@ export const useLogout = () => {
     if (!provider) return;
 
     try {
-      setLoggingInState('pending', true);
       await provider.logout();
 
       clearAuthStates();
@@ -37,9 +37,10 @@ export const useLogout = () => {
       }
 
       setLoggingInState('loggedIn', false);
-    } catch (e: any) {
-      console.error('error logging out', e?.message);
-      setLoggingInState('error', e?.message);
+    } catch (e) {
+      const err = errorParse(e);
+      console.error('error logging out', err);
+      setLoggingInState('error', err);
     } finally {
       setLoggingInState('pending', false);
     }

@@ -4,8 +4,8 @@ import { useElvenScQuery } from '../hooks/interaction/elvenScHooks/useElvenScQue
 import { SCQueryType } from '../hooks/interaction/useScQuery';
 
 interface NFTLeftToMintProps {
-  data?: string | number;
-  dropData?: string | number;
+  data?: number;
+  dropData?: number;
   dataLoading?: boolean;
 }
 
@@ -14,9 +14,9 @@ export const NFTLeftToMint: FC<NFTLeftToMintProps> = ({
   dropData,
   dataLoading,
 }) => {
-  const { data: dropState } = useElvenScQuery({
+  const { data: dropActive } = useElvenScQuery<boolean>({
     funcName: 'isDropActive',
-    type: SCQueryType.INT,
+    type: SCQueryType.BOOLEAN,
   });
 
   return (
@@ -26,7 +26,7 @@ export const NFTLeftToMint: FC<NFTLeftToMintProps> = ({
       justifyContent={{ base: 'center', md: 'flex-start' }}
     >
       <Text fontSize={{ base: 'md', sm: 'xl' }} fontWeight="bold">
-        {Number(dropState) === 1 ? 'Current drop' : 'Total'} NFTs left to mint:{' '}
+        {dropActive ? 'Current drop' : 'Total'} NFTs left to mint:{' '}
       </Text>
       {dataLoading ? (
         <Spinner ml={3} color="elvenTools.color2.base" />
@@ -37,7 +37,7 @@ export const NFTLeftToMint: FC<NFTLeftToMintProps> = ({
           fontWeight="black"
           ml={3}
         >
-          {Number(dropState) === 1 ? dropData : data}
+          {dropActive ? dropData : data}
         </Text>
       )}
     </Box>

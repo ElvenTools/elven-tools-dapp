@@ -8,9 +8,9 @@ const mintTxBaseGasLimit = Number(process.env.NEXT_PUBLIC_MINT_BASE_GAS_LIMIT);
 const mintFunctionName = process.env.NEXT_PUBLIC_MINT_FUNCTION_NAME;
 
 export function useMintTransaction(cb?: (params: ScTransactionCb) => void) {
-  const { data: tokenSellingPrice } = useElvenScQuery({
+  const { data: tokenSellingPrice } = useElvenScQuery<number>({
     funcName: 'getNftPrice',
-    type: SCQueryType.INT,
+    type: SCQueryType.NUMBER,
   });
 
   const { pending, triggerTx, transaction, error } = useScTransaction(cb);

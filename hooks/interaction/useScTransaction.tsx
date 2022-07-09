@@ -30,6 +30,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { ExtensionProvider } from '@elrondnetwork/erdjs-extension-provider/out';
 import { WalletConnectProvider } from '@elrondnetwork/erdjs-wallet-connect-provider/out';
 import { HWProvider } from '@elrondnetwork/erdjs-hw-provider/out';
+import { errorParse } from '../../utils/errorParse';
 
 interface ScTransactionParams {
   func: ContractFunction;
@@ -56,11 +57,11 @@ export function useScTransaction(cb?: (params: ScTransactionCb) => void) {
   const dappProvider = getNetworkState<DappProvider>('dappProvider');
   const apiNetworkProvider =
     getNetworkState<ApiNetworkProvider>('apiNetworkProvider');
-  let currentNonce = accountSnap.nonce;
+  const currentNonce = accountSnap.nonce;
 
   const postSendTx = useCallback(
-    async (tx) => {
-      let transactionWatcher = new TransactionWatcher(apiNetworkProvider);
+    async (tx: Transaction) => {
+      const transactionWatcher = new TransactionWatcher(apiNetworkProvider);
       await transactionWatcher.awaitCompleted(tx);
       setTransaction(tx);
       cb?.({ transaction: tx });
@@ -97,9 +98,10 @@ export function useScTransaction(cb?: (params: ScTransactionCb) => void) {
           try {
             await apiNetworkProvider.sendTransaction(transaction);
             await postSendTx(transaction);
-          } catch (e: any) {
-            setError(e?.message);
-            cb?.({ error: e?.message });
+          } catch (e) {
+            const err = errorParse(e);
+            setError(err);
+            cb?.({ error: err });
           } finally {
             setPending(false);
           }
@@ -141,7 +143,7 @@ export function useScTransaction(cb?: (params: ScTransactionCb) => void) {
         .setArgs(args)
         .build();
 
-      let tx = new Transaction({
+      const tx = new Transaction({
         data,
         gasLimit,
         value,
@@ -169,9 +171,10 @@ export function useScTransaction(cb?: (params: ScTransactionCb) => void) {
           await apiNetworkProvider.sendTransaction(tx);
           await postSendTx(tx);
         }
-      } catch (e: any) {
-        setError(e?.message);
-        cb?.({ error: e?.message });
+      } catch (e) {
+        const err = errorParse(e);
+        setError(err);
+        cb?.({ error: err });
       } finally {
         setPending(false);
       }

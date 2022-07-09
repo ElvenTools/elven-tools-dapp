@@ -1,7 +1,6 @@
 import { Box, Text, Spinner } from '@chakra-ui/react';
 import { FC } from 'react';
 import { Tooltip } from '@chakra-ui/react';
-import { numberFormatter } from '../utils/numberFormater';
 
 interface CollectionInfoBoxProps {
   content: string | number;
@@ -16,9 +15,6 @@ export const CollectionInfoBox: FC<CollectionInfoBoxProps> = ({
   href,
   isLoading = false,
 }) => {
-  const contentFormated =
-    typeof content === 'number' ? numberFormatter.format(content) : content;
-
   return (
     <Tooltip
       label={label}
@@ -48,10 +44,10 @@ export const CollectionInfoBox: FC<CollectionInfoBoxProps> = ({
           <Text fontWeight="normal">
             {href ? (
               <a href={href} target="_blank" rel="noopener noreferrer nofollow">
-                {contentFormated}
+                {content}
               </a>
             ) : (
-              contentFormated
+              content
             )}
           </Text>
         )}

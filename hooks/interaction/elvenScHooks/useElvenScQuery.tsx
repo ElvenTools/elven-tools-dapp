@@ -13,13 +13,13 @@ interface ScConfigDataArgs {
   autoInit?: boolean;
 }
 
-export const useElvenScQuery = ({
+export function useElvenScQuery<T extends string | number | boolean>({
   funcName,
   type,
   args = [],
   autoInit = true,
-}: ScConfigDataArgs) => {
-  const { data, isLoading, fetch } = useScQuery({
+}: ScConfigDataArgs) {
+  const { data, isLoading, fetch } = useScQuery<T>({
     type,
     payload: {
       scAddress: smartContractAddress,
@@ -34,4 +34,4 @@ export const useElvenScQuery = ({
     isLoading,
     fetch,
   };
-};
+}

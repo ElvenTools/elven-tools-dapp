@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Box, Text, useBreakpointValue } from '@chakra-ui/react';
 import { useCallback, useEffect } from 'react';
 import { Address } from '@elrondnetwork/erdjs';
@@ -14,147 +15,138 @@ import { NFTMintedAlready } from './NFTMintedAlready';
 import { NFTLeftToMintPerAddress } from './NFTLeftToMintPerAddress';
 
 // TODO: Prepare separate components for the segments here
-// TODO: rebuild the useElvenScQuery to be more responsive and with boolean output option
 // TODO: use Valtio for global smart contract config state + dispatchers to be able to trigger changes from each component
 
 export const MintHero = () => {
   const { address } = useAccount();
 
-  const { data: mintingPausedState, isLoading: mintingPausedLoading } =
-    useElvenScQuery({
-      funcName: 'isMintingPaused',
-      type: SCQueryType.INT,
+  const { data: mintingPaused } = useElvenScQuery<boolean>({
+    funcName: 'isMintingPaused',
+    type: SCQueryType.BOOLEAN,
+  });
+
+  const { data: dropActive, fetch: refreshDropState } =
+    useElvenScQuery<boolean>({
+      funcName: 'isDropActive',
+      type: SCQueryType.BOOLEAN,
+      autoInit: !mintingPaused,
     });
 
   const {
-    data: dropState,
-    fetch: refreshDropState,
-    isLoading: dropStateLoading,
-  } = useElvenScQuery({
-    funcName: 'isDropActive',
-    type: SCQueryType.INT,
-    autoInit: !mintingPausedLoading && Number(mintingPausedState) !== 1,
-  });
-
-  const {
-    data: allowlistState,
+    data: allowlistEnabled,
     fetch: refreshAllowlistState,
     isLoading: allowlistStateLoading,
-  } = useElvenScQuery({
+  } = useElvenScQuery<boolean>({
     funcName: 'isAllowlistEnabled',
-    type: SCQueryType.INT,
-    autoInit: !mintingPausedLoading && Number(mintingPausedState) !== 1,
+    type: SCQueryType.BOOLEAN,
+    autoInit: Boolean(address && !mintingPaused),
   });
 
   const {
     data: tokensLimitPerAddressTotal,
     fetch: refreshTokensLimitPerAddressTotal,
     isLoading: isLoadingTokensLimitPerAddressTotal,
-  } = useElvenScQuery({
+  } = useElvenScQuery<number>({
     funcName: 'getTokensLimitPerAddressTotal',
-    type: SCQueryType.INT,
-    autoInit: !mintingPausedLoading && Number(mintingPausedState) !== 1,
+    type: SCQueryType.NUMBER,
+    autoInit: Boolean(address && !mintingPaused),
   });
 
   const {
     data: tokensLimitPerAddressPerDrop,
     fetch: refreshTokensLimitPerAddressPerDrop,
     isLoading: tokensLimitPerAddressPerDropLoading,
-  } = useElvenScQuery({
+  } = useElvenScQuery<number>({
     funcName: 'getTokensLimitPerAddressPerDrop',
-    type: SCQueryType.INT,
-    autoInit: !dropStateLoading && Number(dropState) === 1,
+    type: SCQueryType.NUMBER,
+    autoInit: Boolean(address && dropActive),
   });
 
   const {
-    data,
-    fetch: refreshData,
+    data: totalTokensLeft,
+    fetch: refreshTotalTokensLeft,
     isLoading: totalIsLoading,
-  } = useElvenScQuery({
-    type: SCQueryType.INT,
+  } = useElvenScQuery<number>({
+    type: SCQueryType.NUMBER,
     funcName: 'getTotalTokensLeft',
-    autoInit: !mintingPausedLoading && Number(mintingPausedState) !== 1,
   });
 
   const {
     data: dropData,
     fetch: refreshDropData,
     isLoading: dropIsLoading,
-  } = useElvenScQuery({
-    type: SCQueryType.INT,
+  } = useElvenScQuery<number>({
+    type: SCQueryType.NUMBER,
     funcName: 'getDropTokensLeft',
-    autoInit: !dropStateLoading && Number(dropState) === 1,
+    autoInit: dropActive,
   });
 
   const {
     data: mintedData,
     fetch: refreshMintedData,
     isLoading: mintedDataLoading,
-  } = useElvenScQuery({
-    type: SCQueryType.INT,
+  } = useElvenScQuery<number>({
+    type: SCQueryType.NUMBER,
     funcName: 'getMintedPerAddressTotal',
     args: address ? [Address.fromBech32(address)?.hex()] : [],
-    autoInit: Boolean(
-      address && !mintingPausedLoading && Number(mintingPausedState) !== 1
-    ),
+    autoInit: Boolean(address && !mintingPaused),
   });
 
   const { data: mintedPerDropData, fetch: refreshMintedPerDropData } =
-    useElvenScQuery({
-      type: SCQueryType.INT,
+    useElvenScQuery<number>({
+      type: SCQueryType.NUMBER,
       funcName: 'getMintedPerAddressPerDrop',
       args: address ? [Address.fromBech32(address)?.hex()] : [],
-      autoInit: Boolean(
-        address && !dropStateLoading && Number(dropState) === 1
-      ),
+      autoInit: Boolean(address && dropActive),
     });
 
   const {
     data: allowlistCheckData,
     fetch: refreshAllowlistCheckData,
     isLoading: allowlistCheckLoading,
-  } = useElvenScQuery({
-    type: SCQueryType.INT,
+  } = useElvenScQuery<number>({
+    type: SCQueryType.NUMBER,
     funcName: 'getAllowlistAddressCheck',
     args: address ? [Address.fromBech32(address)?.hex()] : [],
-    autoInit: Boolean(
-      address && !allowlistStateLoading && Number(allowlistState) === 1
-    ),
+    autoInit: Boolean(address && allowlistEnabled),
   });
 
   useEffect(() => {
-    if (!mintingPausedLoading && Number(mintingPausedState) !== 1) {
+    if (!mintingPaused) {
+      refreshTotalTokensLeft();
+    }
+  }, [mintingPaused]);
+
+  useEffect(() => {
+    if (address) {
+      refreshMintedData();
       refreshDropState();
       refreshAllowlistState();
       refreshTokensLimitPerAddressTotal();
-      refreshMintedData();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mintingPausedState]);
+  }, [address]);
 
   useEffect(() => {
-    if (!dropStateLoading && Number(dropState) === 1) {
+    if (dropActive) {
       refreshDropData();
       refreshMintedPerDropData();
       refreshTokensLimitPerAddressPerDrop();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dropState]);
+  }, [dropActive]);
 
   useEffect(() => {
-    if (!allowlistStateLoading && Number(allowlistState) === 1) {
+    if (!allowlistStateLoading && allowlistEnabled) {
       refreshAllowlistCheckData();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [allowlistState]);
+  }, [allowlistEnabled]);
 
   const handleRefreshData = useCallback(() => {
-    refreshData();
+    refreshTotalTokensLeft();
     refreshMintedData();
     refreshMintedPerDropData();
     refreshDropData();
   }, [
-    refreshData,
+    refreshTotalTokensLeft,
     refreshMintedData,
     refreshMintedPerDropData,
     refreshDropData,
@@ -164,7 +156,7 @@ export const MintHero = () => {
     let leftPerDrop = 0;
     let leftInTotal = 0;
 
-    if (Number(allowlistState) === 1 && Number(allowlistCheckData) === 0) {
+    if (allowlistEnabled && allowlistCheckData === 0) {
       return 0;
     }
 
@@ -172,27 +164,26 @@ export const MintHero = () => {
       !Number.isNaN(mintedPerDropData) &&
       !Number.isNaN(tokensLimitPerAddressPerDrop)
     ) {
-      leftPerDrop =
-        Number(tokensLimitPerAddressPerDrop) - Number(mintedPerDropData);
+      leftPerDrop = tokensLimitPerAddressPerDrop - mintedPerDropData;
     }
     if (
       !Number.isNaN(mintedData) &&
       !Number.isNaN(tokensLimitPerAddressTotal)
     ) {
-      leftInTotal = Number(tokensLimitPerAddressTotal) - Number(mintedData);
+      leftInTotal = tokensLimitPerAddressTotal - mintedData;
     }
-    if (Number(dropState) !== 1 || leftPerDrop > leftInTotal) {
+    if (!dropActive || leftPerDrop > leftInTotal) {
       return leftInTotal;
     }
     return leftPerDrop;
   }, [
+    allowlistEnabled,
     allowlistCheckData,
-    mintedData,
     mintedPerDropData,
-    tokensLimitPerAddressTotal,
-    dropState,
     tokensLimitPerAddressPerDrop,
-    allowlistState,
+    mintedData,
+    tokensLimitPerAddressTotal,
+    dropActive,
   ]);
 
   const isContentCentered = useBreakpointValue({ base: true, md: false });
@@ -222,14 +213,12 @@ export const MintHero = () => {
         to connect using one of the methods and the devnet address with some
         xEGLD funds.
       </Text>
-      {Number(mintingPausedState) !== 1 ? (
+      {!mintingPaused ? (
         <Box mt={6}>
           <NFTLeftToMint
-            data={data}
+            data={totalTokensLeft}
             dropData={dropData}
-            dataLoading={
-              Number(dropState) === 1 ? dropIsLoading : totalIsLoading
-            }
+            dataLoading={dropActive ? dropIsLoading : totalIsLoading}
           />
           <Box>
             <Authenticated
@@ -253,19 +242,19 @@ export const MintHero = () => {
                 dataLoading={mintedDataLoading}
               />
               {!isLoadingTokensLimitPerAddressTotal &&
-                !tokensLimitPerAddressPerDropLoading &&
-                !Number.isNaN(tokensLeftPerUser) && (
-                  <>
-                    <NFTLeftToMintPerAddress
-                      leftToMintForUser={tokensLeftPerUser}
-                    />
-                    <MintForm
-                      cb={handleRefreshData}
-                      leftToMintForUser={tokensLeftPerUser}
-                    />
-                  </>
-                )}
-              {mintedData && mintedData > 0 && (
+              !tokensLimitPerAddressPerDropLoading &&
+              !Number.isNaN(tokensLeftPerUser) ? (
+                <>
+                  <NFTLeftToMintPerAddress
+                    leftToMintForUser={tokensLeftPerUser}
+                  />
+                  <MintForm
+                    cb={handleRefreshData}
+                    leftToMintForUser={tokensLeftPerUser}
+                  />
+                </>
+              ) : null}
+              {mintedData && mintedData > 0 ? (
                 <Box
                   display="flex"
                   alignItems="center"
@@ -293,7 +282,7 @@ export const MintHero = () => {
                     here
                   </Text>
                 </Box>
-              )}
+              ) : null}
             </Authenticated>
           </Box>
         </Box>

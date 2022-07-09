@@ -28,7 +28,10 @@ export const MintForm: FC<MintFormProps> = ({ leftToMintForUser, cb }) => {
     mint(amount);
   }, [amount, mint]);
 
-  const setAmountHandler = useCallback((value) => setAmount(value), []);
+  const setAmountHandler = useCallback(
+    (valueAsString: string, valueAsNumber: number) => setAmount(valueAsNumber),
+    []
+  );
 
   const getAdditionalPendingMessage = () => {
     if (loginMethod === LoginMethodsEnum.walletconnect) {

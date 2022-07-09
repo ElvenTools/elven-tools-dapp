@@ -9,9 +9,22 @@ const smartContractAddress = process.env.NEXT_PUBLIC_NFT_SMART_CONTRACT;
 
 export const Hero = () => {
   const { data: collectionSize, isLoading: collectionSizeLoading } =
-    useElvenScQuery({ funcName: 'getTotalSupply', type: SCQueryType.INT });
+    useElvenScQuery<number>({
+      funcName: 'getTotalSupply',
+      type: SCQueryType.NUMBER,
+    });
+
+  const { data: totalTokensLeft, isLoading: totalTokensLeftIsLoading } =
+    useElvenScQuery<number>({
+      type: SCQueryType.NUMBER,
+      funcName: 'getTotalTokensLeft',
+    });
+
   const { data: collectionTicker, isLoading: collectionTickerLoading } =
-    useElvenScQuery({ funcName: 'getNftTokenId', type: SCQueryType.STRING });
+    useElvenScQuery<number>({
+      funcName: 'getNftTokenId',
+      type: SCQueryType.STRING,
+    });
 
   return (
     <Box width="100%">
@@ -91,9 +104,9 @@ export const Hero = () => {
           }
         />
         <CollectionInfoBox
-          content={collectionSize || ''}
-          isLoading={collectionSizeLoading}
-          label="Collection amount"
+          content={`${collectionSize - totalTokensLeft} / ${collectionSize}`}
+          isLoading={collectionSizeLoading || totalTokensLeftIsLoading}
+          label="Minter per collection supply"
         />
       </Box>
     </Box>

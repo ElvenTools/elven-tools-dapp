@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+  webpack: (config) => {
     config.resolve.fallback = {
       fs: false,
       buffer: require.resolve('buffer'),
@@ -12,14 +12,17 @@ const nextConfig = {
     };
     return config;
   },
-  reactStrictMode: true,
+  reactStrictMode: false,
   async rewrites() {
     return [
       {
-        source: '/api/:path*',
+        source: `${process.env.NEXT_PUBLIC_ELROND_API}/:path*`,
         destination: `${process.env.ELROND_CUSTOM_API}/:path*`,
       },
     ];
+  },
+  eslint: {
+    dirs: ['components', 'config', 'hooks', 'pages', 'store', 'types', 'utils'],
   },
 };
 

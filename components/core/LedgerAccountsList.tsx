@@ -45,10 +45,11 @@ export const LedgerAccountsList: FC<LedgerAccountsListProps> = ({
         mounted.current && setListPending(true);
         const accounts = await getHWAccounts(currentPage, ADDRESSES_PER_PAGE);
         if (accounts?.length > 0 && mounted.current) setAccounts(accounts);
-      } catch (e: any) {
+      } catch (e) {
+        const error = e as { statusCode: number; name: string };
         if (
-          (e.statusCode === LEDGER_NOT_CONNECTED_CODE ||
-            e.name === LEDGER_DISCONNECTED) &&
+          (error.statusCode === LEDGER_NOT_CONNECTED_CODE ||
+            error.name === LEDGER_DISCONNECTED) &&
           mounted.current
         ) {
           setError(
@@ -79,7 +80,7 @@ export const LedgerAccountsList: FC<LedgerAccountsListProps> = ({
   }, [router]);
 
   const login = useCallback(
-    (index, address) => () => {
+    (index: number, address: string) => () => {
       handleLogin(LoginMethodsEnum.ledger, index)();
       setAddress(address);
     },

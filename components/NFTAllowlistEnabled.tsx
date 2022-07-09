@@ -4,7 +4,7 @@ import { SCQueryType } from '../hooks/interaction/useScQuery';
 import { useElvenScQuery } from '../hooks/interaction/elvenScHooks/useElvenScQuery';
 
 interface NFTAllowlistEnabledProps {
-  data?: string | number;
+  data?: number;
   dataLoading?: boolean;
 }
 
@@ -12,14 +12,14 @@ export const NFTAllowlistEnabled: FC<NFTAllowlistEnabledProps> = ({
   data,
   dataLoading,
 }) => {
-  const { data: allowlistState } = useElvenScQuery({
+  const { data: allowlistState } = useElvenScQuery<boolean>({
     funcName: 'isAllowlistEnabled',
-    type: SCQueryType.INT,
+    type: SCQueryType.BOOLEAN,
   });
 
   return (
     <>
-      {Number(allowlistState) === 1 && (
+      {allowlistState && (
         <Box
           display="flex"
           alignItems="center"
@@ -37,7 +37,7 @@ export const NFTAllowlistEnabled: FC<NFTAllowlistEnabledProps> = ({
             </Text>
             {dataLoading ? (
               <Spinner ml={3} color="elvenTools.color2.base" />
-            ) : Number(data) !== 0 ? (
+            ) : data !== 0 ? (
               <Text
                 color="elvenTools.color2.base"
                 as="span"

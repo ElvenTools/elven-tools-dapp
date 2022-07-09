@@ -30,6 +30,7 @@ import { isLoginExpired } from '../../utils/expiresAt';
 import { clearDappProvider } from '../../store/network';
 import { clearAuthStates } from '../../store/auth';
 import { DappProvider } from '../../types/network';
+import { errorParse } from '../../utils/errorParse';
 
 export const useElrondNetworkSync = () => {
   const { logout } = useLogout();
@@ -44,13 +45,13 @@ export const useElrondNetworkSync = () => {
 
   useEffect(() => {
     const accountStorage = localStorage.getItem('elven_tools_dapp__account');
+
     if (accountStorage) {
       const parsedStorage = JSON.parse(accountStorage);
       setAccountState('address', parsedStorage.address);
       setAccountState('nonce', parsedStorage.nonce);
       setAccountState('balance', parsedStorage.balance);
       setAccountState('addressIndex', parsedStorage.addressIndex);
-      if (!parsedStorage.address) setLoggingInState('pending', false);
       setAccountDone(true);
     } else {
       setLoggingInState('pending', false);
@@ -71,14 +72,14 @@ export const useElrondNetworkSync = () => {
     }
   }, []);
 
-  useEffect(() => {
+  useEffectOnlyOnUpdate(() => {
     localStorage.setItem(
       'elven_tools_dapp__account',
       JSON.stringify(accountSnap)
     );
   }, [accountSnap.address, accountSnap.nonce, accountSnap.balance]);
 
-  useEffect(() => {
+  useEffectOnlyOnUpdate(() => {
     localStorage.setItem(
       'elven_tools_dapp__loginInfo',
       JSON.stringify(loginInfoSnap)
@@ -228,9 +229,10 @@ export const useElrondNetworkSync = () => {
           setAccountState('nonce', userAccountInstance.nonce.valueOf());
           setAccountState('balance', userAccountInstance.balance.toString());
           setLoggingInState('loggedIn', Boolean(address));
-        } catch (e: any) {
+        } catch (e) {
+          const err = errorParse(e);
           console.warn(
-            `Something went wrong trying to synchronize the user account: ${e?.message}`
+            `Something went wrong trying to synchronize the user account: ${err}`
           );
         }
       }

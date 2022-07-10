@@ -31,8 +31,6 @@ export const LoginComponent = memo(() => {
 
   if (error) return <Box textAlign="center">{error}</Box>;
 
-  console.log('loginMethod: ', loginMethod);
-
   return (
     <>
       <Stack spacing={4} direction="column" align="center">

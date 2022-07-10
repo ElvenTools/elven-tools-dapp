@@ -1,4 +1,6 @@
-import { extendTheme, theme as originTheme } from '@chakra-ui/react';
+// Chakra UI specific theme and variables configuration
+
+import { extendTheme } from '@chakra-ui/react';
 import { createBreakpoints } from '@chakra-ui/theme-tools';
 
 const breakpoints = createBreakpoints({

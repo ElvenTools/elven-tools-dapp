@@ -4,7 +4,7 @@ import cloneDeep from 'lodash.clonedeep';
 
 // Account info state + persistance
 
-interface AccountState extends Record<string, any> {
+interface AccountState extends Record<string, unknown> {
   addressIndex: number; // For HW provider only
   address: string;
   nonce: number;
@@ -20,20 +20,20 @@ const accountInitialState: AccountState = {
 
 export const accountState = proxy(accountInitialState);
 
-export const setAccountState = (key: keyof AccountState, value: any) => {
+export const setAccountState = (key: keyof AccountState, value: unknown) => {
   accountState[key] = value;
 };
 
 export const clearAccountState = () => {
   const resetObj = cloneDeep(accountInitialState);
   Object.keys(resetObj).forEach((key) => {
-    accountState[key] = resetObj[key];
+    setAccountState(key, resetObj[key]);
   });
 };
 
 // Login info state + persistance
 
-interface LoginInfoState extends Record<string, any> {
+interface LoginInfoState extends Record<string, unknown> {
   loginMethod: LoginMethodsEnum;
   expires: number;
   loginToken: string;
@@ -49,20 +49,23 @@ const loginInfoInitialState: LoginInfoState = {
 
 export const loginInfoState = proxy(loginInfoInitialState);
 
-export const setLoginInfoState = (key: keyof LoginInfoState, value: any) => {
+export const setLoginInfoState = (
+  key: keyof LoginInfoState,
+  value: unknown
+) => {
   loginInfoState[key] = value;
 };
 
 export const clearLoginInfoState = () => {
   const resetObj = cloneDeep(loginInfoInitialState);
   Object.keys(resetObj).forEach((key) => {
-    loginInfoState[key] = resetObj[key];
+    setLoginInfoState(key, resetObj[key]);
   });
 };
 
 // Login info state
 
-interface LoggingInState extends Record<string, any> {
+interface LoggingInState extends Record<string, unknown> {
   pending: boolean;
   error: string;
   loggedIn: boolean;
@@ -76,14 +79,17 @@ const loggingInInitialState: LoggingInState = {
 
 export const loggingInState = proxy(loggingInInitialState);
 
-export const setLoggingInState = (key: keyof LoggingInState, value: any) => {
+export const setLoggingInState = (
+  key: keyof LoggingInState,
+  value: unknown
+) => {
   loggingInState[key] = value;
 };
 
 export const clearLoggingInState = () => {
   const resetObj = cloneDeep(loginInfoInitialState);
   Object.keys(resetObj).forEach((key) => {
-    loggingInState[key] = resetObj[key];
+    setLoggingInState(key, resetObj[key]);
   });
 };
 

@@ -1,10 +1,14 @@
+// This one is a general smart contract query hook where you can provide any smart contract address
+// There is also useElvenScQuery which is specific to the Elven Tools smart contract and uses this hook under the hood
+
 import useSWR, { Fetcher } from 'swr';
 import useSwrMutation from 'swr/mutation';
 import { apiCall } from '../../utils/apiCall';
 
 export enum SCQueryType {
-  INT = 'int',
+  NUMBER = 'number',
   STRING = 'string',
+  BOOLEAN = 'boolean',
 }
 
 interface SCQueryData {
@@ -30,20 +34,23 @@ export const fetcher: Fetcher<VMOutput, FetcherArgs> = async ({
   payload,
 }) => await apiCall.post(url, payload || {});
 
-export const useScQuery = ({
+export function useScQuery<T extends number | string | boolean>({
   type,
   payload,
   options,
   autoInit = true,
-}: SCQueryData) => {
+}: SCQueryData) {
   let url = '';
 
   switch (type) {
-    case SCQueryType.INT:
+    case SCQueryType.NUMBER:
       url = '/vm-values/int';
       break;
     case SCQueryType.STRING:
       url = '/vm-values/string';
+      break;
+    case SCQueryType.BOOLEAN:
+      url = '/vm-values/int';
       break;
   }
 
@@ -68,11 +75,21 @@ export const useScQuery = ({
     revalidate: true,
   });
 
+  const parseData = (data: string | number | undefined) => {
+    if (type === SCQueryType.BOOLEAN) {
+      return Boolean(Number(data));
+    }
+    if (type === SCQueryType.NUMBER) {
+      return Number(data);
+    }
+    return data;
+  };
+
   return {
-    data: data?.data?.data || mutationData?.data?.data,
+    data: parseData(data?.data?.data || mutationData?.data?.data) as T,
     isLoading: isLoading,
     isValidating: isValidating || isMutating,
     error: error || mutationError,
     fetch: autoInit ? mutate : trigger,
   };
-};
+}

@@ -66,11 +66,13 @@ export const LoginComponent = memo(() => {
         </Box>
       )}
       {loginMethod === LoginMethodsEnum.ledger && (
-        <LedgerAccountsList
-          getHWAccounts={getHWAccounts}
-          resetLoginMethod={resetLoginMethod}
-          handleLogin={handleLogin}
-        />
+        <>
+          <LedgerAccountsList
+            getHWAccounts={getHWAccounts}
+            resetLoginMethod={resetLoginMethod}
+            handleLogin={handleLogin}
+          />
+        </>
       )}
     </>
   );

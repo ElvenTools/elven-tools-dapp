@@ -1,3 +1,13 @@
+### [3.0.0](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v2.3.0) (2022-07-...)
+- some of the configurations for a smart contract are now fetched automatically
+- UX is essential, and the previous approach to sc-related configs was problematic and not clear
+- the only gain was saving on API bandwidth, but I think it should be ok with future improvements, mainly SWR and service worker cache, but also using third-party API providers, not public ones, which should be evident for production-ready dapp
+- still, you can remove the queries and configure all as constants in the app, but it won't be provided as a simple option for now because it would still introduce a lot of confusion
+- new hook useElvenScQuery which uses generic useScQuery (both are now better typed)
+- new return type for useScQuery - boolean, it also uses generics to be able to define typings better (preparation for future result parser)
+- next, react, swr, chakra ui version updates
+- better esling configuration
+
 ### [2.2.1](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v2.2.1) (2022-06-17)
 - bugfix for web wallet signing, it is now required to provide the sender when creating a transaction
 

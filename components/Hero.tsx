@@ -1,14 +1,31 @@
 import { Box, Text } from '@chakra-ui/react';
 import { CollectionInfoBox } from './CollectionInfoBox';
 import { chainType, networkConfig } from '../config/network';
-import {
-  collectionTicker,
-  smartContractAddress,
-  collectionSize,
-} from '../config/nftSmartContract';
 import { shortenHash } from '../utils/shortenHash';
+import { useElvenScQuery } from '../hooks/interaction/elvenScHooks/useElvenScQuery';
+import { SCQueryType } from '../hooks/interaction/useScQuery';
+
+const smartContractAddress = process.env.NEXT_PUBLIC_NFT_SMART_CONTRACT;
 
 export const Hero = () => {
+  const { data: collectionSize, isLoading: collectionSizeLoading } =
+    useElvenScQuery<number>({
+      funcName: 'getTotalSupply',
+      type: SCQueryType.NUMBER,
+    });
+
+  const { data: totalTokensLeft, isLoading: totalTokensLeftIsLoading } =
+    useElvenScQuery<number>({
+      type: SCQueryType.NUMBER,
+      funcName: 'getTotalTokensLeft',
+    });
+
+  const { data: collectionTicker, isLoading: collectionTickerLoading } =
+    useElvenScQuery<number>({
+      funcName: 'getNftTokenId',
+      type: SCQueryType.STRING,
+    });
+
   return (
     <Box width="100%">
       <Text
@@ -68,16 +85,29 @@ export const Hero = () => {
         }}
       >
         <CollectionInfoBox
-          content={collectionTicker}
+          content={collectionTicker || ''}
           label="Collection ticker. Click for details."
+          isLoading={collectionTickerLoading}
           href={`${networkConfig[chainType].explorerAddress}/collections/${collectionTicker}`}
         />
         <CollectionInfoBox
-          content={shortenHash(smartContractAddress, 12)}
+          content={
+            smartContractAddress
+              ? shortenHash(smartContractAddress || '', 12)
+              : 'No minter smart contract provided!'
+          }
           label={`Minter smart contract. Click for details.`}
-          href={`${networkConfig[chainType].explorerAddress}/accounts/${smartContractAddress}`}
+          href={
+            smartContractAddress
+              ? `${networkConfig[chainType].explorerAddress}/accounts/${smartContractAddress}`
+              : undefined
+          }
         />
-        <CollectionInfoBox content={collectionSize} label="Collection amount" />
+        <CollectionInfoBox
+          content={`${collectionSize - totalTokensLeft} / ${collectionSize}`}
+          isLoading={collectionSizeLoading || totalTokensLeftIsLoading}
+          label="Minter per collection supply"
+        />
       </Box>
     </Box>
   );

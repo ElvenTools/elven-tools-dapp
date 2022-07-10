@@ -22,10 +22,6 @@ import {
   setAccountState,
 } from '../../store/auth';
 import { getNetworkState } from '../../store/network';
-import {
-  smartContractAddress,
-  mintTxBaseGasLimit,
-} from '../../config/nftSmartContract';
 import { chainType, networkConfig } from '../../config/network';
 import { LoginMethodsEnum } from '../../types/enums';
 import { DappProvider } from '../../types/network';
@@ -34,6 +30,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { ExtensionProvider } from '@elrondnetwork/erdjs-extension-provider/out';
 import { WalletConnectProvider } from '@elrondnetwork/erdjs-wallet-connect-provider/out';
 import { HWProvider } from '@elrondnetwork/erdjs-hw-provider/out';
+import { errorParse } from '../../utils/errorParse';
 
 interface ScTransactionParams {
   func: ContractFunction;
@@ -47,6 +44,9 @@ export interface ScTransactionCb {
   error?: string;
 }
 
+const smartContractAddress = process.env.NEXT_PUBLIC_NFT_SMART_CONTRACT;
+const mintTxBaseGasLimit = Number(process.env.NEXT_PUBLIC_MINT_BASE_GAS_LIMIT);
+
 export function useScTransaction(cb?: (params: ScTransactionCb) => void) {
   const [pending, setPending] = useState(false);
   const [error, setError] = useState('');
@@ -57,11 +57,11 @@ export function useScTransaction(cb?: (params: ScTransactionCb) => void) {
   const dappProvider = getNetworkState<DappProvider>('dappProvider');
   const apiNetworkProvider =
     getNetworkState<ApiNetworkProvider>('apiNetworkProvider');
-  let currentNonce = accountSnap.nonce;
+  const currentNonce = accountSnap.nonce;
 
   const postSendTx = useCallback(
-    async (tx) => {
-      let transactionWatcher = new TransactionWatcher(apiNetworkProvider);
+    async (tx: Transaction) => {
+      const transactionWatcher = new TransactionWatcher(apiNetworkProvider);
       await transactionWatcher.awaitCompleted(tx);
       setTransaction(tx);
       cb?.({ transaction: tx });
@@ -98,9 +98,10 @@ export function useScTransaction(cb?: (params: ScTransactionCb) => void) {
           try {
             await apiNetworkProvider.sendTransaction(transaction);
             await postSendTx(transaction);
-          } catch (e: any) {
-            setError(e?.message);
-            cb?.({ error: e?.message });
+          } catch (e) {
+            const err = errorParse(e);
+            setError(err);
+            cb?.({ error: err });
           } finally {
             setPending(false);
           }
@@ -129,7 +130,7 @@ export function useScTransaction(cb?: (params: ScTransactionCb) => void) {
       dappProvider &&
       apiNetworkProvider &&
       currentNonce !== undefined &&
-      mintTxBaseGasLimit &&
+      !Number.isNaN(mintTxBaseGasLimit) &&
       smartContractAddress &&
       accountSnap.address &&
       args &&
@@ -142,7 +143,7 @@ export function useScTransaction(cb?: (params: ScTransactionCb) => void) {
         .setArgs(args)
         .build();
 
-      let tx = new Transaction({
+      const tx = new Transaction({
         data,
         gasLimit,
         value,
@@ -170,9 +171,10 @@ export function useScTransaction(cb?: (params: ScTransactionCb) => void) {
           await apiNetworkProvider.sendTransaction(tx);
           await postSendTx(tx);
         }
-      } catch (e: any) {
-        setError(e?.message);
-        cb?.({ error: e?.message });
+      } catch (e) {
+        const err = errorParse(e);
+        setError(err);
+        cb?.({ error: err });
       } finally {
         setPending(false);
       }

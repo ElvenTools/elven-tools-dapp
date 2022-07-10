@@ -12,7 +12,7 @@ const nextConfig = {
     };
     return config;
   },
-  reactStrictMode: false,
+  reactStrictMode: false, // will be handled in following releases, when enabled there are problems in development
   async rewrites() {
     return [
       {

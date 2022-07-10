@@ -25,5 +25,5 @@ export const clearNetworkState = () => {
 };
 
 export const clearDappProvider = () => {
-  networkState['dappProvider'] = networkState.dappProvider;
+  networkState['dappProvider'] = null;
 };

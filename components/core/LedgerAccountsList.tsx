@@ -6,6 +6,7 @@ import { LoginMethodsEnum } from '../../types/enums';
 import { ActionButton } from '../../components/ActionButton';
 import { shortenHash } from '../../utils/shortenHash';
 import { useLoginInfo } from '../../hooks/auth/useLoginInfo';
+import { errorParse } from '../../utils/errorParse';
 
 interface LedgerAccountsListProps {
   getHWAccounts: (page?: number, pageSize?: number) => Promise<string[]>;
@@ -55,6 +56,8 @@ export const LedgerAccountsList: FC<LedgerAccountsListProps> = ({
           setError(
             'Not connected, please check the connection and make sure that you have the Elrond app opened on your Ledger device.'
           );
+        } else {
+          setError(`Error: ${errorParse(e)}`);
         }
       } finally {
         mounted.current && setListPending(false);
@@ -91,7 +94,8 @@ export const LedgerAccountsList: FC<LedgerAccountsListProps> = ({
     if (!listPending && !accounts && !error) {
       resetLoginMethod();
     }
-  }, [accounts, error, listPending, resetLoginMethod]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [accounts, error, listPending]);
 
   if (listPending) {
     return (

@@ -27,7 +27,7 @@ export const setAccountState = (key: keyof AccountState, value: unknown) => {
 export const clearAccountState = () => {
   const resetObj = cloneDeep(accountInitialState);
   Object.keys(resetObj).forEach((key) => {
-    accountState[key] = resetObj[key];
+    setAccountState(key, resetObj[key]);
   });
 };
 
@@ -59,7 +59,7 @@ export const setLoginInfoState = (
 export const clearLoginInfoState = () => {
   const resetObj = cloneDeep(loginInfoInitialState);
   Object.keys(resetObj).forEach((key) => {
-    loginInfoState[key] = resetObj[key];
+    setLoginInfoState(key, resetObj[key]);
   });
 };
 
@@ -89,7 +89,7 @@ export const setLoggingInState = (
 export const clearLoggingInState = () => {
   const resetObj = cloneDeep(loginInfoInitialState);
   Object.keys(resetObj).forEach((key) => {
-    loggingInState[key] = resetObj[key];
+    setLoggingInState(key, resetObj[key]);
   });
 };
 

@@ -1,6 +1,6 @@
 ### Elven Tools Dapp
 
-- Docs: [elven.tools/docs/landing-page.html](https://www.elven.tools/docs/landing-page.html)
+- Docs: [elven.tools/docs/minter-dapp-introduction.html](https://www.elven.tools/docs/minter-dapp-introduction.html)
 - Demo: [dapp-demo.elven.tools](https://dapp-demo.elven.tools)
 - Sneak peek: [youtu.be/ATSxD3mD4dc](https://youtu.be/ATSxD3mD4dc)
 
@@ -18,6 +18,45 @@ The Dapp is built using Nextjs and a couple of helpful tools. It allows you to i
 - API endpoint rewrites and 'guard' middleware
 - Preconfigured UI based on Chakra UI
 - The template with sections mainly used on minter dapps (it will be developed further)
+
+### Examples
+
+Login with one of four methods.
+```jsx
+const { login, isLoggedIn, error, walletConnectUri, getHWAccounts } = useLogin();
+
+(...)
+
+login(LoginMethodsEnum.ledger)
+```
+
+Custom mint transactions for the Elven Tools Smart Contract. There is also more generic `useScTransaction` hook.
+```jsx
+const { mint, pending, transaction, error } = useMintTransaction();
+
+(...)
+
+mint(amount)
+```
+
+Query the Elven Tools Smart Contract. There is also more generic `useScQuery` hook.
+```jsx
+const {
+  data,
+  fetch,
+  isLoading,
+} = useElvenScQuery<boolean>({
+  funcName: 'isAllowlistEnabled',
+  type: SCQueryType.BOOLEAN,
+  autoInit: false,
+});
+
+(...)
+
+fetch()
+```
+
+For more docs on how to use it check the link above, and for more examples see: [elven.tools/docs/dapp-react-hooks-and-components.html](https://elven.tools/docs/dapp-react-hooks-and-components.html)
 
 ### Tracking the progress
 

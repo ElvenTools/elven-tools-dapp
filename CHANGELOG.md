@@ -1,4 +1,4 @@
-### [3.0.0](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v2.3.0) (2022-07-...)
+### [3.0.0](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v3.0.0) (2022-07-10)
 - some of the configurations for a smart contract are now fetched automatically
 - UX is essential, and the previous approach to sc-related configs was problematic and not clear
 - the only gain was saving on API bandwidth, but I think it should be ok with future improvements, mainly SWR and service worker cache, but also using third-party API providers, not public ones, which should be evident for production-ready dapp

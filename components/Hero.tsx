@@ -106,7 +106,7 @@ export const Hero = () => {
         <CollectionInfoBox
           content={`${collectionSize - totalTokensLeft} / ${collectionSize}`}
           isLoading={collectionSizeLoading || totalTokensLeftIsLoading}
-          label="Minter per collection supply"
+          label="Minted per collection supply"
         />
       </Box>
     </Box>

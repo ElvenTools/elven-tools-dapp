@@ -1,3 +1,7 @@
+### [3.1.0](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v3.1.0) (2022-08-06)
+- dependencies updates (erdjs libs, nextjs and others)
+- small adjustments in the code
+
 ### [3.0.0](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v3.0.0) (2022-07-10)
 - some of the configurations for a smart contract are now fetched automatically
 - UX is essential, and the previous approach to sc-related configs was problematic and not clear

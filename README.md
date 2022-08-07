@@ -2,7 +2,7 @@
 
 - Docs: [elven.tools/docs/minter-dapp-introduction.html](https://www.elven.tools/docs/minter-dapp-introduction.html)
 - Demo: [dapp-demo.elven.tools](https://dapp-demo.elven.tools)
-- Sneak peek: [youtu.be/ATSxD3mD4dc](https://youtu.be/ATSxD3mD4dc)
+- Elven Tools intro (including the Dapp): [youtu.be/Jou5jn8PFz8](https://youtu.be/Jou5jn8PFz8)
 
 The Dapp is built using Nextjs and a couple of helpful tools. It allows you to interact with the Elrond blockchain, smart contracts, and especially it is prepared for the [Elven Tools Smart Contract](https://github.com/ElvenTools/elven-nft-minter-sc). But you can always modify it and adjust for your needs.
 

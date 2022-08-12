@@ -216,8 +216,8 @@ export const MintHero = () => {
       {!mintingPaused ? (
         <Box mt={6}>
           <NFTLeftToMint
-            data={totalTokensLeft}
-            dropData={dropData}
+            data={totalTokensLeft || 0}
+            dropData={dropData || 0}
             dataLoading={dropActive ? dropIsLoading : totalIsLoading}
           />
           <Box>

@@ -26,6 +26,9 @@ export const Hero = () => {
       type: SCQueryType.STRING,
     });
 
+  const minted =
+    collectionSize && totalTokensLeft ? collectionSize - totalTokensLeft : 0;
+
   return (
     <Box width="100%">
       <Text
@@ -85,7 +88,7 @@ export const Hero = () => {
         }}
       >
         <CollectionInfoBox
-          content={collectionTicker || ''}
+          content={collectionTicker || '-'}
           label="Collection ticker. Click for details."
           isLoading={collectionTickerLoading}
           href={`${networkConfig[chainType].explorerAddress}/collections/${collectionTicker}`}
@@ -104,7 +107,7 @@ export const Hero = () => {
           }
         />
         <CollectionInfoBox
-          content={`${collectionSize - totalTokensLeft} / ${collectionSize}`}
+          content={`${minted} / ${collectionSize || 0}`}
           isLoading={collectionSizeLoading || totalTokensLeftIsLoading}
           label="Minted per collection supply"
         />

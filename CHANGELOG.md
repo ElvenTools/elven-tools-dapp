@@ -1,3 +1,8 @@
+### [3.1.1](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v3.1.1) (2022-08-13)
+- better errors catching when API is down
+- fixes in displaying the numeric values
+- fixes in memo usage
+
 ### [3.1.0](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v3.1.0) (2022-08-06)
 - dependencies updates (erdjs libs, nextjs and others)
 - small adjustments in the code

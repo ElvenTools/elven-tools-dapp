@@ -1,3 +1,7 @@
+### [3.2.0](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v3.2.0) (2022-10-04)
+- update dependencies
+- show avatar from maiar mobile app if set
+
 ### [3.1.1](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v3.1.1) (2022-08-13)
 - better errors catching when API is down
 - fixes in displaying the numeric values

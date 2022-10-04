@@ -4,6 +4,7 @@ import { useCallback, FC } from 'react';
 import { ActionButton } from './ActionButton';
 import { SocialMediaIcons } from './SocialMediaIcons';
 import { LoginModalButton } from './core/LoginModalButton';
+import { UserMenu } from './UserMenu';
 
 interface HeaderMenuButtonsProps {
   enabled: string[];
@@ -44,6 +45,8 @@ export const HeaderMenuButtons: FC<HeaderMenuButtonsProps> = ({ enabled }) => {
       )}
 
       <SocialMediaIcons />
+
+      <UserMenu />
 
       {enabled.includes('mint') && (
         <ActionButton onClick={handleMintClick}>Mint</ActionButton>

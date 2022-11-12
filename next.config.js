@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 
+const withPWA = require('next-pwa');
+
 const nextConfig = {
   webpack: (config) => {
     config.resolve.fallback = {
@@ -25,9 +27,15 @@ const nextConfig = {
     dirs: ['components', 'config', 'hooks', 'pages', 'store', 'types', 'utils'],
   },
   i18n: {
-    locales: ["en"],
-    defaultLocale: "en",
+    locales: ['en'],
+    defaultLocale: 'en',
   },
 };
-
+module.exports = withPWA({
+  pwa: {
+    dest: 'public',
+    register: true,
+    skipWaiting: true,
+  },
+});
 module.exports = nextConfig;

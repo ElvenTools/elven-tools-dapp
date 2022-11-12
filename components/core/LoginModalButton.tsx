@@ -82,8 +82,8 @@ export const LoginModalButton: FC<LoginModalButtonProps> = ({
                 fillRule="evenodd"
               />
             </svg>
-            </Tooltip>
-            <Text display="none">Login</Text>
+          </Tooltip>
+          <Text display="none">Login</Text>
         </ActionButton>
       )}
       <Modal

@@ -53,11 +53,11 @@ export const Hero = () => {
         <Text
           as="a"
           color="elvenTools.color2.base"
-          href="https://www.elrond.com"
+          href="https://www.multiversx.com"
           target="_blank"
           rel="noopener noreferrer nofollow"
         >
-          Elrond
+          MultiversX
         </Text>{' '}
         blockchain.
       </Text>
@@ -68,7 +68,7 @@ export const Hero = () => {
         textAlign={{ base: 'center', md: 'left' }}
       >
         The actual working example is connected to the Elven Tools smart
-        contract deployed on the Elrond blockchain{' '}
+        contract deployed on the MultiversX blockchain{' '}
         <Text as="span" fontWeight="medium">
           devnet
         </Text>

@@ -69,7 +69,7 @@ export const TransactionPendingModal: FC<TransactionPendingModalProps> = ({
     <Modal isOpen={opened} size="sm" onClose={onClose} isCentered>
       <CustomModalOverlay />
       <ModalContent
-        bgColor="elvenTools.dark.darker"
+        bgColor="ghostLand.dark.darker"
         px={6}
         pt={7}
         pb={10}

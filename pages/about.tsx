@@ -63,8 +63,8 @@ const About: NextPage = () => {
           Remember that you can make a couple of simple changes to make it work
           on the mainnet. Of course, keep in mind that it is best suited for the
           Elven Tools smart contract, but you can modify it and use it with any
-          Elrond smart contract you like. You can even use it for projects not
-          related to NFTs.
+          MultiversX smart contract you like. You can even use it for projects
+          not related to NFTs.
         </Text>
       </Box>
     </MainLayout>

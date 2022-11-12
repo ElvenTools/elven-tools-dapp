@@ -1,5 +1,4 @@
-import { Box, Text } from '@chakra-ui/react';
-import Image from 'next/image';
+import { Box, Text, Image } from '@chakra-ui/react';
 import { FC } from 'react';
 import { SocialIcon } from 'react-social-icons';
 
@@ -17,13 +16,27 @@ export const TeamMember: FC<TeamMemberProps> = ({
   bio,
 }) => {
   return (
-    <Box>
+    <Box
+      borderColor="ghostLand.color2.base"
+      borderWidth={1}
+      bgColor="ghostLand.dark.lighter"
+      backdropFilter="blur(3px)"
+      py={2}
+      px={6}
+      position="relative"
+    >
       <Box display="flex" alignItems="center" justifyContent="center">
-        <Image src={imageUrl} alt={name} width={250} height={250} />
+        <Image
+          src={imageUrl}
+          alt={name}
+          boxSize={{ base: '90px', md: '140px' }}
+          objectFit="contain"
+        />
       </Box>
-      <Text textAlign="center" mt={5} fontWeight="bold" fontSize="xl">
+      <Text textAlign="center" fontWeight="bold" fontSize="xl">
         {name}
       </Text>
+      {bio && <Text textAlign="center">{bio}</Text>}
       {socialMediaLinks && (
         <Box
           display="flex"
@@ -31,6 +44,9 @@ export const TeamMember: FC<TeamMemberProps> = ({
           alignItems="center"
           justifyContent="center"
           gap={2}
+          position="absolute"
+          top={0}
+          right={5}
         >
           {socialMediaLinks.map((link, index) => (
             <SocialIcon
@@ -41,11 +57,6 @@ export const TeamMember: FC<TeamMemberProps> = ({
             />
           ))}
         </Box>
-      )}
-      {bio && (
-        <Text mt={5} textAlign="center">
-          {bio}
-        </Text>
       )}
     </Box>
   );

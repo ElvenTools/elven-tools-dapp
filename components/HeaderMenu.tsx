@@ -13,11 +13,6 @@ export const HeaderMenu: FC<PropsWithChildren<PropsWithChildren>> = ({
       flexWrap="wrap"
       gap="2"
       py={9}
-      sx={{
-        '@media screen and (max-width: 800px)': {
-          flexDirection: 'column',
-        },
-      }}
     >
       <Logo />
       {children}

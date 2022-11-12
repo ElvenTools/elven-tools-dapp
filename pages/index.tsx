@@ -1,31 +1,31 @@
 import type { NextPage } from 'next';
-import { Box } from '@chakra-ui/react';
 import { MainLayout } from '../components/MainLayout';
 import { HeaderMenu } from '../components/HeaderMenu';
-import { Hero } from '../components/Hero';
 import { HeaderMenuButtons } from '../components/HeaderMenuButtons';
-import { HeroImage } from '../components/HeroImage';
-import { Faq } from '../components/Faq';
-import { Roadmap } from '../components/Roadmap';
-import { Team } from '../components/Team';
+import { MainMenu } from '../components/MainMenu';
+import { MainMenuButtons } from '../components/MainMenuButtons';
+import { HomeSectionTitle } from '../components/HomeSectionTitle';
 
 const Home: NextPage = () => {
   return (
     <MainLayout>
       <HeaderMenu>
-        <HeaderMenuButtons enabled={['auth', 'mint', 'about']} />
+        <HeaderMenuButtons enabled={['auth']} />
       </HeaderMenu>
-      <Box
-        display="flex"
-        justifyContent="space-between"
-        mt={{ base: 8, xl: 12, '2xl': 24 }}
-      >
-        <Hero />
-        <HeroImage />
-      </Box>
-      <Faq />
-      <Roadmap />
-      <Team />
+      <HomeSectionTitle title="The NFT DAO where ghosts govern." />
+      <MainMenu>
+        <MainMenuButtons
+          enabled={[
+            'mint',
+            'clan',
+            'dao',
+            'playandearn',
+            'roadmap',
+            'team',
+            'faq',
+          ]}
+        />
+      </MainMenu>
     </MainLayout>
   );
 };

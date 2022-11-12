@@ -30,19 +30,19 @@ export const NFTAllowlistEnabled: FC<NFTAllowlistEnabledProps> = ({
           <Box>
             <Text
               as="span"
-              fontSize={{ base: 'md', sm: 'xl' }}
+              fontSize={{ base: 'md', sm: 'lg' }}
               fontWeight="bold"
             >
               Allowlist is enabled. You are{' '}
             </Text>
             {dataLoading ? (
-              <Spinner ml={3} color="elvenTools.color2.base" />
+              <Spinner ml={3} color="ghostLand.color1.darker" />
             ) : data !== 0 ? (
               <Text
-                color="elvenTools.color2.base"
+                color="ghostLand.color1.darker"
                 as="span"
                 fontWeight="bold"
-                fontSize={{ base: 'md', sm: 'xl' }}
+                fontSize={{ base: 'md', sm: 'lg' }}
               >
                 on
               </Text>
@@ -51,14 +51,14 @@ export const NFTAllowlistEnabled: FC<NFTAllowlistEnabledProps> = ({
                 color="elvenTools.color3.base"
                 as="span"
                 fontWeight="bold"
-                fontSize={{ base: 'md', sm: 'xl' }}
+                fontSize={{ base: 'md', sm: 'lg' }}
               >
                 not on
               </Text>
             )}{' '}
             <Text
               as="span"
-              fontSize={{ base: 'md', sm: 'xl' }}
+              fontSize={{ base: 'md', sm: 'lg' }}
               fontWeight="bold"
             >
               the list!

@@ -63,10 +63,14 @@ export const MintForm: FC<MintFormProps> = ({ leftToMintForUser, cb }) => {
             _focus={{ outline: 'none' }}
             disabled={leftToMintForUser <= 0}
             placeholder="Amount of tokens to mint..."
+            borderColor="ghostLand.color1.darker"
+            borderWidth={1}
+            borderRadius={0}
+            outline="none"
           />
           {leftToMintForUser <= 0 ? null : (
             <NumberInputStepper>
-              <NumberIncrementStepper borderColor="elvenTools.base.dark" />
+              <NumberIncrementStepper borderColor="ghostLand.color1.darker" />
               <NumberDecrementStepper />
             </NumberInputStepper>
           )}

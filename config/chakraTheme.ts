@@ -1,5 +1,4 @@
 // Chakra UI specific theme and variables configuration
-
 import { extendTheme } from '@chakra-ui/react';
 
 export const theme = extendTheme({
@@ -8,8 +7,7 @@ export const theme = extendTheme({
       body: {
         minHeight: '100vh',
         overflowX: 'hidden',
-        bgGradient:
-          'linear-gradient(90deg, elvenTools.bgStripes 0.1%, elvenTools.dark.base 0.1%, elvenTools.dark.base 50%, elvenTools.bgStripes 50%, elvenTools.bgStripes 50.1%, elvenTools.dark.base 50.1%, elvenTools.dark.base 100%);',
+        bgColor: 'black',
         bgSize: '700px',
         backgroundPositionX: '150px',
         color: 'elvenTools.white',
@@ -31,10 +29,36 @@ export const theme = extendTheme({
     },
   },
   fonts: {
-    heading: 'Poppins, sans-serif',
-    body: 'Poppins, sans-serif',
+    heading: `'Cubic Five 12', sans-serif`,
+    body: `'Cubic Five 10', sans-serif`,
   },
   colors: {
+    ghostLand: {
+      bgStripes: '#2c3440',
+      shadowColor: '#141414',
+      dark: {
+        lighter: 'rgb(0, 0, 0, 0.1)',
+        base: 'rgb(0, 0, 0, 0.5)',
+        darker: '#000',
+      },
+      light: '#FAFFFD',
+      white: '#ffffff',
+      color1: {
+        lighter: 'rgb(109, 208, 246, 0.1)',
+        base: '#549db9',
+        darker: '#6dd0f6',
+      },
+      color2: {
+        lighter: 'rgb(229, 232, 241, 0.1)',
+        base: 'rgb(229, 232, 241, 0.2)',
+        darker: 'rgb(229, 232, 241, 1)',
+      },
+      color3: {
+        lighter: '#fb9567',
+        base: '#FA824C',
+        darker: '#f9611c',
+      },
+    },
     elvenTools: {
       bgStripes: '#2c3440',
       shadowColor: '#141414',

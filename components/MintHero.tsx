@@ -13,6 +13,24 @@ import { NFTLeftToMint } from './NFTLeftToMint';
 import { NFTAllowlistEnabled } from './NFTAllowlistEnabled';
 import { NFTMintedAlready } from './NFTMintedAlready';
 import { NFTLeftToMintPerAddress } from './NFTLeftToMintPerAddress';
+import { motion } from 'framer-motion';
+
+const easing = [0.6, -0.05, 0.01, 0.99];
+
+const fadeInUp = {
+  initial: {
+    y: 60,
+    opacity: 0,
+  },
+  animate: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      ease: easing,
+    },
+  },
+};
 
 // TODO: Prepare separate components for the segments here
 // TODO: use Valtio for global smart contract config state + dispatchers to be able to trigger changes from each component
@@ -191,120 +209,120 @@ export const MintHero = () => {
   const tokensLeftPerUser = getLeftToMintForUser();
 
   return (
-    <Box width="100%">
-      <Text
-        as="h1"
-        fontSize={{ base: '2xl', md: '3xl', lg: '5xl' }}
-        textAlign={{ base: 'center', md: 'left' }}
-        fontWeight="black"
-        lineHeight="shorter"
-        mb={5}
+    <motion.div
+      exit={{ opacity: 0 }}
+      initial="initial"
+      animate="animate"
+      variants={fadeInUp}
+    >
+      <Box
+        width="100%"
+        borderColor="ghostLand.color2.base"
+        borderWidth={1}
+        p={4}
       >
-        ⚡ Mint some of them
-      </Text>
-      <Text
-        as="h2"
-        fontSize="lg"
-        fontWeight="thin"
-        textAlign={{ base: 'center', md: 'left' }}
-      >
-        To be able to mint you have to be logged in to be able to mint. Remember
-        that it will mint only on the devent. If you want to do that, you need
-        to connect using one of the methods and the devnet address with some
-        xEGLD funds.
-      </Text>
-      {!mintingPaused ? (
-        <Box mt={6}>
-          <NFTLeftToMint
-            data={totalTokensLeft || 0}
-            dropData={dropData || 0}
-            dataLoading={dropActive ? dropIsLoading : totalIsLoading}
-          />
-          <Box>
-            <Authenticated
-              fallback={
-                <Box
-                  mt={6}
-                  display="flex"
-                  justifyContent={isContentCentered ? 'center' : 'flex-start'}
-                >
-                  <LoginModalButton />
-                </Box>
-              }
-              spinnerCentered={isContentCentered}
-            >
-              <NFTAllowlistEnabled
-                data={allowlistCheckData}
-                dataLoading={allowlistCheckLoading}
-              />
-              <NFTMintedAlready
-                data={mintedData}
-                dataLoading={mintedDataLoading}
-              />
-              {!isLoadingTokensLimitPerAddressTotal &&
-              !tokensLimitPerAddressPerDropLoading &&
-              !Number.isNaN(tokensLeftPerUser) ? (
-                <>
-                  <NFTLeftToMintPerAddress
-                    leftToMintForUser={tokensLeftPerUser}
-                  />
-                  <MintForm
-                    cb={handleRefreshData}
-                    leftToMintForUser={tokensLeftPerUser}
-                  />
-                </>
-              ) : null}
-              {mintedData && mintedData > 0 ? (
-                <Box
-                  display="flex"
-                  alignItems="center"
-                  mt={6}
-                  justifyContent={{ base: 'center', md: 'flex-start' }}
-                >
-                  <Text
-                    as="span"
-                    fontSize={{ base: 'md', sm: 'xl' }}
-                    fontWeight="bold"
+        <Text
+          as="h1"
+          fontSize={{ base: '2xl' }}
+          textAlign={{ base: 'left' }}
+          fontWeight="black"
+          lineHeight="shorter"
+          mb={5}
+        >
+          Collect MxGhosts and join the clan.
+        </Text>
+        <Text as="h2" fontSize="md" fontWeight="thin">
+          To be able to mint you have to be logged in to be able to mint.
+          Remember that it will mint only on the devent. If you want to do that,
+          you need to connect using one of the methods and the devnet address
+          with some xEGLD funds.
+        </Text>
+        {!mintingPaused ? (
+          <Box mt={6}>
+            <NFTLeftToMint
+              data={totalTokensLeft || 0}
+              dropData={dropData || 0}
+              dataLoading={dropActive ? dropIsLoading : totalIsLoading}
+            />
+            <Box>
+              <Authenticated
+                fallback={
+                  <Box
+                    mt={6}
+                    display="flex"
+                    alignItems="center"
+                    justifyContent={isContentCentered ? 'center' : 'flex-start'}
                   >
-                    Check your NFTs:
-                  </Text>
-                  <Text
-                    as="a"
-                    ml={3}
-                    target="_blank"
-                    color="elvenTools.color2.base"
-                    fontSize="2xl"
-                    fontWeight="black"
-                    textDecoration="underline"
-                    rel="noopener noreferrer nofollow"
-                    href={`${networkConfig[chainType].explorerAddress}/accounts/${address}/nfts`}
+                    <Box mr={4}>Login to mint </Box>
+                    <LoginModalButton />
+                  </Box>
+                }
+                spinnerCentered={isContentCentered}
+              >
+                <NFTAllowlistEnabled
+                  data={allowlistCheckData}
+                  dataLoading={allowlistCheckLoading}
+                />
+                <NFTMintedAlready
+                  data={mintedData}
+                  dataLoading={mintedDataLoading}
+                />
+                {!isLoadingTokensLimitPerAddressTotal &&
+                !tokensLimitPerAddressPerDropLoading &&
+                !Number.isNaN(tokensLeftPerUser) ? (
+                  <>
+                    <NFTLeftToMintPerAddress
+                      leftToMintForUser={tokensLeftPerUser}
+                    />
+                    <MintForm
+                      cb={handleRefreshData}
+                      leftToMintForUser={tokensLeftPerUser}
+                    />
+                  </>
+                ) : null}
+                {mintedData && mintedData > 0 ? (
+                  <Box
+                    display="flex"
+                    alignItems="center"
+                    mt={6}
+                    justifyContent={{ base: 'center', md: 'flex-start' }}
                   >
-                    here
-                  </Text>
-                </Box>
-              ) : null}
-            </Authenticated>
+                    <Text
+                      as="span"
+                      fontSize={{ base: 'md', sm: 'xl' }}
+                      fontWeight="bold"
+                    >
+                      Check your NFTs:
+                    </Text>
+                    <Text
+                      as="a"
+                      ml={3}
+                      target="_blank"
+                      color="elvenTools.color1.lighter"
+                      fontSize="2xl"
+                      fontWeight="black"
+                      textDecoration="underline"
+                      rel="noopener noreferrer nofollow"
+                      href={`${networkConfig[chainType].explorerAddress}/accounts/${address}/nfts`}
+                    >
+                      here
+                    </Text>
+                  </Box>
+                ) : null}
+              </Authenticated>
+            </Box>
           </Box>
-        </Box>
-      ) : (
-        <Box>
-          <Text
-            fontSize="xl"
-            fontWeight="bold"
-            mt={10}
-            textAlign={{ base: 'center', md: 'left' }}
-          >
-            Minting was not started yet or is paused at the moment.
-          </Text>
-          <Text
-            fontSize="xl"
-            fontWeight="bold"
-            textAlign={{ base: 'center', md: 'left' }}
-          >
-            Please be back soon!
-          </Text>
-        </Box>
-      )}
-    </Box>
+        ) : (
+          <Box>
+            <Text fontSize="lg" fontWeight="bold" mt={10}>
+              Minting was not started yet or is paused at the moment.
+            </Text>
+            <Text fontSize="lg" fontWeight="bold">
+              Please be back soon!
+            </Text>
+          </Box>
+        )}
+      </Box>
+    </motion.div>
   );
 };

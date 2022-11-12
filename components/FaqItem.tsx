@@ -15,11 +15,10 @@ interface FaqItemProps {
 export const FaqItem: FC<FaqItemProps> = ({ question, answer }) => {
   return (
     <AccordionItem
-      border={0}
-      bgColor="elvenTools.dark.darker"
-      boxShadow="0 0 10px"
-      color="elvenTools.shadowColor"
-      bgGradient="linear-gradient(90deg, elvenTools.dark.base 0%, elvenTools.dark.darker 70%);"
+      borderColor="ghostLand.color1.darker"
+      borderWidth={1}
+      bgColor="ghostLand.dark.lighter"
+      backdropFilter="blur(3px)"
       mb={6}
     >
       <AccordionButton

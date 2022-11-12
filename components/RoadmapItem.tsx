@@ -8,21 +8,31 @@ interface RoadmapItemProps {
 
 export const RoadmapItem: FC<RoadmapItemProps> = ({ title, points }) => {
   return (
-    <Box
-      px={10}
-      py={7}
-      borderRadius="2xl"
-      boxShadow="0 0 25px"
-      color="elvenTools.shadowColor"
-      bgColor="elvenTools.dark.darker"
-      bgGradient="linear-gradient(90deg, elvenTools.dark.base 0%, elvenTools.dark.darker 70%);"
-    >
-      <Text color="elvenTools.white" fontSize="2xl" fontWeight="black" mb={3}>
+    <Box>
+      <Text
+        as="h2"
+        color="ghostLand.color2.darker"
+        fontSize="xl"
+        fontWeight="black"
+        mb={3}
+      >
         {title}
       </Text>
-      <UnorderedList color="elvenTools.white">
+      <UnorderedList m={0} color="elvenTools.white">
         {points.map((point, index) => (
-          <ListItem key={index}>{point}</ListItem>
+          <ListItem
+            listStyleType="none"
+            borderColor="ghostLand.color2.base"
+            borderWidth={1}
+            bgColor="ghostLand.dark.lighter"
+            backdropFilter="blur(3px)"
+            py={2}
+            px={6}
+            mb={2}
+            key={index}
+          >
+            {point}
+          </ListItem>
         ))}
       </UnorderedList>
     </Box>

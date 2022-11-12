@@ -5,6 +5,7 @@ import { HeaderMenu } from '../components/HeaderMenu';
 import { HeaderMenuButtons } from '../components/HeaderMenuButtons';
 import { MintHero } from '../components/MintHero';
 import { HeroImage } from '../components/HeroImage';
+import { Secondary } from '../components/Secondary';
 
 const Mint: NextPage = () => {
   return (
@@ -15,11 +16,12 @@ const Mint: NextPage = () => {
       <Box
         display="flex"
         justifyContent="space-between"
-        mt={{ base: 8, xl: 12, '2xl': 24 }}
+        flexDirection={{ base: 'column-reverse', md: 'row-reverse' }}
       >
         <MintHero />
         <HeroImage />
       </Box>
+      <Secondary />
     </MainLayout>
   );
 };

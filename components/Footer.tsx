@@ -1,14 +1,13 @@
-import { Container, Box, Text } from '@chakra-ui/react';
+import { Container, Box, Text, Image } from '@chakra-ui/react';
 import packageJson from '../package.json';
 
 export const Footer = () => {
   return (
     <Box
-      height="120px"
-      bgColor="elvenTools.dark.darker"
       color="elvenTools.white"
       display="flex"
       alignItems="center"
+      mt={{ base: 'auto' }}
     >
       <Container
         maxW="container.xl"
@@ -16,32 +15,39 @@ export const Footer = () => {
         fontWeight="normal"
         textAlign="center"
       >
-        <Box>Elven Tools Dapp Template (v{`${packageJson.version}`})</Box>
-        <Box fontSize="xs" fontWeight="hairline">
-          All for free. Please support the project. Give it credit and tell the
-          world about it. Attribution is not required but welcomed in the form
-          of a backlink.
-        </Box>
-        <Box fontSize="xs" fontWeight="bold">
+        <Box
+          fontSize="xs"
+          fontWeight="bold"
+          mb="4"
+          position="relative"
+          zIndex={1}
+        >
           <Text
             as="a"
-            color="elvenTools.color3.base"
+            color="#fff"
             href="https://www.elven.tools"
             target="_blank"
             rel="noopener noreferrer nofollow"
           >
-            elven.tools
-          </Text>{' '}
-          ⚡{' '}
-          <Text
-            as="a"
-            color="elvenTools.color3.base"
-            href="https://www.julian.io"
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-          >
-            julian.io
+            Elven Tools Dapp (v{`${packageJson.version}`})
           </Text>
+        </Box>
+        <Box
+          position="absolute"
+          zIndex={0}
+          width="100%"
+          height="auto"
+          left="0"
+          right="0"
+          bottom="0"
+        >
+          <Image
+            src="/media/ghostverse-cemetery-mr-ghost-mxghosts-nft-dao-multiversx-blockchain.webp"
+            alt="Mr Ghost Moon"
+            objectFit="contain"
+            width="2048"
+            height="auto"
+          />
         </Box>
       </Container>
     </Box>

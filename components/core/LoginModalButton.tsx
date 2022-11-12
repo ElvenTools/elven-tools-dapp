@@ -9,6 +9,7 @@ import {
   Spinner,
   Flex,
   ModalHeader,
+  Tooltip,
 } from '@chakra-ui/react';
 import { FC } from 'react';
 import { ActionButton } from '../ActionButton';
@@ -51,9 +52,39 @@ export const LoginModalButton: FC<LoginModalButtonProps> = ({
   return (
     <>
       {isLoggedIn ? (
-        <ActionButton onClick={logout}>Disconnect</ActionButton>
+        <ActionButton onClick={logout} aria-label="logout">
+          <Tooltip label="Logout" fontSize="md">
+            <svg
+              width="30px"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 1290 1100"
+            >
+              <path
+                d="M607 0h152v38h114v38h75v38h38v38h38v38h76v-76h76v417h38v38h38v38h38v152h-38v37h-38v-37h-38v341h-38v-38h-38v-38h-38v-38h-38v-38h-38v-76h-38v-38h-37v38h-38v38h-38v38h-38v38h-38v38h-38v38h-76v-38h-38v-38h-38v-38h-38v-38h-38v-38h-38v-38h-37v38h-38v76h-38v38h-38v38h-38v38h-38v38h-38V759H38v-38H0v-76h38v-38h38v-38h76v-38h38V114h76v76h76v-38h38v-38h38V76h75V38h114z"
+                fill="#e5e8f1"
+                fillRule="evenodd"
+              />
+            </svg>
+          </Tooltip>
+          <Text display="none">Logout</Text>
+        </ActionButton>
       ) : (
-        <ActionButton onClick={open}>Connect</ActionButton>
+        <ActionButton onClick={open} aria-label="login">
+          <Tooltip label="Login" fontSize="md">
+            <svg
+              width="30px"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 1290 1100"
+            >
+              <path
+                d="M607 0h152v38h114v38h75v38h38v38h38v38h76v-76h76v417h38v38h38v38h38v152h-38v37h-38v-37h-38v341h-38v-38h-38v-38h-38v-38h-38v-38h-38v-76h-38v-38h-37v38h-38v38h-38v38h-38v38h-38v38h-38v38h-76v-38h-38v-38h-38v-38h-38v-38h-38v-38h-38v-38h-37v38h-38v76h-38v38h-38v38h-38v38h-38v38h-38V759H38v-38H0v-76h38v-38h38v-38h76v-38h38V114h76v76h76v-38h38v-38h38V76h75V38h114z"
+                fill="#6dd0f6"
+                fillRule="evenodd"
+              />
+            </svg>
+            </Tooltip>
+            <Text display="none">Login</Text>
+        </ActionButton>
       )}
       <Modal
         isOpen={opened}
@@ -64,10 +95,11 @@ export const LoginModalButton: FC<LoginModalButtonProps> = ({
       >
         <CustomModalOverlay />
         <ModalContent
-          bgColor="elvenTools.dark.darker"
+          bgColor="ghostLand.dark.darker"
           pt={7}
           pb={10}
           px={0}
+          borderRadius="none"
           position="relative"
         >
           <ModalCloseButton _focus={{ outline: 'none' }} />

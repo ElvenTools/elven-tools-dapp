@@ -36,6 +36,7 @@ module.exports = withPWA({
     dest: 'public',
     register: true,
     skipWaiting: true,
+    publicExcludes: ['!robots.txt', '!sitemap.xml.gz'],
   },
 });
 module.exports = nextConfig;

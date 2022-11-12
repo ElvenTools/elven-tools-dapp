@@ -17,7 +17,7 @@
   ],
   "theme_color": "#FFFFFF",
   "background_color": "#000",
-  "start_url": "/",
+  "start_url": "https://devnet-ghostverse.netlify.app",
   "display": "standalone",
   "orientation": "portrait"
 }

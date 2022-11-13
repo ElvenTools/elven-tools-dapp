@@ -12,7 +12,7 @@ const ClanPage: NextPage = () => {
       <HeaderMenu>
         <HeaderMenuButtons enabled={['auth']} />
       </HeaderMenu>
-      <HomeSectionTitle title="DAO" />
+      <HomeSectionTitle title="To support the Decentralized Autonomous Organization, read the Lightpaper, vote, monitor the wallets, or contribute to GitHub." />
       <MainMenu>
         <MainMenuButtons enabled={['lightpaper', 'vote', 'wallet', 'github']} />
       </MainMenu>

@@ -46,9 +46,6 @@ export const MainMenuButtons: FC<MainMenuButtonsProps> = ({ enabled }) => {
   const handleDiscordClick = useCallback(() => {
     router.push('https://discord.gg/tXSeJfVVnH');
   }, [router]);
-  const handleFacebookClick = useCallback(() => {
-    router.push('https://www.facebook.com/GokaiLabs');
-  }, [router]);
   const handleInstagramClick = useCallback(() => {
     router.push('https://www.instagram.com/gokai_labs/');
   }, [router]);
@@ -64,7 +61,7 @@ export const MainMenuButtons: FC<MainMenuButtonsProps> = ({ enabled }) => {
     );
   }, [router]);
   const handleGithubClick = useCallback(() => {
-    router.push('https://github.com/gokaiorg');
+    router.push('https://github.com/GhostVerseOrg');
   }, [router]);
   const handleGiphyClick = useCallback(() => {
     router.push('https://giphy.com/GokaiLabs');
@@ -274,18 +271,6 @@ export const MainMenuButtons: FC<MainMenuButtonsProps> = ({ enabled }) => {
             alt="GhostVerse Instagram Mr Ghost MxGhosts NFT DAO MultiversX"
           />
           Instagram
-        </ActionButtonXL>
-      )}
-      {enabled.includes('facebook') && (
-        <ActionButtonXL onClick={handleFacebookClick}>
-          <Image
-            boxSize={{ base: '100px', md: '140px' }}
-            objectFit="contain"
-            my={4}
-            src="/media/ghostverse-facebook-mr-ghost-mxghosts-nft-dao-multiversx-blockchain.webp"
-            alt="GhostVerse Facebook Mr Ghost MxGhosts NFT DAO MultiversX"
-          />
-          Facebook
         </ActionButtonXL>
       )}
       {enabled.includes('facebook') && (

@@ -11,7 +11,7 @@ const TeamPage: NextPage = () => {
       <HeaderMenu>
         <HeaderMenuButtons enabled={['auth']} />
       </HeaderMenu>
-      <HomeSectionTitle title="Team" />
+      <HomeSectionTitle title="The team is made up entirely of contributors and investors. Join us and help us create the most terrifying GhostVerse ever." />
       <Team />
     </MainLayout>
   );

@@ -15,7 +15,7 @@ export const Logo = () => {
         cursor="pointer"
       >
         <ImgEarth />
-        <Box width="200px">
+        <Box width={{ base: '130px', md: '200px' }}>
           <ImgG />
         </Box>
       </Box>

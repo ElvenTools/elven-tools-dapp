@@ -7,7 +7,7 @@ export const Footer = () => {
       color="elvenTools.white"
       display="flex"
       alignItems="center"
-      mt={{ base: 'auto' }}
+      mt={{ base: '5rem', md: 'auto' }}
     >
       <Container
         maxW="container.xl"
@@ -21,15 +21,26 @@ export const Footer = () => {
           mb="4"
           position="relative"
           zIndex={1}
+          display="flex"
+          justifyContent="center"
         >
+          <Text>Powered by</Text>
           <Text
             as="a"
-            color="#fff"
+            color="ghostLand.color1.darker"
             href="https://www.elven.tools"
-            target="_blank"
-            rel="noopener noreferrer nofollow"
+            mx={2}
           >
             Elven Tools Dapp (v{`${packageJson.version}`})
+          </Text>
+          <Text>on</Text>
+          <Text
+            as="a"
+            color="ghostLand.color1.darker"
+            href="https://multiversx.com/"
+            mx={2}
+          >
+            MultiversX
           </Text>
         </Box>
         <Box

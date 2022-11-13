@@ -217,9 +217,6 @@ export const MintHero = () => {
     >
       <Box
         width="100%"
-        borderColor="ghostLand.color2.base"
-        borderWidth={1}
-        p={4}
       >
         <Text
           as="h1"
@@ -232,14 +229,13 @@ export const MintHero = () => {
           Collect MxGhosts and join the clan.
         </Text>
         <Text as="h2" fontSize="md" fontWeight="thin">
-          To be able to mint you have to be logged in to be able to mint.
-          Remember that it will mint only on the devent. If you want to do that,
-          you need to connect using one of the methods and the devnet address
-          with some xEGLD funds.
+          Mr Ghost, formerly of the Maiar Ghosts clan, has joined the MxGhosts clan.
+          <br/><br/>
+          He will now haunt the GhostVerse, one of the many universes of the MultiversX. Each ghost represents a vote in the governance of the GhostVerse DAO. GhostVerse ghosts receive a monthly passive income in EGLD.
         </Text>
         {!mintingPaused ? (
           <Box mt={6}>
-            <NFTLeftToMint
+            {/* <NFTLeftToMint
               data={totalTokensLeft || 0}
               dropData={dropData || 0}
               dataLoading={dropActive ? dropIsLoading : totalIsLoading}
@@ -310,7 +306,13 @@ export const MintHero = () => {
                   </Box>
                 ) : null}
               </Authenticated>
-            </Box>
+            </Box> */}
+            <Text fontSize="lg" fontWeight="bold" mt={10}>
+              Drop #2 sold out.
+            </Text>
+            <Text fontSize="lg" fontWeight="bold">
+              Please be back soon!
+            </Text>
           </Box>
         ) : (
           <Box>

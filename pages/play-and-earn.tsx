@@ -11,7 +11,7 @@ const RoadmapPage: NextPage = () => {
       <HeaderMenu>
         <HeaderMenuButtons enabled={['auth']} />
       </HeaderMenu>
-      <HomeSectionTitle title="Collect your favorite NFT and win prizes!" />
+      <HomeSectionTitle title="Hold and enjoy a lifetime passive income in EGLD. Play with us on Twitter and Discord to earn prizes!" />
       <Earn />
     </MainLayout>
   );

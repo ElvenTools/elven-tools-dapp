@@ -12,7 +12,7 @@ const ClanPage: NextPage = () => {
       <HeaderMenu>
         <HeaderMenuButtons enabled={['auth']} />
       </HeaderMenu>
-      <HomeSectionTitle title="Clan" />
+      <HomeSectionTitle title="Our clan is expanding by the day. Don't be afraid to communicate with the ghosts." />
       <MainMenu>
         <MainMenuButtons
           enabled={[

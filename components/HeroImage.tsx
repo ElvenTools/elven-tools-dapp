@@ -26,6 +26,7 @@ export const HeroImage = () => {
           alt="Mint Mr Ghost Mr Ghost Minting - MultiversX NFT DAO - MxGhosts"
           width={300}
           height={300}
+          maxWidth="inherit"
         />
       </motion.div>
     </Box>

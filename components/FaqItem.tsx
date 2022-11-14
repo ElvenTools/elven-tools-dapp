@@ -6,6 +6,7 @@ import {
   AccordionPanel,
   AccordionItem,
 } from '@chakra-ui/react';
+import { UrlWithStringQuery } from 'url';
 
 interface FaqItemProps {
   question: string;

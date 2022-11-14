@@ -21,7 +21,7 @@ export const Logo = () => {
           borderRadius="sm"
           color="elvenTools.color2.base"
         >
-          devnet
+          $TDM
         </Text>
 
         <Text
@@ -32,7 +32,7 @@ export const Logo = () => {
           fontWeight="black"
           color="elvenTools.white"
         >
-          Weird Faces
+          winNft
         </Text>
       </Box>
     </NextLink>

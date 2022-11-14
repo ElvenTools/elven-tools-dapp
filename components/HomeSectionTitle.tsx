@@ -9,7 +9,7 @@ export const HomeSectionTitle: FC<HomeSectionTitleProps> = ({ title }) => {
   return (
     <Text
       as="h2"
-      fontSize={{ base: '5xl', lg: '7xl' }}
+      fontSize={{ base: '3xl', lg: '5xl' }}
       fontWeight="black"
       mb={16}
       textAlign="center"
@@ -17,8 +17,8 @@ export const HomeSectionTitle: FC<HomeSectionTitleProps> = ({ title }) => {
       {title}{' '}
       <Box
         as="span"
-        width={5}
-        height={5}
+        width={3}
+        height={3}
         display="inline-block"
         backgroundColor="elvenTools.color3.base"
       />

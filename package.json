@@ -26,7 +26,7 @@
     "@elrondnetwork/erdjs-web-wallet-provider": "2.1.1",
     "@emotion/react": "11.10.4",
     "@emotion/styled": "11.10.4",
-    "@fontsource/poppins": "4.5.10",
+    "@fontsource/comfortaa": "4.5.10",
     "bignumber.js": "9.1.0",
     "buffer": "6.0.3",
     "crypto-browserify": "3.12.0",

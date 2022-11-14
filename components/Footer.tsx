@@ -4,7 +4,7 @@ import packageJson from '../package.json';
 export const Footer = () => {
   return (
     <Box
-      height="120px"
+      height="80px"
       bgColor="elvenTools.dark.darker"
       color="elvenTools.white"
       display="flex"
@@ -16,11 +16,9 @@ export const Footer = () => {
         fontWeight="normal"
         textAlign="center"
       >
-        <Box>Elven Tools Dapp Template (v{`${packageJson.version}`})</Box>
+        <Box>winNft (v2.0)</Box>
         <Box fontSize="xs" fontWeight="hairline">
-          All for free. Please support the project. Give it credit and tell the
-          world about it. Attribution is not required but welcomed in the form
-          of a backlink.
+          Created with ❤️ by winNft
         </Box>
         <Box fontSize="xs" fontWeight="bold">
           <Text

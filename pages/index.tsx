@@ -21,7 +21,7 @@ const Home: NextPage = () => {
         mt={{ base: 8, xl: 12, '2xl': 24 }}
       >
         <Hero />
-        <HeroImage />
+        <HeroImage image="/image.gif"/>
       </Box>
       <Faq />
       <Roadmap />

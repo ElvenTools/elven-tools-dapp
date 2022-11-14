@@ -115,6 +115,6 @@ export const nftcollection = [
   {
     title: 'second collection',
     description: '2 collections of our platform',
-    image: '/img.gif'
+    image: '/img2.gif'
   },
 ];

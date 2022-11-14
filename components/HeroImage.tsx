@@ -1,6 +1,6 @@
 import { Box } from '@chakra-ui/react';
 
-export const HeroImage = () => {
+export const HeroImage = ({ collectionItem }: { collectionItem?: any }) => {
   return (
     <Box
       minWidth="400px"
@@ -23,7 +23,7 @@ export const HeroImage = () => {
         display="flex"
         bgGradient="linear-gradient(90deg, elvenTools.dark.base 0%, elvenTools.dark.darker 70%);"
       >
-        <Box as="img" src="/img.gif" alt="" width="300px" height="300px" />
+        <Box as="img" src={`${collectionItem && collectionItem.image}`} alt="" width="300px" height="300px" />
       </Box>
     </Box>
   );

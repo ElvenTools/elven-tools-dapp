@@ -22,15 +22,22 @@ export const faq = [
   },
   {
     question: 'Tokenomics for $TDM',
-    answer:'⚪Total&Max Supply:1,000,000,000 ⚪Sale/Presale:300,000,000 ⚪Rewards:200,000,000 ⚪Dex Liquidity/Future Listings:180,000,000 ⚪Marketing/Growth:100,000,000 ⚪Metabonding:100,000,000 ⚪Team:120,000,000'
-      
-    
+    points: [
+      'Total&Max Supply: 1,000,000,000', 
+      'Sale/Presale: 300,000,000 ',
+      'Rewards: 200,000,000 ',
+      'Dex Liquidity/Future Listings: 180,000,000 ',
+      'Marketing/Growth: 100,000,000 ',
+      'Metabonding: 100,000,000 ',
+      'Team: 120,000,000'
+    ]
   },
   {
     question:
       'Whitepaper',
     answer:
-      'Read our more detailed Tokenomics and WhitePaper here www.mintandwin.com',
+      'Read our more detailed Tokenomics and WhitePaper here',
+    link: 'https://www.google.com/'
   },
   {
     question: 'Presale Phases',
@@ -96,5 +103,18 @@ export const team = [
       'https://www.telegram.me',
       'https://www.medium.com',
     ],
+  },
+];
+
+export const nftcollection = [
+  {
+    title: 'first collection',
+    description: 'To be able to mint you have to be logged in to be able to mint. Remember that it will mint only on the devent. If you want to do that, you need to connect using one of the methods and the devnet address with some xEGLD funds.',
+    image: '/img.gif'
+  },
+  {
+    title: 'second collection',
+    description: '2 collections of our platform',
+    image: '/img.gif'
   },
 ];

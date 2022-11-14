@@ -17,7 +17,7 @@ import { NFTLeftToMintPerAddress } from './NFTLeftToMintPerAddress';
 // TODO: Prepare separate components for the segments here
 // TODO: use Valtio for global smart contract config state + dispatchers to be able to trigger changes from each component
 
-export const MintHero = () => {
+export const MintHero = ({ collectionItem }: { collectionItem: any }) => {
   const { address } = useAccount();
 
   const { data: mintingPaused } = useElvenScQuery<boolean>({
@@ -208,10 +208,7 @@ export const MintHero = () => {
         fontWeight="thin"
         textAlign={{ base: 'center', md: 'left' }}
       >
-        To be able to mint you have to be logged in to be able to mint. Remember
-        that it will mint only on the devent. If you want to do that, you need
-        to connect using one of the methods and the devnet address with some
-        xEGLD funds.
+        {collectionItem.description}
       </Text>
       {!mintingPaused ? (
         <Box mt={6}>
@@ -242,8 +239,8 @@ export const MintHero = () => {
                 dataLoading={mintedDataLoading}
               />
               {!isLoadingTokensLimitPerAddressTotal &&
-              !tokensLimitPerAddressPerDropLoading &&
-              !Number.isNaN(tokensLeftPerUser) ? (
+                !tokensLimitPerAddressPerDropLoading &&
+                !Number.isNaN(tokensLeftPerUser) ? (
                 <>
                   <NFTLeftToMintPerAddress
                     leftToMintForUser={tokensLeftPerUser}

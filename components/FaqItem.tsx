@@ -5,15 +5,20 @@ import {
   AccordionIcon,
   AccordionPanel,
   AccordionItem,
+  Link,
+  ListItem,
+  UnorderedList
 } from '@chakra-ui/react';
 import { UrlWithStringQuery } from 'url';
 
 interface FaqItemProps {
   question: string;
-  answer: string;
+  answer?: string;
+  link?: string;
+  points?: any;
 }
 
-export const FaqItem: FC<FaqItemProps> = ({ question, answer }) => {
+export const FaqItem: FC<FaqItemProps> = ({ question, answer, link, points }) => {
   return (
     <AccordionItem
       border={0}
@@ -33,7 +38,26 @@ export const FaqItem: FC<FaqItemProps> = ({ question, answer }) => {
         </Box>
         <AccordionIcon />
       </AccordionButton>
-      <AccordionPanel color="elvenTools.white">{answer}</AccordionPanel>
+      <AccordionPanel color="elvenTools.white">
+        {answer && <>
+          {answer}
+          &nbsp;
+          {
+            link && <Link className='site_link' href={`${link}`} target="_black">{link}</Link>
+          }
+        </>}
+        {
+          points &&
+          <UnorderedList
+            color="elvenTools.white"
+            style={{ padding: '0px 10px' }}
+          >
+            {points.map((point: any, index: any) => (
+              <ListItem key={index}>{point}</ListItem>
+            ))}
+          </UnorderedList>}
+      </AccordionPanel>
+
     </AccordionItem>
   );
 };

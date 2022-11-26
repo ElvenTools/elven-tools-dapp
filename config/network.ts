@@ -10,6 +10,9 @@ export const DAPP_INIT_ROUTE = '/dapp/init';
 
 export const chainType = process.env.NEXT_PUBLIC_ELROND_CHAIN || 'devnet';
 
+export const avatarIdUrl = (address: string) =>
+  `https://id.maiar.com/users/photos/profile/${address}`;
+
 export const networkConfig: Record<string, NetworkType> = {
   devnet: {
     id: 'devnet',

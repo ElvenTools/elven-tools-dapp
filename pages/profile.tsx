@@ -1,4 +1,4 @@
-import { ProtectedPageWrapper } from '../components/ProtectedPageWrapper';
+import { ProtectedPageWrapper } from '../components/core/ProtectedPageWrapper';
 import { MainLayout } from '../components/MainLayout';
 import { HeaderMenu } from '../components/HeaderMenu';
 import { HeaderMenuButtons } from '../components/HeaderMenuButtons';

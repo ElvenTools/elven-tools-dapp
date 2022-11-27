@@ -4,12 +4,24 @@
 // IPFS gateway, we take the CID from Elrond's IPFS gateway url here to be sure that we will get it
 
 import { FC, CSSProperties, PropsWithChildren } from 'react';
-import Image from 'next/image';
+import { Box } from '@chakra-ui/react';
+import Image, { ImageProps } from 'next/image';
 import { customIPFSGateway, elrondIPFSGateway } from '../config/network';
 
 const commonImageStyles: CSSProperties = {
   objectFit: 'contain',
   borderRadius: 10,
+};
+
+const commonImagesProps = {
+  sizes: '280px',
+  height: 280,
+  width: 280,
+  priority: true,
+  style: commonImageStyles,
+  placeholder: 'blur' as ImageProps['placeholder'],
+  blurDataURL:
+    'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARgAAAEYCAQAAAAthyEHAAAB0ElEQVR42u3SQQ0AAAgEIC+eqaxuBb9ukIH0FJxFGIRBGIRBGIQBYRAGYRAGYRAGhEEYhEEYhEEYEAZhEAZhEAaEQRiEQRiEQRgQBmEQBmEQBmFAGIRBGIRBGIQBYRAGYRAGYUAYhEEYhEEYhAFhEAZhEAZhEAaEQRiEQRiEQRgQBmEQBmEQBoRBGIRBGIRBGBAGYRAGYRAGYUAYhEEYhEEYhBEGYRAGYRAGYUAYhEEYhEEYhAFhEAZhEAZhEAaEQRiEQRiEAWEQBmEQBmEQBoRBGIRBGIRBGBAGYRAGYRAGYUAYhEEYhEEYEAZhEAZhEAZhQBiEQRiEQRiEAWEQBmEQBmEQBoRBGIRBGIQBYRAGYRAGYRAGhEEYhEEYhEEYEAZhEAZhEAZhhEEYhEEYhEEYEAZhEAZhEAZhQBiEQRiEQRiEAWEQBmEQBmFAGIRBGIRBGIQBYRAGYRAGYRAGhEEYhEEYhEEYEAZhEAZhEAaEQRiEQRiEQRgQBmEQBmEQBmFAGIRBGIRBGIQBYRAGYRAGYUAYhEEYhEEYhAFhEAZhEAZhEAaEQRiEQRiEQRhhEAZhEAZhEAaEQRiEQRiEQRgQBmEQBmEQBmFAGIRBGP5YwUTb2T0xhhoAAAAASUVORK5CYII=',
 };
 
 interface NftImageHelperProps {
@@ -46,12 +58,19 @@ const MaybeWithHref: FC<PropsWithChildren<WithHrefProps>> = ({
 }) => {
   if (href) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer">
+      <Box
+        as="a"
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        position="relative"
+        display="block"
+      >
         {children}
-      </a>
+      </Box>
     );
   }
-  return <>{children}</>;
+  return <Box position="relative">{children}</Box>;
 };
 
 export const NftImageHelper: FC<NftImageHelperProps> = ({
@@ -66,13 +85,12 @@ export const NftImageHelper: FC<NftImageHelperProps> = ({
           <Image
             src={getImageUrlFromIPFS(elrondIPFSGatewayUrl, thumbnail)}
             alt=""
-            fill
-            style={commonImageStyles}
+            {...commonImagesProps}
           />
         </MaybeWithHref>
       ) : (
         <MaybeWithHref href={href}>
-          <Image src={thumbnail} alt="" fill style={commonImageStyles} />
+          <Image src={thumbnail} alt="" {...commonImagesProps} />
         </MaybeWithHref>
       )}
     </>

@@ -6,7 +6,6 @@ import { ProfileUserData } from '../components/ProfileUserData';
 import { ProfileNFTsList } from '../components/ProfileNFTsList';
 
 const Profile = () => {
-  // Check if buildo could use blockchain to save social media info
   return (
     <ProtectedPageWrapper>
       <MainLayout>

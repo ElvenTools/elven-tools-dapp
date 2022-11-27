@@ -13,6 +13,9 @@ export const chainType = process.env.NEXT_PUBLIC_ELROND_CHAIN || 'devnet';
 export const avatarIdUrl = (address: string) =>
   `https://id.maiar.com/users/photos/profile/${address}`;
 
+export const customIPFSGateway = 'https://nftstorage.link/ipfs/';
+export const elrondIPFSGateway = 'https://devnet-media.elrond.com/nfts/asset/';
+
 export const networkConfig: Record<string, NetworkType> = {
   devnet: {
     id: 'devnet',
@@ -29,7 +32,7 @@ export const networkConfig: Record<string, NetworkType> = {
     apiAddress:
       process.env.NEXT_PUBLIC_ELROND_API || 'https://devnet-api.elrond.com',
     explorerAddress: 'https://devnet-explorer.elrond.com',
-    apiTimeout: '4000',
+    apiTimeout: '10000',
   },
 
   testnet: {
@@ -47,7 +50,7 @@ export const networkConfig: Record<string, NetworkType> = {
     apiAddress:
       process.env.NEXT_PUBLIC_ELROND_API || 'https://testnet-api.elrond.com',
     explorerAddress: 'https://testnet-explorer.elrond.com',
-    apiTimeout: '4000',
+    apiTimeout: '10000',
   },
 
   mainnet: {
@@ -64,6 +67,6 @@ export const networkConfig: Record<string, NetworkType> = {
     walletAddress: 'https://wallet.elrond.com',
     apiAddress: process.env.NEXT_PUBLIC_ELROND_API || 'https://api.elrond.com',
     explorerAddress: 'https://explorer.elrond.com',
-    apiTimeout: '4000',
+    apiTimeout: '10000',
   },
 };

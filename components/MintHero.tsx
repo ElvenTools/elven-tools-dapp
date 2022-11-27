@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Box, Text, useBreakpointValue } from '@chakra-ui/react';
+import Link from 'next/link';
 import { useCallback, useEffect } from 'react';
 import { Address } from '@elrondnetwork/erdjs';
 import { SCQueryType } from '../hooks/interaction/useScQuery';
@@ -8,7 +9,6 @@ import { MintForm } from './MintForm';
 import { Authenticated } from './core/Authenticated';
 import { useAccount } from '../hooks/auth/useAccount';
 import { LoginModalButton } from './core/LoginModalButton';
-import { networkConfig, chainType } from '../config/network';
 import { NFTLeftToMint } from './NFTLeftToMint';
 import { NFTAllowlistEnabled } from './NFTAllowlistEnabled';
 import { NFTMintedAlready } from './NFTMintedAlready';
@@ -268,19 +268,17 @@ export const MintHero = () => {
                   >
                     Check your NFTs:
                   </Text>
-                  <Text
-                    as="a"
+                  <Box
                     ml={3}
-                    target="_blank"
                     color="elvenTools.color2.base"
                     fontSize="2xl"
                     fontWeight="black"
                     textDecoration="underline"
-                    rel="noopener noreferrer nofollow"
-                    href={`${networkConfig[chainType].explorerAddress}/accounts/${address}/nfts`}
                   >
-                    here
-                  </Text>
+                    <Link color="elvenTools.color2.base" href="/profile">
+                      here
+                    </Link>
+                  </Box>
                 </Box>
               ) : null}
             </Authenticated>

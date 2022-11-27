@@ -24,6 +24,14 @@ const nextConfig = {
   eslint: {
     dirs: ['components', 'config', 'hooks', 'pages', 'store', 'types', 'utils'],
   },
+  images: {
+    domains: [
+      'nftstorage.link',
+      'media.elrond.com',
+      'devnet-media.elrond.com',
+      'testnet-media.elrond.com',
+    ],
+  },
 };
 
 module.exports = nextConfig;

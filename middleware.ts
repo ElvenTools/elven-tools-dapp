@@ -1,5 +1,3 @@
-/* eslint-disable @next/next/no-server-import-in-page */
-
 // This middleware is to protect the proxied api to be called only by the same host
 // In the future it could get more logic, for example JWT tokens, etc.
 

@@ -28,7 +28,7 @@ export const Footer = () => {
             color="elvenTools.color3.base"
             href="https://www.elven.tools"
             target="_blank"
-            rel="noopener noreferrer nofollow"
+            rel="noopener noreferrer"
           >
             elven.tools
           </Text>{' '}
@@ -38,7 +38,7 @@ export const Footer = () => {
             color="elvenTools.color3.base"
             href="https://www.julian.io"
             target="_blank"
-            rel="noopener noreferrer nofollow"
+            rel="noopener noreferrer"
           >
             julian.io
           </Text>

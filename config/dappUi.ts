@@ -41,7 +41,7 @@ export const faq = [
 // Roadmap section data
 export const roadmap = [
   {
-    title: 'Done',
+    title: 'Done. Q1/Q2 2022',
     points: [
       '✓ Create the most terrifying OG PFP DAO NFT collection in MultiversX history',
       '✓ Build an organic community populated by OGs',
@@ -55,7 +55,7 @@ export const roadmap = [
     ],
   },
   {
-    title: 'In Progress',
+    title: 'In Progress. Q3/Q4 2022',
     points: [
       '↻ Build a more amazing community',
       '↻ Meet awesome ghost clan members',
@@ -68,7 +68,7 @@ export const roadmap = [
     ],
   },
   {
-    title: 'Planned',
+    title: 'Planned. Q1/Q4 2023',
     points: [
       'Build the most amazing community',
       'Set up the multi-sig wallet with xSafe',

@@ -32,25 +32,19 @@ export const MainMenuButtons: FC<MainMenuButtonsProps> = ({ enabled }) => {
     router.push('/faq');
   }, [router]);
   const handleLightpaperClick = useCallback(() => {
-    router.push('https://docs.gokai.org/');
+    router.push('https://docs.ghostverse.org/');
   }, [router]);
   const handleWalletClick = useCallback(() => {
     router.push('https://walletfp.com/?category=nft&address=gokai');
   }, [router]);
   const handleVoteClick = useCallback(() => {
-    router.push('https://superciety.com/fellowships/gokai-dao');
+    router.push('https://superciety.com/fellowships/ghostverse-dao');
   }, [router]);
   const handleTwitterClick = useCallback(() => {
     router.push('https://twitter.com/GhostverseOrg');
   }, [router]);
   const handleDiscordClick = useCallback(() => {
     router.push('https://discord.gg/tXSeJfVVnH');
-  }, [router]);
-  const handleInstagramClick = useCallback(() => {
-    router.push('https://www.instagram.com/gokai_labs/');
-  }, [router]);
-  const handleMediumClick = useCallback(() => {
-    router.push('https://medium.com/@GokaiLabs');
   }, [router]);
   const handleEgldCommunityClick = useCallback(() => {
     router.push('https://egld.community/projects/gokai-labs');
@@ -247,42 +241,6 @@ export const MainMenuButtons: FC<MainMenuButtonsProps> = ({ enabled }) => {
             alt="GhostVerse MultiversX Builders Mr Ghost MxGhosts NFT DAO MultiversX"
           />
           Builders
-        </ActionButtonXL>
-      )}
-      {enabled.includes('medium') && (
-        <ActionButtonXL onClick={handleMediumClick}>
-          <Image
-            boxSize={{ base: '100px', md: '140px' }}
-            objectFit="contain"
-            my={4}
-            src="/media/ghostverse-medium-mr-ghost-mxghosts-nft-dao-multiversx-blockchain.webp"
-            alt="GhostVerse Medium Mr Ghost MxGhosts NFT DAO MultiversX"
-          />
-          Medium
-        </ActionButtonXL>
-      )}
-      {enabled.includes('instagram') && (
-        <ActionButtonXL onClick={handleInstagramClick}>
-          <Image
-            boxSize={{ base: '100px', md: '140px' }}
-            objectFit="contain"
-            my={4}
-            src="/media/ghostverse-instagram-mr-ghost-mxghosts-nft-dao-multiversx-blockchain.webp"
-            alt="GhostVerse Instagram Mr Ghost MxGhosts NFT DAO MultiversX"
-          />
-          Instagram
-        </ActionButtonXL>
-      )}
-      {enabled.includes('facebook') && (
-        <ActionButtonXL onClick={handleGiphyClick}>
-          <Image
-            boxSize={{ base: '100px', md: '140px' }}
-            objectFit="contain"
-            my={4}
-            src="/media/ghostverse-giphy-mr-ghost-mxghosts-nft-dao-multiversx-blockchain.webp"
-            alt="GhostVerse Giphy Mr Ghost MxGhosts NFT DAO MultiversX"
-          />
-          Giphy
         </ActionButtonXL>
       )}
     </>

@@ -1,4 +1,4 @@
-import { Avatar } from '@chakra-ui/react';
+import { Avatar, Text } from '@chakra-ui/react';
 import { Tooltip } from '@chakra-ui/react';
 import Link from 'next/link';
 import { avatarIdUrl } from '../config/network';
@@ -10,7 +10,14 @@ export const UserAvatar = () => {
   if (!address) return null;
 
   return (
-    <Link href="/profile">
+    <Text
+      as="a"
+      href="/profile"
+      _hover={{ borderColor: 'ghostLand.color1.darker' }}
+      borderColor="black"
+      borderRadius="100%"
+      borderWidth={1}
+    >
       <Tooltip
         bg="elvenTools.dark.darker"
         fontWeight="light"
@@ -25,6 +32,6 @@ export const UserAvatar = () => {
       >
         <Avatar size="md" src={avatarIdUrl(address)} />
       </Tooltip>
-    </Link>
+    </Text>
   );
 };

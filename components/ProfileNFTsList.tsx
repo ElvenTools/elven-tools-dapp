@@ -1,4 +1,12 @@
-import { Box, Stack, Spinner, Card, CardBody, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Stack,
+  Spinner,
+  Card,
+  CardBody,
+  Text,
+  SimpleGrid,
+} from '@chakra-ui/react';
 import Link from 'next/link';
 import { useAccount } from '../hooks/auth/useAccount';
 import { useApiCall } from '../hooks/interaction/useApiCall';
@@ -51,18 +59,10 @@ export const ProfileNFTsList = () => {
 
   return (
     <>
-      <Stack
-        direction="row"
-        my={12}
-        justifyContent="center"
-        flexWrap="wrap"
-        gap={8}
-        spacing={0}
-      >
+      <SimpleGrid my={12} columns={{ base: '2', md: '3', xl: '5' }} gap={6}>
         {nfts?.map((nft) => (
           <Card
-            maxW="xs"
-            minW="xs"
+            w="100%"
             key={nft.identifier}
             backgroundColor="ghostLand.color1.lighter"
             borderColor="ghostLand.color1.darker"
@@ -71,7 +71,7 @@ export const ProfileNFTsList = () => {
             backdropFilter="blur(3px)"
           >
             <CardBody>
-              <Stack height={280} position="relative">
+              <Stack position="relative">
                 <NftImageHelper
                   thumbnail={nft.media?.[0].thumbnailUrl}
                   elrondIPFSGatewayUrl={nft.url}
@@ -104,7 +104,7 @@ export const ProfileNFTsList = () => {
             </CardBody>
           </Card>
         ))}
-      </Stack>
+      </SimpleGrid>
     </>
   );
 };

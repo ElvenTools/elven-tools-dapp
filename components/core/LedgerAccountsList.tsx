@@ -100,7 +100,7 @@ export const LedgerAccountsList: FC<LedgerAccountsListProps> = ({
   if (listPending) {
     return (
       <Flex justify="center" align="center" marginTop={6} direction="column">
-        <Spinner color="elvenTools.color2.base" />
+        <Spinner color="ghostLand.color1.darker" />
         <Box marginTop={3}>Loading addresses, please wait...</Box>
       </Flex>
     );
@@ -127,7 +127,7 @@ export const LedgerAccountsList: FC<LedgerAccountsListProps> = ({
   if (chosenAddress)
     return (
       <Flex justify="center" align="center" marginTop={6} direction="column">
-        <Spinner color="elvenTools.color2.base" />
+        <Spinner color="ghostLand.color1.darker" />
         <Box marginTop={3}>Confirm on the Ledger device:</Box>
         <Box marginTop={3} wordBreak="break-word" textAlign="center">
           <Box fontWeight="bold">Address:</Box> {chosenAddress}

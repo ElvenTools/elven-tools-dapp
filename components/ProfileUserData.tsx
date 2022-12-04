@@ -19,75 +19,85 @@ export const ProfileUserData = () => {
       borderColor="ghostLand.color2.base"
       borderWidth={1}
       p={4}
-      backdropFilter="blur(3px)">
+      backdropFilter="blur(3px)"
+    >
       <Stack
         direction={{ base: 'column', md: 'row' }}
         alignItems={{ base: 'center', md: 'left' }}
         justifyContent={{ base: 'center', md: 'left' }}
         spacing={0}
       >
-        <Avatar mr={{ base: '0', md: '4' }} size="2xl" src={avatarIdUrl(address)} />
+        <Avatar
+          mr={{ base: '0', md: '4' }}
+          size="2xl"
+          src={avatarIdUrl(address)}
+        />
         <Box>
- <Box>
-          <Box mt={{ base: '4', md: '0' }} fontWeight={900} fontSize={32} display="inline-block">
-            {accountData?.username ? (
-              <Box>@{accountData?.username}</Box>
-            ) : (
-              <Tooltip
-                bg="elvenTools.dark.darker"
-                fontWeight="light"
-                placement="top"
-                py={3}
-                px={5}
-                hasArrow
-                arrowSize={12}
-                borderRadius={10}
-                label={
-                  'Check Buildo Begins tool on how to get one! (github.com/xdevguild/buildo-begins)'
-                }
-              >
-                <Box>
-                  <a
-                    href="https://github.com/xdevguild/buildo-begins#general-operations"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    {accountDataPending ? '' : 'No herotag!'}
-                  </a>
-                </Box>
-              </Tooltip>
-            )}
-          </Box>
-        </Box>
-        <Box>
-          <Box display="inline-block">
-            <Stack
-              direction="row"
-              alignItems="center"
-              as="a"
-              href={`${networkConfig[chainType].explorerAddress}/address/${address}`}
-              target="_blank"
-              rel="noopener noreferrer"
+          <Box>
+            <Box
+              mt={{ base: '4', md: '0' }}
+              fontWeight={900}
+              fontSize={32}
+              display="inline-block"
             >
-              <Tooltip
-                bg="elvenTools.dark.darker"
-                fontWeight="light"
-                placement="top"
-                py={3}
-                px={5}
-                hasArrow
-                arrowSize={12}
-                borderRadius={10}
-                label={address}
-              >
-                <Box fontWeight={700} fontSize={22}>
-                  {shortenHash(address, 8)}
-                </Box>
-              </Tooltip>
-              <Icon as={BiLink} w={6} h={6} />
-            </Stack>
+              {accountData?.username ? (
+                <Box>{accountData?.username}</Box>
+              ) : (
+                <Tooltip
+                  bg="elvenTools.dark.darker"
+                  fontWeight="light"
+                  placement="top"
+                  py={3}
+                  px={5}
+                  hasArrow
+                  arrowSize={12}
+                  borderRadius={10}
+                  label={
+                    'Check Buildo Begins tool on how to get one! (github.com/xdevguild/buildo-begins)'
+                  }
+                >
+                  <Box>
+                    <a
+                      href="https://github.com/xdevguild/buildo-begins#general-operations"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      {accountDataPending ? '' : 'No herotag!'}
+                    </a>
+                  </Box>
+                </Tooltip>
+              )}
+            </Box>
           </Box>
-        </Box>
+          <Box>
+            <Box display="inline-block">
+              <Stack
+                direction="row"
+                alignItems="center"
+                as="a"
+                href={`${networkConfig[chainType].explorerAddress}/address/${address}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Tooltip
+                  bg="elvenTools.dark.darker"
+                  fontWeight="light"
+                  placement="top"
+                  py={3}
+                  px={5}
+                  hasArrow
+                  arrowSize={12}
+                  borderRadius={10}
+                  label={address}
+                >
+                  <Box fontWeight={700} fontSize={22}>
+                    {shortenHash(address, 8)}
+                  </Box>
+                </Tooltip>
+                <Icon as={BiLink} w={6} h={6} />
+              </Stack>
+            </Box>
+          </Box>
         </Box>
       </Stack>
     </Stack>

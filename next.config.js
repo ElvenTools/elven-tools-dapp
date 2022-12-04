@@ -30,6 +30,14 @@ const nextConfig = {
     locales: ['en'],
     defaultLocale: 'en',
   },
+  images: {
+    domains: [
+      'nftstorage.link',
+      'media.elrond.com',
+      'devnet-media.elrond.com',
+      'testnet-media.elrond.com',
+    ],
+  },
 };
 module.exports = withPWA({
   pwa: {

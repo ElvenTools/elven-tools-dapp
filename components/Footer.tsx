@@ -30,6 +30,8 @@ export const Footer = () => {
             color="ghostLand.color1.darker"
             href="https://www.elven.tools"
             mx={2}
+            target="_blank"
+            rel="noopener noreferrer"
           >
             Elven Tools Dapp (v{`${packageJson.version}`})
           </Text>
@@ -39,6 +41,8 @@ export const Footer = () => {
             color="ghostLand.color1.darker"
             href="https://multiversx.com/"
             mx={2}
+            target="_blank"
+            rel="noopener noreferrer"
           >
             MultiversX
           </Text>

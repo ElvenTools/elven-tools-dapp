@@ -57,9 +57,6 @@ export const MainMenuButtons: FC<MainMenuButtonsProps> = ({ enabled }) => {
   const handleGithubClick = useCallback(() => {
     router.push('https://github.com/GhostVerseOrg');
   }, [router]);
-  const handleGiphyClick = useCallback(() => {
-    router.push('https://giphy.com/GokaiLabs');
-  }, [router]);
 
   return (
     <>

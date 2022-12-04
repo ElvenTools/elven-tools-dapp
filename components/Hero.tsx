@@ -45,7 +45,7 @@ export const Hero = () => {
           color="elvenTools.color3.base"
           href="https://www.elven.tools"
           target="_blank"
-          rel="noopener noreferrer nofollow"
+          rel="noopener noreferrer"
         >
           Elven Tools
         </Text>{' '}
@@ -55,7 +55,7 @@ export const Hero = () => {
           color="elvenTools.color2.base"
           href="https://www.multiversx.com"
           target="_blank"
-          rel="noopener noreferrer nofollow"
+          rel="noopener noreferrer"
         >
           MultiversX
         </Text>{' '}

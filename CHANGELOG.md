@@ -1,3 +1,9 @@
+### [3.3.0](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v3.3.0) (2022-11-26)
+- added Profile page with the list of minted NFTs and basic account/wallet information
+- updated dependencies, including Next 13 (without changing the files structure yet)
+- general API call hook added, for different API calls, not only blockchain-related. See more in the docs
+- added `ProtectedPageWrapper` - client-side only page content wrapper component that will redirect to the chosen path when the user is not logged in. Wrap page content with it. Check the profile page, for example.
+
 ### [3.2.0](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v3.2.0) (2022-10-04)
 - update dependencies
 - show avatar from maiar mobile app if set

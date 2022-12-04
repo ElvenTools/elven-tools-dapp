@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Box, Text, useBreakpointValue } from '@chakra-ui/react';
+import Link from 'next/link';
 import { useCallback, useEffect } from 'react';
 import { Address } from '@elrondnetwork/erdjs';
 import { SCQueryType } from '../hooks/interaction/useScQuery';
@@ -8,7 +9,6 @@ import { MintForm } from './MintForm';
 import { Authenticated } from './core/Authenticated';
 import { useAccount } from '../hooks/auth/useAccount';
 import { LoginModalButton } from './core/LoginModalButton';
-import { networkConfig, chainType } from '../config/network';
 import { NFTLeftToMint } from './NFTLeftToMint';
 import { NFTAllowlistEnabled } from './NFTAllowlistEnabled';
 import { NFTMintedAlready } from './NFTMintedAlready';
@@ -215,9 +215,7 @@ export const MintHero = () => {
       animate="animate"
       variants={fadeInUp}
     >
-      <Box
-        width="100%"
-      >
+      <Box width="100%">
         <Text
           as="h1"
           fontSize={{ base: '2xl' }}
@@ -229,13 +227,18 @@ export const MintHero = () => {
           Collect MxGhosts and join the clan.
         </Text>
         <Text as="h2" fontSize="md" fontWeight="thin">
-          Mr Ghost, formerly of the Maiar Ghosts clan, has joined the MxGhosts clan.
-          <br/><br/>
-          He will now haunt the GhostVerse, one of the many universes of the MultiversX. Each ghost represents a vote in the governance of the GhostVerse DAO. GhostVerse ghosts receive a monthly passive income in EGLD.
+          Mr Ghost, formerly of the Maiar Ghosts clan, has joined the MxGhosts
+          clan.
+          <br />
+          <br />
+          He will now haunt the GhostVerse, one of the many universes of the
+          MultiversX. Each ghost represents a vote in the governance of the
+          GhostVerse DAO. GhostVerse ghosts receive a monthly passive income in
+          EGLD.
         </Text>
         {!mintingPaused ? (
           <Box mt={6}>
-            {/* <NFTLeftToMint
+            <NFTLeftToMint
               data={totalTokensLeft || 0}
               dropData={dropData || 0}
               dataLoading={dropActive ? dropIsLoading : totalIsLoading}
@@ -290,23 +293,14 @@ export const MintHero = () => {
                     >
                       Check your NFTs:
                     </Text>
-                    <Text
-                      as="a"
-                      ml={3}
-                      target="_blank"
-                      color="elvenTools.color1.lighter"
-                      fontSize="2xl"
-                      fontWeight="black"
-                      textDecoration="underline"
-                      rel="noopener noreferrer nofollow"
-                      href={`${networkConfig[chainType].explorerAddress}/accounts/${address}/nfts`}
-                    >
+
+                    <Link color="elvenTools.color2.base" href="/profile">
                       here
-                    </Text>
+                    </Link>
                   </Box>
                 ) : null}
               </Authenticated>
-            </Box> */}
+            </Box>
             <Text fontSize="lg" fontWeight="bold" mt={10}>
               Drop #2 sold out.
             </Text>

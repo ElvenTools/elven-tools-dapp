@@ -13,16 +13,23 @@ export const ProfileUserData = () => {
     useApiCall<Account>({ url: `/accounts/${address}` });
 
   return (
-    <Stack direction="row" justifyContent="center">
+    <Stack
+      direction="row"
+      justifyContent={{ base: 'center', md: 'left' }}
+      borderColor="ghostLand.color2.base"
+      borderWidth={1}
+      p={4}
+      backdropFilter="blur(3px)">
       <Stack
-        direction="column"
-        alignItems="center"
-        justifyContent="center"
+        direction={{ base: 'column', md: 'row' }}
+        alignItems={{ base: 'center', md: 'left' }}
+        justifyContent={{ base: 'center', md: 'left' }}
         spacing={0}
       >
-        <Avatar mt={8} size="2xl" src={avatarIdUrl(address)} />
+        <Avatar mr={{ base: '0', md: '4' }} size="2xl" src={avatarIdUrl(address)} />
         <Box>
-          <Box mt={4} fontWeight={900} fontSize={32} display="inline-block">
+ <Box>
+          <Box mt={{ base: '4', md: '0' }} fontWeight={900} fontSize={32} display="inline-block">
             {accountData?.username ? (
               <Box>@{accountData?.username}</Box>
             ) : (
@@ -80,6 +87,7 @@ export const ProfileUserData = () => {
               <Icon as={BiLink} w={6} h={6} />
             </Stack>
           </Box>
+        </Box>
         </Box>
       </Stack>
     </Stack>

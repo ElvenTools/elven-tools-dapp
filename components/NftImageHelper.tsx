@@ -10,7 +10,7 @@ import { customIPFSGateway, elrondIPFSGateway } from '../config/network';
 
 const commonImageStyles: CSSProperties = {
   objectFit: 'contain',
-  borderRadius: 10,
+  borderRadius: 0,
 };
 
 const commonImagesProps = {

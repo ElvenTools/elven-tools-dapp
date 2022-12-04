@@ -8,12 +8,12 @@ import {
   useDisclosure,
   ModalOverlay,
   ModalCloseButton,
+  Box,
 } from '@chakra-ui/react';
 import { FC } from 'react';
 import { networkConfig, chainType } from '../../config/network';
 import { useEffectOnlyOnUpdate } from '../../hooks/tools/useEffectOnlyOnUpdate';
 import { shortenHash } from '../../utils/shortenHash';
-
 interface TransactionPendingModalProps {
   isOpen: boolean;
   successTxHash?: string;
@@ -82,27 +82,44 @@ export const TransactionPendingModal: FC<TransactionPendingModalProps> = ({
           </Text>
 
           {!txError && (
-            <Flex alignItems="center" justifyContent="center" mt={8}>
+            <Flex alignItems="center" justifyContent="center" mt={2}>
               {successTxHash && (
-                <Text
-                  as="a"
-                  href={`${networkConfig[chainType].explorerAddress}/transactions/${successTxHash}`}
-                  target="_blank"
-                  rel="noopener noreferrer nofollow"
-                  borderColor="elvenTools.color2.darker"
-                  borderWidth={2}
-                  bgColor="transparent"
-                  py={2}
-                  px={6}
-                  rounded="xl"
-                  fontWeight="normal"
-                  color="elvenTools.white"
-                  userSelect="none"
-                  _hover={{ bg: 'elvenTools.color2.darker' }}
-                  transition="background-color .3s"
-                >
-                  {shortenHash(successTxHash)}
-                </Text>
+                <Box
+                  display="flex"
+                  flexDirection="column">
+                  <Text
+                    as="a"
+                    href={`${networkConfig[chainType].explorerAddress}/transactions/${successTxHash}`}
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    p={2}
+                    mb={4}
+                    fontWeight="normal"
+                    color="ghostLand.color1.darker"
+                    userSelect="none"
+                    transition="background-color .3s"
+                  >
+                    {shortenHash(successTxHash)}
+                  </Text>
+                  <Text
+                    as="a"
+                    href="/profile"
+                    borderColor="ghostLand.color1.darker"
+                    borderWidth={1}
+                    bgColor="transparent"
+                    p={2}
+                    height="48px"
+                    fontWeight="normal"
+                    color="elvenTools.white"
+                    userSelect="none"
+                    textAlign="center"
+                    lineHeight={2}
+                    _hover={{ bg: 'ghostLand.color1.lighter' }}
+                    transition="background-color .3s"
+                  >
+                    My profile
+                  </Text>
+                </Box>
               )}
               {!successTxHash && !txError && (
                 <Spinner

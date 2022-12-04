@@ -53,10 +53,10 @@ export const ProfileNFTsList = () => {
     <>
       <Stack
         direction="row"
-        mt={12}
+        my={12}
         justifyContent="center"
         flexWrap="wrap"
-        gap={6}
+        gap={8}
         spacing={0}
       >
         {nfts?.map((nft) => (
@@ -64,7 +64,11 @@ export const ProfileNFTsList = () => {
             maxW="xs"
             minW="xs"
             key={nft.identifier}
-            backgroundColor="elvenTools.dark.darker"
+            backgroundColor="ghostLand.color1.lighter"
+            borderColor="ghostLand.color1.darker"
+            borderWidth={1}
+            borderRadius="0"
+            backdropFilter="blur(3px)"
           >
             <CardBody>
               <Stack height={280} position="relative">

@@ -238,7 +238,7 @@ export const MintHero = () => {
         </Text>
         {!mintingPaused ? (
           <Box mt={6}>
-            <NFTLeftToMint
+            {/* <NFTLeftToMint
               data={totalTokensLeft || 0}
               dropData={dropData || 0}
               dataLoading={dropActive ? dropIsLoading : totalIsLoading}
@@ -279,28 +279,20 @@ export const MintHero = () => {
                     />
                   </>
                 ) : null}
-                {mintedData && mintedData > 0 ? (
-                  <Box
-                    display="flex"
-                    alignItems="center"
-                    mt={6}
-                    justifyContent={{ base: 'center', md: 'flex-start' }}
-                  >
-                    <Text
-                      as="span"
-                      fontSize={{ base: 'md', sm: 'xl' }}
-                      fontWeight="bold"
-                    >
-                      Check your NFTs:
-                    </Text>
-
-                    <Link color="elvenTools.color2.base" href="/profile">
-                      here
-                    </Link>
-                  </Box>
-                ) : null}
               </Authenticated>
-            </Box>
+            </Box> */}
+            {mintedData && mintedData > 0 ? (
+              <Box
+                display="flex"
+                alignItems="center"
+                mt={6}
+                justifyContent={{ base: 'center', md: 'flex-start' }}
+              >
+                <Text as="a" color="ghostLand.color1.darker" href="/profile">
+                  Check your NFTs
+                </Text>
+              </Box>
+            ) : null}
             <Text fontSize="lg" fontWeight="bold" mt={10}>
               Drop #2 sold out.
             </Text>

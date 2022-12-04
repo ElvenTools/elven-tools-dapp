@@ -23,7 +23,7 @@ export const ActionButton: FC<PropsWithChildren<ActionButtonProps>> = ({
   return (
     <Box
       as="button"
-      borderColor="ghostLand.color1.darker"
+      borderColor="ghostVerse.color1.darker"
       borderWidth={1}
       bgColor="transparent"
       p={2}

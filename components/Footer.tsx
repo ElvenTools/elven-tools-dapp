@@ -27,7 +27,7 @@ export const Footer = () => {
           <Text>Powered by</Text>
           <Text
             as="a"
-            color="ghostLand.color1.darker"
+            color="ghostVerse.color1.darker"
             href="https://www.elven.tools"
             mx={2}
             target="_blank"
@@ -38,7 +38,7 @@ export const Footer = () => {
           <Text>on</Text>
           <Text
             as="a"
-            color="ghostLand.color1.darker"
+            color="ghostVerse.color1.darker"
             href="https://multiversx.com/"
             mx={2}
             target="_blank"

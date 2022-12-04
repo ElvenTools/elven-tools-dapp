@@ -9,16 +9,7 @@ interface HeaderMenuButtonsProps {
 
 export const HeaderMenuButtons: FC<HeaderMenuButtonsProps> = ({ enabled }) => {
   return (
-    <Box
-      display="flex"
-      gap={5}
-      alignItems="center"
-      sx={{
-        '@media screen and (max-width: 515px)': {
-          flexDirection: 'column',
-        },
-      }}
-    >
+    <Box display="flex" gap={5} alignItems="center">
       <UserAvatar />
       {enabled.includes('auth') && <LoginModalButton />}
     </Box>

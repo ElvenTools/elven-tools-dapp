@@ -17,9 +17,9 @@ export const TeamMember: FC<TeamMemberProps> = ({
 }) => {
   return (
     <Box
-      borderColor="ghostLand.color2.base"
+      borderColor="ghostVerse.color2.base"
       borderWidth={1}
-      bgColor="ghostLand.dark.lighter"
+      bgColor="ghostVerse.dark.lighter"
       backdropFilter="blur(3px)"
       py={2}
       px={6}

@@ -59,18 +59,22 @@ export const ProfileNFTsList = () => {
 
   return (
     <>
-      <SimpleGrid my={12} columns={{ base: 3, md: 3, xl: 5 }} gap={6}>
+      <SimpleGrid
+        my={12}
+        columns={{ base: 1, sm: 2, md: 3, xl: 5 }}
+        gap={{ base: 1, sm: 2, md: 3, xl: 5 }}
+      >
         {nfts?.map((nft) => (
           <Card
             w="100%"
             key={nft.identifier}
-            backgroundColor="ghostLand.color1.lighter"
-            borderColor="ghostLand.color1.darker"
+            backgroundColor="ghostVerse.color1.lighter"
+            borderColor="ghostVerse.color1.darker"
             borderWidth={1}
             borderRadius="0"
             backdropFilter="blur(3px)"
           >
-            <CardBody>
+            <CardBody p={{ base: 1, sm: 2, md: 3 }}>
               <Stack position="relative">
                 <NftImageHelper
                   thumbnail={nft.media?.[0].thumbnailUrl}
@@ -92,7 +96,11 @@ export const ProfileNFTsList = () => {
                   {nft.name}
                 </a>
               </Box>
-              <Box color="elvenTools.white" textAlign="center">
+              <Box
+                textAlign="center"
+                color="ghostVerse.grey.base"
+                fontSize={{ base: 10, md: 14 }}
+              >
                 <a
                   href={`${networkConfig[chainType].explorerAddress}/nfts/${nft.identifier}`}
                   rel="noopener noreferrer"
@@ -100,6 +108,7 @@ export const ProfileNFTsList = () => {
                 >
                   {nft.identifier}
                 </a>
+                {nfts.length}
               </Box>
             </CardBody>
           </Card>

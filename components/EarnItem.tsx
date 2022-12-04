@@ -13,7 +13,7 @@ export const EarnItem: FC<EarnItemProps> = ({ name, imageUrl, bio }) => {
       as="a"
       p={4}
       rel="noopener noreferrer nofollow"
-      borderColor="ghostLand.color2.base"
+      borderColor="ghostVerse.color2.base"
       borderWidth={1}
       backdropFilter="blur(3px)"
     >
@@ -22,7 +22,7 @@ export const EarnItem: FC<EarnItemProps> = ({ name, imageUrl, bio }) => {
       </Box>
       <Text
         as="h2"
-        color="ghostLand.color2.darker"
+        color="ghostVerse.color2.darker"
         fontSize="xl"
         fontWeight="black"
         mt={5}

@@ -33,7 +33,7 @@ export const theme = extendTheme({
     body: `'Cubic Five 10', sans-serif`,
   },
   colors: {
-    ghostLand: {
+    ghostVerse: {
       bgStripes: '#2c3440',
       shadowColor: '#141414',
       dark: {
@@ -43,6 +43,9 @@ export const theme = extendTheme({
       },
       light: '#FAFFFD',
       white: '#ffffff',
+      grey: {
+        base: '#666666',
+      },
       color1: {
         lighter: 'rgb(109, 208, 246, 0.1)',
         base: '#549db9',

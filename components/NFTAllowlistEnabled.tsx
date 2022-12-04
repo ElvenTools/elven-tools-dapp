@@ -36,10 +36,10 @@ export const NFTAllowlistEnabled: FC<NFTAllowlistEnabledProps> = ({
               Allowlist is enabled. You are{' '}
             </Text>
             {dataLoading ? (
-              <Spinner ml={3} color="ghostLand.color1.darker" />
+              <Spinner ml={3} color="ghostVerse.color1.darker" />
             ) : data !== 0 ? (
               <Text
-                color="ghostLand.color1.darker"
+                color="ghostVerse.color1.darker"
                 as="span"
                 fontWeight="bold"
                 fontSize={{ base: 'md', sm: 'lg' }}

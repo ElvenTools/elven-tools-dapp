@@ -11,7 +11,7 @@ export const RoadmapItem: FC<RoadmapItemProps> = ({ title, points }) => {
     <Box>
       <Text
         as="h2"
-        color="ghostLand.color2.darker"
+        color="ghostVerse.color2.darker"
         fontSize="xl"
         fontWeight="black"
         mb={3}
@@ -22,9 +22,9 @@ export const RoadmapItem: FC<RoadmapItemProps> = ({ title, points }) => {
         {points.map((point, index) => (
           <ListItem
             listStyleType="none"
-            borderColor="ghostLand.color2.base"
+            borderColor="ghostVerse.color2.base"
             borderWidth={1}
-            bgColor="ghostLand.dark.lighter"
+            bgColor="ghostVerse.dark.lighter"
             backdropFilter="blur(3px)"
             py={2}
             px={6}

@@ -47,7 +47,7 @@ export const MobileLoginQR: FunctionComponent<MobileLoginQRProps> = ({
           <Box
             width="100%"
             textAlign="center"
-            borderColor="ghostLand.color1.darker"
+            borderColor="ghostVerse.color1.darker"
             borderWidth={1}
             bgColor="transparent"
             py={2}

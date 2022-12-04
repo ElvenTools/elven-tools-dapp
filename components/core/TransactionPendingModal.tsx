@@ -69,7 +69,7 @@ export const TransactionPendingModal: FC<TransactionPendingModalProps> = ({
     <Modal isOpen={opened} size="sm" onClose={onClose} isCentered>
       <CustomModalOverlay />
       <ModalContent
-        bgColor="ghostLand.dark.darker"
+        bgColor="ghostVerse.dark.darker"
         px={6}
         pt={7}
         pb={10}
@@ -93,7 +93,7 @@ export const TransactionPendingModal: FC<TransactionPendingModalProps> = ({
                     p={2}
                     mb={4}
                     fontWeight="normal"
-                    color="ghostLand.color1.darker"
+                    color="ghostVerse.color1.darker"
                     userSelect="none"
                     transition="background-color .3s"
                   >
@@ -102,7 +102,7 @@ export const TransactionPendingModal: FC<TransactionPendingModalProps> = ({
                   <Text
                     as="a"
                     href="/profile"
-                    borderColor="ghostLand.color1.darker"
+                    borderColor="ghostVerse.color1.darker"
                     borderWidth={1}
                     bgColor="transparent"
                     p={2}

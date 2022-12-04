@@ -33,7 +33,7 @@ export const Secondary = () => {
       <Box mt={4}>
         <Text
           as="h2"
-          color="ghostLand.color2.darker"
+          color="ghostVerse.color2.darker"
           fontSize="xl"
           fontWeight="black"
           mb={3}

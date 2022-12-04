@@ -38,7 +38,7 @@ export const CollectionInfoBox: FC<CollectionInfoBoxProps> = ({
       >
         {isLoading ? (
           <Box display="flex" alignItems="center" justifyContent="center">
-            <Spinner color="ghostLand.color1.darker" />
+            <Spinner color="ghostVerse.color1.darker" />
           </Box>
         ) : (
           <Text fontWeight="normal">

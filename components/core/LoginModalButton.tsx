@@ -95,7 +95,7 @@ export const LoginModalButton: FC<LoginModalButtonProps> = ({
       >
         <CustomModalOverlay />
         <ModalContent
-          bgColor="ghostLand.dark.darker"
+          bgColor="ghostVerse.dark.darker"
           pt={7}
           pb={10}
           px={0}

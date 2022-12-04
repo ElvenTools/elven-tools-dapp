@@ -15,33 +15,29 @@ export const ProfileUserData = () => {
   return (
     <Stack
       direction="row"
-      justifyContent={{ base: 'center', md: 'left' }}
-      borderColor="ghostLand.color2.base"
+      borderColor="ghostVerse.color2.base"
       borderWidth={1}
       p={4}
       backdropFilter="blur(3px)"
     >
       <Stack
-        direction={{ base: 'column', md: 'row' }}
-        alignItems={{ base: 'center', md: 'left' }}
+        direction="row"
         justifyContent={{ base: 'center', md: 'left' }}
         spacing={0}
       >
         <Avatar
-          mr={{ base: '0', md: '4' }}
-          size="2xl"
+          width={{ base: '80px', md: '120px' }}
+          height="auto"
+          mr={4}
           src={avatarIdUrl(address)}
         />
         <Box>
           <Box>
-            <Box
-              mt={{ base: '4', md: '0' }}
-              fontWeight={900}
-              fontSize={32}
-              display="inline-block"
-            >
+            <Box fontWeight={900} fontSize={32} display="inline-block">
               {accountData?.username ? (
-                <Box>{accountData?.username}</Box>
+                <Box fontSize={{ base: 14, md: 16, xl: 20 }}>
+                  {accountData?.username}
+                </Box>
               ) : (
                 <Tooltip
                   bg="elvenTools.dark.darker"
@@ -56,7 +52,7 @@ export const ProfileUserData = () => {
                     'Check Buildo Begins tool on how to get one! (github.com/xdevguild/buildo-begins)'
                   }
                 >
-                  <Box>
+                  <Box fontSize={{ base: 16, xl: 20 }}>
                     <a
                       href="https://github.com/xdevguild/buildo-begins#general-operations"
                       rel="noopener noreferrer"
@@ -73,7 +69,6 @@ export const ProfileUserData = () => {
             <Box display="inline-block">
               <Stack
                 direction="row"
-                alignItems="center"
                 as="a"
                 href={`${networkConfig[chainType].explorerAddress}/address/${address}`}
                 target="_blank"
@@ -90,11 +85,15 @@ export const ProfileUserData = () => {
                   borderRadius={10}
                   label={address}
                 >
-                  <Box fontWeight={700} fontSize={22}>
+                  <Box
+                    fontWeight={700}
+                    color="ghostVerse.grey.base"
+                    fontSize={{ base: 12, md: 16 }}
+                  >
                     {shortenHash(address, 8)}
                   </Box>
                 </Tooltip>
-                <Icon as={BiLink} w={6} h={6} />
+                <Icon color="ghostVerse.grey.base" as={BiLink} w={6} h={6} />
               </Stack>
             </Box>
           </Box>

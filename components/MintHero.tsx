@@ -288,7 +288,7 @@ export const MintHero = () => {
                 mt={6}
                 justifyContent={{ base: 'center', md: 'flex-start' }}
               >
-                <Text as="a" color="ghostLand.color1.darker" href="/profile">
+                <Text as="a" color="ghostVerse.color1.darker" href="/profile">
                   Check your NFTs
                 </Text>
               </Box>

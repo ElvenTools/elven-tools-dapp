@@ -22,7 +22,7 @@ export const MainLayout: FC<PropsWithChildren<MetaHeadProps>> = ({
         minHeight="calc(100vh - 34px)"
         position="relative"
         zIndex={3}
-        color="ghostLand.color2.darker"
+        color="ghostVerse.color2.darker"
       >
         <Container maxW="container.xl">
           <Box>{children}</Box>

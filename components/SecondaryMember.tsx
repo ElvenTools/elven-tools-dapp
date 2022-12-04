@@ -20,9 +20,9 @@ export const SecondaryMember: FC<SecondaryMemberProps> = ({
             <Box
               as="a"
               height="68px"
-              borderColor="ghostLand.color1.darker"
+              borderColor="ghostVerse.color1.darker"
               borderWidth={1}
-              bgColor="ghostLand.dark.lighter"
+              bgColor="ghostVerse.dark.lighter"
               backdropFilter="blur(3px)"
               color="white"
               py={2}

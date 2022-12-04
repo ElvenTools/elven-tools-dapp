@@ -15,9 +15,9 @@ interface FaqItemProps {
 export const FaqItem: FC<FaqItemProps> = ({ question, answer }) => {
   return (
     <AccordionItem
-      borderColor="ghostLand.color1.darker"
+      borderColor="ghostVerse.color1.darker"
       borderWidth={1}
-      bgColor="ghostLand.dark.lighter"
+      bgColor="ghostVerse.dark.lighter"
       backdropFilter="blur(3px)"
       mb={6}
     >

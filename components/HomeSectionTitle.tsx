@@ -11,7 +11,7 @@ export const HomeSectionTitle: FC<HomeSectionTitleProps> = ({ title }) => {
       as="h1"
       fontSize={{ base: 'lg', md: '2xl' }}
       fontWeight="black"
-      color="ghostLand.color2.darker"
+      color="ghostVerse.color2.darker"
       mb={4}
     >
       {title}

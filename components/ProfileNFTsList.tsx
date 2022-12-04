@@ -59,7 +59,7 @@ export const ProfileNFTsList = () => {
 
   return (
     <>
-      <SimpleGrid my={12} columns={{ base: '2', md: '3', xl: '5' }} gap={6}>
+      <SimpleGrid my={12} columns={{ base: 3, md: 3, xl: 5 }} gap={6}>
         {nfts?.map((nft) => (
           <Card
             w="100%"

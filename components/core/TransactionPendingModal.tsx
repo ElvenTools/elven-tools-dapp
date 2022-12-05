@@ -112,7 +112,7 @@ export const TransactionPendingModal: FC<TransactionPendingModalProps> = ({
                     userSelect="none"
                     textAlign="center"
                     lineHeight={2}
-                    _hover={{ bg: 'ghostLand.color1.lighter' }}
+                    _hover={{ bg: 'GhostVerse.color1.lighter' }}
                     transition="background-color .3s"
                   >
                     My profile

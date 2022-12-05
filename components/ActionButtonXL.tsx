@@ -35,16 +35,12 @@ export const ActionButtonXL: FC<PropsWithChildren<ActionButtonXLProps>> = ({
       cursor={disabled ? 'not-allowed' : 'pointer'}
       color="elvenTools.white"
       userSelect="none"
-      _hover={
-        !disabled
-          ? {
-              bg: 'ghostLand.color1.lighter',
-              borderColor: 'ghostLand.color1.darker',
-              color: 'ghostLand.color1.darker',
-              backdropFilter: 'blur(3px)',
-            }
-          : {}
-      }
+      _hover={{
+        bgColor: 'rgba(109, 208, 246, 0.1)',
+        borderColor: '#6dd0f6',
+        color: '#6dd0f6',
+        backdropFilter: 'blur(3px)',
+      }}
       transition="background-color .3s"
       width={isFullWidth ? '100%' : 'auto'}
       onClick={handleClick}

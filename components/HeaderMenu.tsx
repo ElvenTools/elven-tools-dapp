@@ -12,7 +12,7 @@ export const HeaderMenu: FC<PropsWithChildren<PropsWithChildren>> = ({
       justifyContent="space-between"
       flexWrap="wrap"
       gap="2"
-      py={9}
+      py={{ base: '4', md: '9' }}
     >
       <Logo />
       {children}

@@ -13,13 +13,13 @@ export const UserAvatar = () => {
     <Text
       as="a"
       href="/profile"
-      _hover={{ borderColor: 'ghostLand.color1.darker' }}
       borderColor="black"
       borderRadius="100%"
       borderWidth={1}
+      _hover={{ borderColor: 'ghostVerse.color1.darker' }}
     >
       <Tooltip
-        bg="elvenTools.dark.darker"
+        bg="ghostVerse.green.base"
         fontWeight="light"
         placement="top"
         py={3}
@@ -27,7 +27,7 @@ export const UserAvatar = () => {
         mb={3}
         hasArrow
         arrowSize={12}
-        borderRadius={10}
+        borderRadius={0}
         label="Go to profile page"
       >
         <Avatar size="md" src={avatarIdUrl(address)} />

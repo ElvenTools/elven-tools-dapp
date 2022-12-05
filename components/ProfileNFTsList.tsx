@@ -60,7 +60,7 @@ export const ProfileNFTsList = () => {
   return (
     <>
       <SimpleGrid
-        my={12}
+        my={{ base: '8', md: '12' }}
         columns={{ base: 1, sm: 2, md: 3, xl: 5 }}
         gap={{ base: 1, sm: 2, md: 3, xl: 5 }}
       >
@@ -108,7 +108,6 @@ export const ProfileNFTsList = () => {
                 >
                   {nft.identifier}
                 </a>
-                {nfts.length}
               </Box>
             </CardBody>
           </Card>

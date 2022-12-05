@@ -45,6 +45,14 @@ export const theme = extendTheme({
       white: '#ffffff',
       grey: {
         base: '#666666',
+        darker: '#303030',
+      },
+      blue: {
+        lighter: 'rgba(109, 208, 246, 0.1)',
+        base: '#6dd0f6',
+      },
+      green: {
+        base: '#304222',
       },
       color1: {
         lighter: 'rgb(109, 208, 246, 0.1)',

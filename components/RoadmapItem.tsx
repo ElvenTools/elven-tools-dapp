@@ -11,7 +11,7 @@ export const RoadmapItem: FC<RoadmapItemProps> = ({ title, points }) => {
     <Box>
       <Text
         as="h2"
-        color="ghostVerse.color2.darker"
+        color="ghostVerse.grey.base"
         fontSize="xl"
         fontWeight="black"
         mb={3}

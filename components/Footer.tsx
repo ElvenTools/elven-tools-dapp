@@ -18,11 +18,12 @@ export const Footer = () => {
         <Box
           fontSize="xs"
           fontWeight="bold"
-          mb="4"
+          mb={{ base: '2', md: '4' }}
           position="relative"
           zIndex={1}
           display="flex"
           justifyContent="center"
+          whiteSpace="nowrap"
         >
           <Text>Powered by</Text>
           <Text

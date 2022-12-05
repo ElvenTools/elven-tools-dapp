@@ -40,7 +40,7 @@ const ElvenToolsDapp = ({ Component, pageProps }: AppProps) => {
   }, [toast]);
 
   return (
-    <SWRConfig value={{ onError: handleErrorToast }}>
+    <SWRConfig>
       <AnimatePresence>
         <ChakraProvider theme={theme}>
           <Fonts />

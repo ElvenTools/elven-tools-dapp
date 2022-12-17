@@ -61,6 +61,7 @@ export const roadmap = [
       '↻ Meet awesome ghost clan members',
       '↻ Make our long-term partnerships stronger',
       '↻ Create a decentralized GhostVerse dApp',
+      '↻ Open a cannabis shop',
       '↻ Passive income dashboard',
       '↻ Collection rarity',
       '↻ Produce merch',

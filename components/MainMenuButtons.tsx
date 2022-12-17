@@ -31,6 +31,9 @@ export const MainMenuButtons: FC<MainMenuButtonsProps> = ({ enabled }) => {
   const handleFaqClick = useCallback(() => {
     router.push('/faq');
   }, [router]);
+  const handleGreenGardenClick = useCallback(() => {
+    router.push('https://green.gd/');
+  }, [router]);
   const handleLightpaperClick = useCallback(() => {
     router.push('https://docs.ghostverse.org/');
   }, [router]);
@@ -190,6 +193,18 @@ export const MainMenuButtons: FC<MainMenuButtonsProps> = ({ enabled }) => {
             alt="GhostVerse FAQ Mr Ghost MxGhosts NFT DAO MultiversX"
           />
           Faq
+        </ActionButtonXL>
+      )}
+      {enabled.includes('greengarden') && (
+        <ActionButtonXL onClick={handleGreenGardenClick}>
+          <Image
+            boxSize={{ base: '100px', md: '140px' }}
+            objectFit="contain"
+            my={4}
+            src="/media/ghostverse-greengarden-cannabis-shop-mr-ghost-mxghosts-nft-dao-multiversx-blockchain.png"
+            alt="GhostVerse GreenGarden Cannabis Shop Mr Ghost MxGhosts NFT DAO MultiversX"
+          />
+          GreenGarden
         </ActionButtonXL>
       )}
       {enabled.includes('egldcommunity') && (

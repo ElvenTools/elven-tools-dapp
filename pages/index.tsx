@@ -23,6 +23,7 @@ const Home: NextPage = () => {
             'roadmap',
             'team',
             'faq',
+            'greengarden',
           ]}
         />
       </MainMenu>

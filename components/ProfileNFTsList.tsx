@@ -6,7 +6,7 @@ import { NFT } from '../types/nfts';
 import { SCQueryType } from '../hooks/interaction/useScQuery';
 import { useElvenScQuery } from '../hooks/interaction/elvenScHooks/useElvenScQuery';
 import { NftImageHelper } from './NftImageHelper';
-import { networkConfig, chainType } from '../config/network';
+import { getActiveNetworkConfiguration } from '../config/network';
 
 const SIZE_PER_PAGE = 10000;
 
@@ -71,7 +71,9 @@ export const ProfileNFTsList = () => {
                 <NftImageHelper
                   thumbnail={nft.media?.[0].thumbnailUrl}
                   elrondIPFSGatewayUrl={nft.url}
-                  href={`${networkConfig[chainType].explorerAddress}/nfts/${nft.identifier}`}
+                  href={`${
+                    getActiveNetworkConfiguration().explorerAddress
+                  }/nfts/${nft.identifier}`}
                 />
               </Stack>
               <Box
@@ -81,7 +83,9 @@ export const ProfileNFTsList = () => {
                 textAlign="center"
               >
                 <a
-                  href={`${networkConfig[chainType].explorerAddress}/nfts/${nft.identifier}`}
+                  href={`${
+                    getActiveNetworkConfiguration().explorerAddress
+                  }/nfts/${nft.identifier}`}
                   rel="noopener noreferrer"
                   target="_blank"
                 >
@@ -90,7 +94,9 @@ export const ProfileNFTsList = () => {
               </Box>
               <Box color="elvenTools.white" textAlign="center">
                 <a
-                  href={`${networkConfig[chainType].explorerAddress}/nfts/${nft.identifier}`}
+                  href={`${
+                    getActiveNetworkConfiguration().explorerAddress
+                  }/nfts/${nft.identifier}`}
                   rel="noopener noreferrer"
                   target="_blank"
                 >

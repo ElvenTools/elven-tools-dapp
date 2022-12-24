@@ -1,3 +1,8 @@
+### [4.0.0](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v4.0.0) (2022-12-24)
+- breaking: env vars naming changes and API proxy is now optional, check for more in the docs
+- dependencies update
+- demo homepage updates and rebranding
+
 ### [3.3.0](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v3.3.0) (2022-11-26)
 - added Profile page with the list of minted NFTs and basic account/wallet information
 - updated dependencies, including Next 13 (without changing the files structure yet)

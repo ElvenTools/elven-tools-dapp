@@ -1,6 +1,6 @@
 import { useEffect, useState, FunctionComponent } from 'react';
 import { Flex, Box } from '@chakra-ui/react';
-import { networkConfig, chainType } from '../../config/network';
+import { getActiveNetworkConfiguration } from '../../config/network';
 import { isMobile } from '../../utils/isMobile';
 import QRCode from 'qrcode';
 
@@ -59,7 +59,7 @@ export const MobileLoginQR: FunctionComponent<MobileLoginQRProps> = ({
             transition="background-color .3s"
             as="a"
             href={`${
-              networkConfig[chainType]?.walletConnectDeepLink
+              getActiveNetworkConfiguration()?.walletConnectDeepLink
             }?wallet-connect=${encodeURIComponent(walletConnectUri)}`}
             rel="noopener noreferrer nofollow"
             target="_blank"

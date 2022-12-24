@@ -1,6 +1,6 @@
 import { Box, Avatar, Stack, Icon, Tooltip } from '@chakra-ui/react';
 import { BiLink } from 'react-icons/bi';
-import { avatarIdUrl, networkConfig, chainType } from '../config/network';
+import { avatarIdUrl, getActiveNetworkConfiguration } from '../config/network';
 import { shortenHash } from '../utils/shortenHash';
 import { Account } from '../types/account';
 import { useApiCall } from '../hooks/interaction/useApiCall';
@@ -58,7 +58,9 @@ export const ProfileUserData = () => {
               direction="row"
               alignItems="center"
               as="a"
-              href={`${networkConfig[chainType].explorerAddress}/address/${address}`}
+              href={`${
+                getActiveNetworkConfiguration().explorerAddress
+              }/address/${address}`}
               target="_blank"
               rel="noopener noreferrer"
             >

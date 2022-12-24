@@ -10,7 +10,7 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react';
 import { FC } from 'react';
-import { networkConfig, chainType } from '../../config/network';
+import { getActiveNetworkConfiguration } from '../../config/network';
 import { useEffectOnlyOnUpdate } from '../../hooks/tools/useEffectOnlyOnUpdate';
 import { shortenHash } from '../../utils/shortenHash';
 
@@ -86,7 +86,9 @@ export const TransactionPendingModal: FC<TransactionPendingModalProps> = ({
               {successTxHash && (
                 <Text
                   as="a"
-                  href={`${networkConfig[chainType].explorerAddress}/transactions/${successTxHash}`}
+                  href={`${
+                    getActiveNetworkConfiguration().explorerAddress
+                  }/transactions/${successTxHash}`}
                   target="_blank"
                   rel="noopener noreferrer nofollow"
                   borderColor="elvenTools.color2.darker"

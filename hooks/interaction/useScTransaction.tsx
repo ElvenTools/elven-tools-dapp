@@ -22,7 +22,7 @@ import {
   setAccountState,
 } from '../../store/auth';
 import { getNetworkState } from '../../store/network';
-import { chainType, networkConfig } from '../../config/network';
+import { getActiveNetworkConfiguration } from '../../config/network';
 import { LoginMethodsEnum } from '../../types/enums';
 import { DappProvider } from '../../types/network';
 import { getParamFromUrl } from '../../utils/getParamFromUrl';
@@ -149,7 +149,7 @@ export function useScTransaction(cb?: (params: ScTransactionCb) => void) {
         value,
         receiver: new Address(smartContractAddress),
         sender: new Address(accountSnap.address),
-        chainID: networkConfig[chainType].shortId,
+        chainID: getActiveNetworkConfiguration().shortId,
       });
 
       tx.setNonce(currentNonce);

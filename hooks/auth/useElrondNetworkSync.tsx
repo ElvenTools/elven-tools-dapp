@@ -16,9 +16,8 @@ import { ExtensionProvider } from '@elrondnetwork/erdjs-extension-provider';
 import { HWProvider } from '@elrondnetwork/erdjs-hw-provider';
 import { ApiNetworkProvider } from '@elrondnetwork/erdjs-network-providers';
 import {
-  networkConfig,
-  chainType,
   DAPP_INIT_ROUTE,
+  getActiveNetworkConfiguration,
 } from '../../config/network';
 import { getBridgeAddressFromNetwork } from '../../utils/bridgeAddress';
 import { getParamFromUrl } from '../../utils/getParamFromUrl';
@@ -102,10 +101,10 @@ export const useElrondNetworkSync = () => {
     const askForApiNetworkProvider = async () => {
       let apiNetworkProvider = apiNetworkProviderRef?.current;
       if (!apiNetworkProvider) {
-        const publicApiEndpoint = process.env.NEXT_PUBLIC_ELROND_API;
+        const publicApiEndpoint = getActiveNetworkConfiguration().apiAddress;
         if (publicApiEndpoint) {
           apiNetworkProvider = new ApiNetworkProvider(publicApiEndpoint, {
-            timeout: Number(networkConfig[chainType].apiTimeout),
+            timeout: Number(getActiveNetworkConfiguration().apiTimeout),
           });
           apiNetworkProviderRef.current = apiNetworkProvider;
           network.setNetworkState('apiNetworkProvider', apiNetworkProvider);
@@ -166,7 +165,7 @@ export const useElrondNetworkSync = () => {
             };
 
             const bridgeAddress = getBridgeAddressFromNetwork(
-              networkConfig[chainType].walletConnectBridgeAddresses
+              getActiveNetworkConfiguration().walletConnectBridgeAddresses
             );
             dappProvider = new WalletConnectProvider(
               bridgeAddress,
@@ -195,7 +194,9 @@ export const useElrondNetworkSync = () => {
             }
             if (address) {
               dappProvider = new WalletProvider(
-                `${networkConfig[chainType].walletAddress}${DAPP_INIT_ROUTE}`
+                `${
+                  getActiveNetworkConfiguration().walletAddress
+                }${DAPP_INIT_ROUTE}`
               );
               dappProviderRef.current = dappProvider;
               network.setNetworkState('dappProvider', dappProvider);

@@ -1,6 +1,6 @@
 import { Box, Text } from '@chakra-ui/react';
 import { CollectionInfoBox } from './CollectionInfoBox';
-import { chainType, networkConfig } from '../config/network';
+import { getActiveNetworkConfiguration } from '../config/network';
 import { shortenHash } from '../utils/shortenHash';
 import { useElvenScQuery } from '../hooks/interaction/elvenScHooks/useElvenScQuery';
 import { SCQueryType } from '../hooks/interaction/useScQuery';
@@ -53,11 +53,11 @@ export const Hero = () => {
         <Text
           as="a"
           color="elvenTools.color2.base"
-          href="https://www.elrond.com"
+          href="https://multiversx.com"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Elrond
+          MultiversX
         </Text>{' '}
         blockchain.
       </Text>
@@ -68,7 +68,7 @@ export const Hero = () => {
         textAlign={{ base: 'center', md: 'left' }}
       >
         The actual working example is connected to the Elven Tools smart
-        contract deployed on the Elrond blockchain{' '}
+        contract deployed on the MultiversX (Elrond) blockchain{' '}
         <Text as="span" fontWeight="medium">
           devnet
         </Text>
@@ -91,7 +91,9 @@ export const Hero = () => {
           content={collectionTicker || '-'}
           label="Collection ticker. Click for details."
           isLoading={collectionTickerLoading}
-          href={`${networkConfig[chainType].explorerAddress}/collections/${collectionTicker}`}
+          href={`${
+            getActiveNetworkConfiguration().explorerAddress
+          }/collections/${collectionTicker}`}
         />
         <CollectionInfoBox
           content={
@@ -102,7 +104,9 @@ export const Hero = () => {
           label={`Minter smart contract. Click for details.`}
           href={
             smartContractAddress
-              ? `${networkConfig[chainType].explorerAddress}/accounts/${smartContractAddress}`
+              ? `${
+                  getActiveNetworkConfiguration().explorerAddress
+                }/accounts/${smartContractAddress}`
               : undefined
           }
         />

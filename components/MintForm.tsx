@@ -60,14 +60,14 @@ export const MintForm: FC<MintFormProps> = ({ leftToMintForUser, cb }) => {
         >
           <NumberInputField
             py={5}
-            _focus={{ outline: 'none' }}
+            _focusVisible={{ outline: 'none' }}
             disabled={leftToMintForUser <= 0}
             placeholder="Amount of tokens to mint..."
           />
           {leftToMintForUser <= 0 ? null : (
             <NumberInputStepper>
-              <NumberIncrementStepper borderColor="elvenTools.base.dark" />
-              <NumberDecrementStepper />
+              <NumberIncrementStepper color="elvenTools.base.light" />
+              <NumberDecrementStepper color="elvenTools.base.light" />
             </NumberInputStepper>
           )}
         </NumberInput>

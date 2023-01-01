@@ -6,7 +6,10 @@
 import { FC, CSSProperties, PropsWithChildren } from 'react';
 import { Box } from '@chakra-ui/react';
 import Image, { ImageProps } from 'next/image';
-import { customIPFSGateway, elrondIPFSGateway } from '../config/network';
+import {
+  customIPFSGateway,
+  getActiveNetworkConfiguration,
+} from '../config/network';
 
 const commonImageStyles: CSSProperties = {
   objectFit: 'contain',
@@ -40,7 +43,7 @@ const getImageUrlFromIPFS = (
 ) => {
   if (elrondIPFSGatewayUrl) {
     const CIDandImageFileName = elrondIPFSGatewayUrl.replace(
-      elrondIPFSGateway,
+      getActiveNetworkConfiguration().elrondIPFSGateway,
       ''
     );
     return `${customIPFSGateway}${CIDandImageFileName}`;

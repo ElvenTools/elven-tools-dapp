@@ -14,7 +14,6 @@ export const avatarIdUrl = (address: string) =>
   `https://id.maiar.com/users/photos/profile/${address}`;
 
 export const customIPFSGateway = 'https://nftstorage.link/ipfs/';
-export const elrondIPFSGateway = 'https://devnet-media.elrond.com/nfts/asset/';
 
 export const networkConfig: Record<string, NetworkType> = {
   devnet: {
@@ -32,6 +31,7 @@ export const networkConfig: Record<string, NetworkType> = {
     apiAddress:
       process.env.NEXT_PUBLIC_MULTIVERSX_API || 'https://devnet-api.elrond.com',
     explorerAddress: 'https://devnet-explorer.elrond.com',
+    elrondIPFSGateway: 'https://devnet-media.elrond.com/nfts/asset/',
     apiTimeout: '10000',
   },
 
@@ -51,6 +51,7 @@ export const networkConfig: Record<string, NetworkType> = {
       process.env.NEXT_PUBLIC_MULTIVERSX_API ||
       'https://testnet-api.elrond.com',
     explorerAddress: 'https://testnet-explorer.elrond.com',
+    elrondIPFSGateway: 'https://testnet-media.elrond.com/nfts/asset/',
     apiTimeout: '10000',
   },
 
@@ -69,6 +70,7 @@ export const networkConfig: Record<string, NetworkType> = {
     apiAddress:
       process.env.NEXT_PUBLIC_MULTIVERSX_API || 'https://api.elrond.com',
     explorerAddress: 'https://explorer.elrond.com',
+    elrondIPFSGateway: 'https://media.elrond.com/nfts/asset/',
     apiTimeout: '10000',
   },
 };

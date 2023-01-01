@@ -18,6 +18,7 @@ export interface BaseNetworkType {
   apiAddress: string;
   explorerAddress: string;
   apiTimeout: string;
+  elrondIPFSGateway: string;
 }
 
 export interface NetworkType extends BaseNetworkType {

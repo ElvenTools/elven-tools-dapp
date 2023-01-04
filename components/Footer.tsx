@@ -16,12 +16,27 @@ export const Footer = () => {
         textAlign="center"
       >
         <Box
+          borderRadius="0px"
+          mx="auto"
+          my={{ base: '5' }}
+          display="table"
+          zIndex="1"
+          position="relative"
+        >
+          <iframe
+            src="https://egld.community/api/products/5691f3eb-fbf6-4987-b684-6b060cef40c4/upvotes/embed"
+            width="290"
+            height="70"
+          ></iframe> 
+        </Box>
+        <Box
           fontSize="xs"
           fontWeight="bold"
           mb={{ base: '2', md: '4' }}
           position="relative"
           zIndex={1}
           display="flex"
+          flexDirection={{ base: 'column', md: 'row' }}
           justifyContent="center"
           whiteSpace="nowrap"
         >

@@ -20,9 +20,7 @@ const ClanPage: NextPage = () => {
             'discord',
             'egldcommunity',
             'builders',
-            'medium',
-            'instagram',
-            'facebook',
+            'kavarii',
           ]}
         />
       </MainMenu>

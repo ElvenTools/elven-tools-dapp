@@ -50,7 +50,10 @@ export const MainMenuButtons: FC<MainMenuButtonsProps> = ({ enabled }) => {
     router.push('https://discord.gg/tXSeJfVVnH');
   }, [router]);
   const handleEgldCommunityClick = useCallback(() => {
-    router.push('https://egld.community/projects/gokai-labs');
+    router.push('https://egld.community/projects/ghostverse');
+  }, [router]);
+  const handleKavariiClick = useCallback(() => {
+    router.push('https://kavarii.com/c/ghostverse');
   }, [router]);
   const handleBuildersClick = useCallback(() => {
     router.push(
@@ -253,6 +256,19 @@ export const MainMenuButtons: FC<MainMenuButtonsProps> = ({ enabled }) => {
             alt="GhostVerse MultiversX Builders Mr Ghost MxGhosts NFT DAO MultiversX"
           />
           Builders
+        </ActionButtonXL>
+      )}
+
+      {enabled.includes('kavarii') && (
+        <ActionButtonXL onClick={handleKavariiClick}>
+          <Image
+            boxSize={{ base: '100px', md: '140px' }}
+            objectFit="contain"
+            my={4}
+            src="/media/ghostverse-kavarii-mr-ghost-mxghosts-nft-dao-multiversx-blockchain.webp"
+            alt="GhostVerse MultiversX Builders Mr Ghost MxGhosts NFT DAO MultiversX"
+          />
+          Kavarii
         </ActionButtonXL>
       )}
     </>

@@ -16,7 +16,7 @@ export const NFTMintedAlready: FC<NFTMintedAlreadyProps> = ({
       alignItems="center"
       justifyContent={{ base: 'center', md: 'flex-start' }}
     >
-      <Text fontSize={{ base: 'md', sm: 'lg' }} fontWeight="bold">
+      <Text>
         You have minted:{' '}
       </Text>
 
@@ -25,7 +25,7 @@ export const NFTMintedAlready: FC<NFTMintedAlreadyProps> = ({
       ) : (
         <Text
           color="ghostVerse.color1.darker"
-          fontSize="3xl"
+          fontSize="xl"
           fontWeight="black"
           ml={3}
         >

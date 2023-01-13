@@ -27,7 +27,7 @@ export const Footer = () => {
             src="https://egld.community/api/products/5691f3eb-fbf6-4987-b684-6b060cef40c4/upvotes/embed"
             width="290"
             height="70"
-          ></iframe> 
+          ></iframe>
         </Box>
         <Box
           fontSize="xs"

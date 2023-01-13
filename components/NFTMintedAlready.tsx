@@ -16,9 +16,7 @@ export const NFTMintedAlready: FC<NFTMintedAlreadyProps> = ({
       alignItems="center"
       justifyContent={{ base: 'center', md: 'flex-start' }}
     >
-      <Text>
-        You have minted:{' '}
-      </Text>
+      <Text>You have minted: </Text>
 
       {dataLoading ? (
         <Spinner ml={3} color="ghostVerse.color1.darker" />

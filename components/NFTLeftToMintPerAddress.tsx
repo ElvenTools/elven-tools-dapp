@@ -17,9 +17,7 @@ export const NFTLeftToMintPerAddress: FC<NFTLeftToMintPerAddressProps> = ({
       mb={6}
       justifyContent={{ base: 'flex-start' }}
     >
-      <Text>
-        You can mint:
-      </Text>
+      <Text>You can mint:</Text>
       {dataLoading ? (
         <Spinner ml={3} color="ghostVerse.color1.darker" />
       ) : (

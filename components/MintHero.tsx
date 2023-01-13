@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Box, Text, useBreakpointValue } from '@chakra-ui/react';
-import Link from 'next/link';
 import { useCallback, useEffect } from 'react';
 import { Address } from '@elrondnetwork/erdjs';
 import { SCQueryType } from '../hooks/interaction/useScQuery';
@@ -227,80 +226,88 @@ export const MintHero = () => {
           Collect MxGhosts and join the clan.
         </Text>
         <Text as="h2" fontSize="md" fontWeight="thin">
-          The GhostVerse is an otherworldly universe within the MultiversX blockchain.
+          The GhostVerse is an otherworldly universe within the MultiversX
+          blockchain.
           <br />
           <br />
-          The 8658 inhabitants of the GhostVerse are known as the MxGhosts, they are the guardians of the MultiversX, tasked with haunting and keeping the peace. They have the right to vote in the GhostVerse DAO and can shape the future of the universe through their decisions.
+          The 8658 inhabitants of the GhostVerse are known as the MxGhosts, they
+          are the guardians of the MultiversX, tasked with haunting and keeping
+          the peace. They have the right to vote in the GhostVerse DAO and can
+          shape the future of the universe through their decisions.
           <br />
           <br />
-          Some MxGhosts join the GhostClan, a powerful organization that controls the haunting of the MultiversX. They are paid every month in EGLD for their services, providing them with a passive income.
-          <br/>  
+          Some MxGhosts join the GhostClan, a powerful organization that
+          controls the haunting of the MultiversX. They are paid every month in
+          EGLD for their services, providing them with a passive income.
           <br />
-          Collecting and owning a Mr Ghost NFT is not just a way to own a piece of digital art, it's also a way to become a part of this fantastic world! 
+          <br />
+          Collecting and owning a Mr Ghost NFT is not just a way to own a piece
+          of digital art, it&apos;s also a way to become a part of this
+          fantastic world!
         </Text>
         {!mintingPaused ? (
-        <Box mt={6}>
-          <NFTLeftToMint
-            data={totalTokensLeft || 0}
-            dropData={dropData || 0}
-            dataLoading={dropActive ? dropIsLoading : totalIsLoading}
-          />
-          <Box>
-            <Authenticated
-              fallback={
-                <Box
-                  mt={6}
-                  display="flex"
-                  justifyContent={isContentCentered ? 'center' : 'flex-start'}
-                >
-                  <LoginModalButton />
-                </Box>
-              }
-              spinnerCentered={isContentCentered}
-            >
-              <NFTAllowlistEnabled
-                data={allowlistCheckData}
-                dataLoading={allowlistCheckLoading}
-              />
-              <NFTMintedAlready
-                data={mintedData}
-                dataLoading={mintedDataLoading}
-              />
-              {!isLoadingTokensLimitPerAddressTotal &&
-              !tokensLimitPerAddressPerDropLoading &&
-              !Number.isNaN(tokensLeftPerUser) ? (
-                <>
-                  <NFTLeftToMintPerAddress
-                    leftToMintForUser={tokensLeftPerUser}
-                  />
-                  <MintForm
-                    cb={handleRefreshData}
-                    leftToMintForUser={tokensLeftPerUser}
-                  />
-                </>
-              ) : null}
-            </Authenticated>
+          <Box mt={6}>
+            <NFTLeftToMint
+              data={totalTokensLeft || 0}
+              dropData={dropData || 0}
+              dataLoading={dropActive ? dropIsLoading : totalIsLoading}
+            />
+            <Box>
+              <Authenticated
+                fallback={
+                  <Box
+                    mt={6}
+                    display="flex"
+                    justifyContent={isContentCentered ? 'center' : 'flex-start'}
+                  >
+                    <LoginModalButton />
+                  </Box>
+                }
+                spinnerCentered={isContentCentered}
+              >
+                <NFTAllowlistEnabled
+                  data={allowlistCheckData}
+                  dataLoading={allowlistCheckLoading}
+                />
+                <NFTMintedAlready
+                  data={mintedData}
+                  dataLoading={mintedDataLoading}
+                />
+                {!isLoadingTokensLimitPerAddressTotal &&
+                !tokensLimitPerAddressPerDropLoading &&
+                !Number.isNaN(tokensLeftPerUser) ? (
+                  <>
+                    <NFTLeftToMintPerAddress
+                      leftToMintForUser={tokensLeftPerUser}
+                    />
+                    <MintForm
+                      cb={handleRefreshData}
+                      leftToMintForUser={tokensLeftPerUser}
+                    />
+                  </>
+                ) : null}
+              </Authenticated>
+            </Box>
           </Box>
-        </Box>
-      ) : (
-        <Box>
-          <Text
-            fontSize="xl"
-            fontWeight="bold"
-            mt={10}
-            textAlign={{ base: 'center', md: 'left' }}
-          >
-            Minting was not started yet or is paused at the moment.
-          </Text>
-          <Text
-            fontSize="xl"
-            fontWeight="bold"
-            textAlign={{ base: 'center', md: 'left' }}
-          >
-            Please be back soon!
-          </Text>
-        </Box>
-      )}
+        ) : (
+          <Box>
+            <Text
+              fontSize="xl"
+              fontWeight="bold"
+              mt={10}
+              textAlign={{ base: 'center', md: 'left' }}
+            >
+              Minting was not started yet or is paused at the moment.
+            </Text>
+            <Text
+              fontSize="xl"
+              fontWeight="bold"
+              textAlign={{ base: 'center', md: 'left' }}
+            >
+              Please be back soon!
+            </Text>
+          </Box>
+        )}
       </Box>
     </motion.div>
   );

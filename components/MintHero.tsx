@@ -265,21 +265,21 @@ export const MintHero = () => {
                 }
                 spinnerCentered={isContentCentered}
               >
-                <NFTAllowlistEnabled
+                {/* <NFTAllowlistEnabled
                   data={allowlistCheckData}
                   dataLoading={allowlistCheckLoading}
                 />
                 <NFTMintedAlready
                   data={mintedData}
                   dataLoading={mintedDataLoading}
-                />
+                /> */}
                 {!isLoadingTokensLimitPerAddressTotal &&
                 !tokensLimitPerAddressPerDropLoading &&
                 !Number.isNaN(tokensLeftPerUser) ? (
                   <>
-                    <NFTLeftToMintPerAddress
+                    {/* <NFTLeftToMintPerAddress
                       leftToMintForUser={tokensLeftPerUser}
-                    />
+                    /> */}
                     <MintForm
                       cb={handleRefreshData}
                       leftToMintForUser={tokensLeftPerUser}

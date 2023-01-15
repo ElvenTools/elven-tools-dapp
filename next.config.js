@@ -31,6 +31,9 @@ const nextConfig = {
   images: {
     domains: [
       'nftstorage.link',
+      'media.multiversx.com',
+      'devnet-media.multiversx.com',
+      'testnet-media.multiversx.com',
       'media.elrond.com',
       'devnet-media.elrond.com',
       'testnet-media.elrond.com',

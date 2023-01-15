@@ -29,7 +29,7 @@ const commonImagesProps = {
 
 interface NftImageHelperProps {
   thumbnail: string;
-  elrondIPFSGatewayUrl: string;
+  multiversxIPFSGatewayUrl: string;
   href?: string;
 }
 
@@ -38,12 +38,12 @@ const isDefaultThumbnail = (thumbnail: string) => {
 };
 
 const getImageUrlFromIPFS = (
-  elrondIPFSGatewayUrl: string,
+  multiversxIPFSGatewayUrl: string,
   thumbnail: string
 ) => {
-  if (elrondIPFSGatewayUrl) {
-    const CIDandImageFileName = elrondIPFSGatewayUrl.replace(
-      getActiveNetworkConfiguration().elrondIPFSGateway,
+  if (multiversxIPFSGatewayUrl) {
+    const CIDandImageFileName = multiversxIPFSGatewayUrl.replace(
+      getActiveNetworkConfiguration().multiversIPFSGateway,
       ''
     );
     return `${customIPFSGateway}${CIDandImageFileName}`;
@@ -78,7 +78,7 @@ const MaybeWithHref: FC<PropsWithChildren<WithHrefProps>> = ({
 
 export const NftImageHelper: FC<NftImageHelperProps> = ({
   thumbnail,
-  elrondIPFSGatewayUrl,
+  multiversxIPFSGatewayUrl,
   href,
 }) => {
   return (
@@ -86,7 +86,7 @@ export const NftImageHelper: FC<NftImageHelperProps> = ({
       {isDefaultThumbnail(thumbnail) ? (
         <MaybeWithHref href={href}>
           <Image
-            src={getImageUrlFromIPFS(elrondIPFSGatewayUrl, thumbnail)}
+            src={getImageUrlFromIPFS(multiversxIPFSGatewayUrl, thumbnail)}
             alt=""
             {...commonImagesProps}
           />

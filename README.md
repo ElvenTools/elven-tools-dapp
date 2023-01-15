@@ -86,7 +86,7 @@ Check detailed docs on it here: [How to start with the Dapp](https://www.elven.t
 ### Main assumption for the dapp:
 
 - it works on Nextjs
-- it uses the newest version of erdjs without the dapp-core library.
+- it uses the newest version of [sdk-core](https://github.com/multiversx/mx-sdk-js-core) without the [sdk-dapp](https://github.com/multiversx/mx-sdk-dapp) library.
 it uses backend-side rewrites to hide the API endpoint. The only exposed one is `/api`
 - it uses .env file - there is an example in the repo
 - it uses chakra-ui

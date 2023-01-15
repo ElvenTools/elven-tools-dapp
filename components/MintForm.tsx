@@ -35,7 +35,7 @@ export const MintForm: FC<MintFormProps> = ({ leftToMintForUser, cb }) => {
 
   const getAdditionalPendingMessage = () => {
     if (loginMethod === LoginMethodsEnum.walletconnect) {
-      return 'Sign the transaction using Maiar mobile app. It will take some time to finish. You can always close this message. You will get the transaction hash when finished.';
+      return 'Sign the transaction using xPortal mobile app. It will take some time to finish. You can always close this message. You will get the transaction hash when finished.';
     }
     if (loginMethod === LoginMethodsEnum.ledger) {
       return 'Sign the transaction using Ledger HW. It will take some time to finish. You can always close this message. You will get the transaction hash when finished.';

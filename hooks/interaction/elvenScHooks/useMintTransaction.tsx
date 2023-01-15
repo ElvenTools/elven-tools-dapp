@@ -1,4 +1,4 @@
-import { ContractFunction, TokenPayment, U32Value } from '@elrondnetwork/erdjs';
+import { ContractFunction, TokenPayment, U32Value } from '@multiversx/sdk-core';
 import BigNumber from 'bignumber.js';
 import { useScTransaction, ScTransactionCb } from '../useScTransaction';
 import { useElvenScQuery } from '../elvenScHooks/useElvenScQuery';

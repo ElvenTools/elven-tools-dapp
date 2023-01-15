@@ -1,6 +1,9 @@
-### [4.0.1](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v4.0.1) (2023-01-01)
-- fix for nfts list image fallback
-- dependencies update
+### [4.1.0](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v4.1.0) (2023-01-15)
+- rebrand to multiversx (continuation)
+    - npm packages are replaced
+    - public api/explorer endpoints are replaced
+- update dependencies
+- **Breaking:** `useElrondNetworkSync` is now `useNetworkSync`
 
 ### [4.0.0](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v4.0.0) (2022-12-24)
 - breaking: env vars naming changes and API proxy is now optional, check for more in the docs

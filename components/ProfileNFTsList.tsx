@@ -70,7 +70,7 @@ export const ProfileNFTsList = () => {
               <Stack height={280} position="relative">
                 <NftImageHelper
                   thumbnail={nft.media?.[0].thumbnailUrl}
-                  elrondIPFSGatewayUrl={nft.url}
+                  multiversxIPFSGatewayUrl={nft.url}
                   href={`${
                     getActiveNetworkConfiguration().explorerAddress
                   }/nfts/${nft.identifier}`}

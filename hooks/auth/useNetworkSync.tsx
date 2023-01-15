@@ -9,12 +9,12 @@ import {
   setLoginInfoState,
 } from '../../store/auth';
 import * as network from '../../store/network';
-import { Address, Account } from '@elrondnetwork/erdjs';
-import { WalletProvider } from '@elrondnetwork/erdjs-web-wallet-provider';
-import { WalletConnectProvider } from '@elrondnetwork/erdjs-wallet-connect-provider';
-import { ExtensionProvider } from '@elrondnetwork/erdjs-extension-provider';
-import { HWProvider } from '@elrondnetwork/erdjs-hw-provider';
-import { ApiNetworkProvider } from '@elrondnetwork/erdjs-network-providers';
+import { Address, Account } from '@multiversx/sdk-core';
+import { WalletProvider } from '@multiversx/sdk-web-wallet-provider';
+import { WalletConnectProvider } from '@multiversx/sdk-wallet-connect-provider';
+import { ExtensionProvider } from '@multiversx/sdk-extension-provider';
+import { HWProvider } from '@multiversx/sdk-hw-provider';
+import { ApiNetworkProvider } from '@multiversx/sdk-network-providers';
 import {
   DAPP_INIT_ROUTE,
   getActiveNetworkConfiguration,
@@ -31,7 +31,7 @@ import { clearAuthStates } from '../../store/auth';
 import { DappProvider } from '../../types/network';
 import { errorParse } from '../../utils/errorParse';
 
-export const useElrondNetworkSync = () => {
+export const useNetworkSync = () => {
   const { logout } = useLogout();
   const [accountDone, setAccountDone] = useState(false);
   const [loginInfoDone, setLoginInfoDone] = useState(false);
@@ -135,7 +135,7 @@ export const useElrondNetworkSync = () => {
 
       if (!dappProvider) {
         switch (loginMethod) {
-          // Browser extension auth (Maiar defi wallet)
+          // Browser extension auth (MultiversX defi wallet)
           case LoginMethodsEnum.extension:
             dappProvider = ExtensionProvider.getInstance();
             try {
@@ -152,7 +152,7 @@ export const useElrondNetworkSync = () => {
               console.warn("Can't initialize the Dapp Provider!");
             }
             break;
-          // Maiar mobile app auth
+          // xPortal mobile app auth
           case LoginMethodsEnum.walletconnect:
             const providerHandlers = {
               onClientLogin: () =>
@@ -176,7 +176,7 @@ export const useElrondNetworkSync = () => {
               await dappProvider.init();
               if (!dappProvider.isInitialized()) {
                 console.warn(
-                  'Something went wrong trying to sync with the Maiar app!'
+                  'Something went wrong trying to sync with the xPortal app!'
                 );
               } else {
                 network.setNetworkState('dappProvider', dappProvider);

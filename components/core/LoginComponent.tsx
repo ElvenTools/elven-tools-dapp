@@ -43,19 +43,19 @@ export const LoginComponent = memo(() => {
               isFullWidth
               onClick={handleLogin(LoginMethodsEnum.wallet)}
             >
-              Elrond Web Wallet
+              Web Wallet
             </ActionButton>
             <ActionButton
               isFullWidth
               onClick={handleLogin(LoginMethodsEnum.extension)}
             >
-              Maiar Browser Extension
+              Browser Extension
             </ActionButton>
             <ActionButton
               isFullWidth
               onClick={handleLogin(LoginMethodsEnum.walletconnect)}
             >
-              Maiar Mobile App
+              xPortal App
             </ActionButton>
             <ActionButton isFullWidth onClick={handleLedgerAccountsList}>
               Ledger

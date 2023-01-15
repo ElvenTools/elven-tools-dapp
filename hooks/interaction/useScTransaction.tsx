@@ -8,13 +8,13 @@ import {
   TokenPayment,
   TransactionWatcher,
   ContractCallPayloadBuilder,
-} from '@elrondnetwork/erdjs';
-import { ApiNetworkProvider } from '@elrondnetwork/erdjs-network-providers';
+} from '@multiversx/sdk-core';
+import { ApiNetworkProvider } from '@multiversx/sdk-network-providers';
 import {
   WalletProvider,
   WALLET_PROVIDER_CALLBACK_PARAM,
   WALLET_PROVIDER_CALLBACK_PARAM_TX_SIGNED,
-} from '@elrondnetwork/erdjs-web-wallet-provider';
+} from '@multiversx/sdk-web-wallet-provider';
 import { useSnapshot } from 'valtio';
 import {
   accountState,
@@ -27,9 +27,9 @@ import { LoginMethodsEnum } from '../../types/enums';
 import { DappProvider } from '../../types/network';
 import { getParamFromUrl } from '../../utils/getParamFromUrl';
 import { useEffect, useState, useCallback } from 'react';
-import { ExtensionProvider } from '@elrondnetwork/erdjs-extension-provider/out';
-import { WalletConnectProvider } from '@elrondnetwork/erdjs-wallet-connect-provider/out';
-import { HWProvider } from '@elrondnetwork/erdjs-hw-provider/out';
+import { ExtensionProvider } from '@multiversx/sdk-extension-provider';
+import { WalletConnectProvider } from '@multiversx/sdk-wallet-connect-provider';
+import { HWProvider } from '@multiversx/sdk-hw-provider';
 import { errorParse } from '../../utils/errorParse';
 
 interface ScTransactionParams {

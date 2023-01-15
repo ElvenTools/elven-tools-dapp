@@ -2,7 +2,7 @@
 import { Box, Text, useBreakpointValue } from '@chakra-ui/react';
 import Link from 'next/link';
 import { useCallback, useEffect } from 'react';
-import { Address } from '@elrondnetwork/erdjs';
+import { Address } from '@multiversx/sdk-core';
 import { SCQueryType } from '../hooks/interaction/useScQuery';
 import { useElvenScQuery } from '../hooks/interaction/elvenScHooks/useElvenScQuery';
 import { MintForm } from './MintForm';

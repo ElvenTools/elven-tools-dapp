@@ -1,4 +1,4 @@
-import { Container, Box, Text } from '@chakra-ui/react';
+import { Container, Box, Text, Stack } from '@chakra-ui/react';
 import packageJson from '../package.json';
 
 export const Footer = () => {
@@ -22,7 +22,12 @@ export const Footer = () => {
           world about it. Attribution is not required but welcomed in the form
           of a backlink.
         </Box>
-        <Box fontSize="xs" fontWeight="bold">
+        <Stack
+          fontSize="xs"
+          fontWeight="bold"
+          direction="row"
+          justifyContent="center"
+        >
           <Text
             as="a"
             color="elvenTools.color3.base"
@@ -30,9 +35,29 @@ export const Footer = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            elven.tools
-          </Text>{' '}
-          ⚡{' '}
+            Elven Tools ⚡
+          </Text>
+          <Text fontWeight="hairline"> | </Text>
+          <Text
+            as="a"
+            color="elvenTools.color3.base"
+            href="https://www.elvenjs.com"
+            target="_blank"
+            rel="noopener noreferrer nofollow"
+          >
+            {'Elven.js'}
+          </Text>
+          <Text fontWeight="hairline"> | </Text>
+          <Text
+            as="a"
+            color="elvenTools.color3.base"
+            href="https://github.com/xdevguild/buildo-begins"
+            target="_blank"
+            rel="noopener noreferrer nofollow"
+          >
+            {'Buildo Begins'}
+          </Text>
+          <Text fontWeight="hairline"> | </Text>
           <Text
             as="a"
             color="elvenTools.color3.base"
@@ -42,7 +67,7 @@ export const Footer = () => {
           >
             julian.io
           </Text>
-        </Box>
+        </Stack>
       </Container>
     </Box>
   );

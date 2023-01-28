@@ -43,7 +43,7 @@ export const roadmap = [
   {
     title: 'Q1 2023',
     points: [
-      'UI automated tests',
+      'MultiversX rebranding and dependecies replacement',
       'Nextjs configuration improvements',
       'Better UI and more functionality',
     ],

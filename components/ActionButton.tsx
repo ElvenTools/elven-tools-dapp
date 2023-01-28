@@ -1,3 +1,5 @@
+// The component for triggering functions. For in-app navigation use Next Link component
+
 import { Box, BoxProps } from '@chakra-ui/react';
 import { FC, PropsWithChildren, useCallback } from 'react';
 

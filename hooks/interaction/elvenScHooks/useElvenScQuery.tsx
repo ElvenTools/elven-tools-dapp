@@ -11,13 +11,19 @@ interface ScConfigDataArgs {
   type: SCQueryType;
   args?: string[];
   autoInit?: boolean;
+  abiJSON?: {
+    name: string;
+    endpoints: unknown[];
+    types: unknown;
+  };
 }
 
-export function useElvenScQuery<T extends string | number | boolean>({
+export function useElvenScQuery<T extends string | number | boolean | unknown>({
   funcName,
   type,
   args = [],
   autoInit = true,
+  abiJSON,
 }: ScConfigDataArgs) {
   const { data, isLoading, fetch } = useScQuery<T>({
     type,
@@ -27,6 +33,7 @@ export function useElvenScQuery<T extends string | number | boolean>({
       args,
     },
     autoInit,
+    abiJSON,
   });
 
   return {

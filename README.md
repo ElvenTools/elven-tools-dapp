@@ -1,6 +1,7 @@
 ### Elven Tools Dapp
 
 - Docs: [elven.tools/docs/minter-dapp-introduction.html](https://www.elven.tools/docs/minter-dapp-introduction.html)
+- Dapp's React hooks and components [elven.tools/docs/dapp-react-hooks-and-components.html](https://www.elven.tools/docs/dapp-react-hooks-and-components.html)
 - Demo: [dapp-demo.elven.tools](https://dapp-demo.elven.tools)
 - Elven Tools intro (including the Dapp): [youtu.be/Jou5jn8PFz8](https://youtu.be/Jou5jn8PFz8)
 
@@ -32,7 +33,7 @@ const { login, isLoggedIn, error, walletConnectUri, getHWAccounts } = useLogin()
 login(LoginMethodsEnum.ledger)
 ```
 
-Custom mint transactions for the Elven Tools Smart Contract. There is also a more generic `useScTransaction`` hook.
+Custom mint transactions for the Elven Tools Smart Contract. There is also a more generic `useScTransaction` hook.
 
 ```jsx
 const { mint, pending, transaction, error } = useMintTransaction();
@@ -42,7 +43,7 @@ const { mint, pending, transaction, error } = useMintTransaction();
 mint(amount)
 ```
 
-Query the Elven Tools Smart Contract. There is also a more generic `useScQuery`` hook.
+Query the Elven Tools Smart Contract. There is also a more generic `useScQuery` hook.
 
 ```jsx
 const {
@@ -58,6 +59,38 @@ const {
 (...)
 
 fetch()
+```
+
+You can also query more complex data types. Then you  will need to provide the ABI JSON file.
+
+```jsx
+import { TypedOutcomeBundle } from '@multiversx/sdk-core';
+import abiJSON from '../config/abi.json';
+
+const { data } = useScQuery<TypedOutcomeBundle>({
+  type: SCQueryType.COMPLEX,
+  payload: {
+    scAddress: 'erd1qqq...',
+    funcName: 'yourScFunction',
+    args: [], // args in hex format, use erdjs for conversion, see above
+  },
+  autoInit: true,
+  abiJSON,
+});
+```
+
+The `data` here will be a `TypedOutcomeBundle`. Which is:
+
+```typescript
+interface TypedOutcomeBundle {
+  returnCode: ReturnCode;
+  returnMessage: string;
+  values: TypedValue[];
+  firstValue?: TypedValue;
+  secondValue?: TypedValue;
+  thirdValue?: TypedValue;
+  lastValue?: TypedValue;
+}
 ```
 
 For more docs on how to use it check the link above, and for more examples see: [elven.tools/docs/dapp-react-hooks-and-components.html](https://elven.tools/docs/dapp-react-hooks-and-components.html)
@@ -87,9 +120,9 @@ Check detailed docs on it here: [How to start with the Dapp](https://www.elven.t
 
 - it works on Nextjs
 - it uses the newest version of [sdk-core](https://github.com/multiversx/mx-sdk-js-core) without the [sdk-dapp](https://github.com/multiversx/mx-sdk-dapp) library.
-it uses backend-side rewrites to hide the API endpoint. The only exposed one is `/api`
+- optionally it uses backend-side rewrites to hide the API endpoint, then the only exposed one is `/api`
 - it uses .env file - there is an example in the repo
-- it uses chakra-ui
+- it uses [chakra-ui](https://chakra-ui.com/)
 
 More docs on it: [Minter Dapp introduction](https://www.elven.tools/docs/minter-dapp-introduction.html)
 

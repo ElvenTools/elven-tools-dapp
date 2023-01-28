@@ -1,6 +1,6 @@
 ### [4.2.0](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v4.2.0) (2023-01-28)
 - rebuilt in-app navigation using Next Link instead ActionButton that should be used only for triggering functions, and not navigation
-- `useScQuery` can now query more complex data using abi file
+- `useScQuery` can now query more complex data using abi file and result parser from MultiversX sdk-core 
 - better errors handling through the network provider
 - update npm dependencies
 

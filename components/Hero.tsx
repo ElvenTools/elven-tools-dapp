@@ -68,7 +68,7 @@ export const Hero = () => {
         textAlign={{ base: 'center', md: 'left' }}
       >
         The actual working example is connected to the Elven Tools smart
-        contract deployed on the MultiversX (Elrond) blockchain{' '}
+        contract deployed on the MultiversX blockchain{' '}
         <Text as="span" fontWeight="medium">
           devnet
         </Text>

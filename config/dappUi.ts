@@ -7,23 +7,23 @@ export const dappHostname = process.env.NEXT_PUBLIC_DAPP_HOST;
 
 // HTML metata and og tags, default values for MetaHead.tsx component
 export const defaultMetaTags = {
-  title: 'Elven Tools NFT minter dapp demo - MultiversX (Elrond) blockchain',
+  title: 'Elven Tools NFT minter dapp demo - MultiversX blockchain',
   description:
-    'Open source Dapp template for the Elven Tools and MultiversX (Elrond) blockchain. The actual working example is connected to the Elven Tools smart contract deployed on the MultiversX (Elrond) blockchain devnet!',
+    'Open source Dapp template for the Elven Tools and MultiversX blockchain. The actual working example is connected to the Elven Tools smart contract deployed on the MultiversX blockchain devnet!',
   image: `${dappHostname}/og-image.png`,
 };
 
 // FAQ section data
 export const faq = [
   {
-    question: 'What is an ESDT on MultiversX (Elrond)?',
+    question: 'What is an ESDT on MultiversX?',
     answer:
-      'ESDT stands for MultiversX (Elrond) Standard Digital Token. Custom tokens at native speed and scalability, without ERC20. The MultiversX (Elrond) network natively supports the issuance of custom tokens, without the need for contracts such as ERC20, but addressing the same use-cases. And due to the native in-protocol support, transactions with custom tokens do not require the VM at all. In effect, this means that custom tokens are as fast and as scalable as the native EGLD token itself.',
+      'ESDT stands for MultiversX Standard Digital Token. Custom tokens at native speed and scalability, without ERC20. The MultiversX network natively supports the issuance of custom tokens, without the need for contracts such as ERC20, but addressing the same use-cases. And due to the native in-protocol support, transactions with custom tokens do not require the VM at all. In effect, this means that custom tokens are as fast and as scalable as the native EGLD token itself.',
   },
   {
-    question: 'What is an NFT on MultiversX (Elrond)?',
+    question: 'What is an NFT on MultiversX?',
     answer:
-      'The MultiversX (Elrond) protocol introduces native NFT support by adding metadata and attributes on top of the already existing ESDT. This way, one can issue a semi-fungible token or a non-fungible token which is quite similar to an ESDT, but has a few more attributes, as well as an assignable URI. Once owning a quantity of a NFT/SFT, users will have their data store directly under their account, inside the trie.',
+      'The MultiversX protocol introduces native NFT support by adding metadata and attributes on top of the already existing ESDT. This way, one can issue a semi-fungible token or a non-fungible token which is quite similar to an ESDT, but has a few more attributes, as well as an assignable URI. Once owning a quantity of a NFT/SFT, users will have their data store directly under their account, inside the trie.',
   },
   {
     question:

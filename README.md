@@ -4,14 +4,14 @@
 - Demo: [dapp-demo.elven.tools](https://dapp-demo.elven.tools)
 - Elven Tools intro (including the Dapp): [youtu.be/Jou5jn8PFz8](https://youtu.be/Jou5jn8PFz8)
 
-The Dapp is built using Nextjs and a couple of helpful tools. It allows you to interact with the MultiversX (Elrond) blockchain and smart contracts, and especially it is prepared for the [Elven Tools Smart Contract](https://github.com/ElvenTools/elven-nft-minter-sc). But you can always modify it and adjust it for your needs.
+The Dapp is built using Nextjs and a couple of helpful tools. It allows you to interact with the MultiversX blockchain and smart contracts, and especially it is prepared for the [Elven Tools Smart Contract](https://github.com/ElvenTools/elven-nft-minter-sc). But you can always modify it and adjust it for your needs.
 
 ### It provides:
 
-- Auth with 4 MultiversX (Elrond) blockchain providers
+- Auth with 4 MultiversX blockchain providers
   - Web Wallet
-  - Maiar mobile app
-  - Maiar DeFi browser extension
+  - xPortal mobile app
+  - MultiversX DeFi browser extension
   - Ledger Nano
 - React hooks for making transactions
 - React hooks for querying smart contracts

@@ -1,7 +1,7 @@
 // After minting an NFT, there is no guarantee that the image thumbnail
-// will be immediately available through MultiversX (Elrond) API
+// will be immediately available through MultiversX API
 // This is why we have this helper. It will fallback to the IPFS source using a custom
-// IPFS gateway, we take the CID from MultiversX (Elrond)'s IPFS gateway url here to be sure that we will get it
+// IPFS gateway, we take the CID from MultiversX's IPFS gateway url here to be sure that we will get it
 
 import { FC, CSSProperties, PropsWithChildren } from 'react';
 import { Box } from '@chakra-ui/react';

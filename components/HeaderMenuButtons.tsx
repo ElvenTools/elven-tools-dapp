@@ -1,7 +1,6 @@
-import { useRouter } from 'next/router';
-import { Box, Button } from '@chakra-ui/react';
-import { useCallback, FC } from 'react';
-import { ActionButton } from './ActionButton';
+import NextLink from 'next/link';
+import { Box, Link } from '@chakra-ui/react';
+import { FC } from 'react';
 import { SocialMediaIcons } from './SocialMediaIcons';
 import { LoginModalButton } from './core/LoginModalButton';
 import { UserAvatar } from './UserAvatar';
@@ -11,16 +10,6 @@ interface HeaderMenuButtonsProps {
 }
 
 export const HeaderMenuButtons: FC<HeaderMenuButtonsProps> = ({ enabled }) => {
-  const router = useRouter();
-
-  const handleMintClick = useCallback(() => {
-    router.push('/mint');
-  }, [router]);
-
-  const handleAboutClick = useCallback(() => {
-    router.push('/about');
-  }, [router]);
-
   return (
     <Box
       display="flex"
@@ -33,15 +22,15 @@ export const HeaderMenuButtons: FC<HeaderMenuButtonsProps> = ({ enabled }) => {
       }}
     >
       {enabled.includes('about') && (
-        <Button
-          variant="link"
+        <Link
           color="elvenTools.white"
-          _focus={{ outline: 'none' }}
           mr={2}
-          onClick={handleAboutClick}
+          as={NextLink}
+          _focus={{ outline: 'none' }}
+          href="/about"
         >
           About
-        </Button>
+        </Link>
       )}
 
       <SocialMediaIcons />
@@ -49,7 +38,24 @@ export const HeaderMenuButtons: FC<HeaderMenuButtonsProps> = ({ enabled }) => {
       <UserAvatar />
 
       {enabled.includes('mint') && (
-        <ActionButton onClick={handleMintClick}>Mint</ActionButton>
+        <Link
+          as={NextLink}
+          href="/mint"
+          borderColor="elvenTools.color2.darker"
+          borderWidth={2}
+          bgColor="transparent"
+          py={2}
+          px={6}
+          rounded="xl"
+          fontWeight="normal"
+          cursor="pointer"
+          color="elvenTools.white"
+          userSelect="none"
+          _hover={{ bg: 'elvenTools.color2.darker' }}
+          transition="background-color .3s"
+        >
+          Mint
+        </Link>
       )}
       {enabled.includes('auth') && <LoginModalButton />}
     </Box>

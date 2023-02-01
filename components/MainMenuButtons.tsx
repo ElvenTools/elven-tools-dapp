@@ -38,7 +38,7 @@ export const MainMenuButtons: FC<MainMenuButtonsProps> = ({ enabled }) => {
     router.push('https://docs.ghostverse.org/');
   }, [router]);
   const handleWalletClick = useCallback(() => {
-    router.push('https://walletfp.com/?category=nft&address=gokai');
+    router.push('https://explorer.multiversx.com/accounts/erd1xuf43l9v4d3lxhfg9ehzh244592gf2an7hmuw9h84gma7j8fdsws60rrqn');
   }, [router]);
   const handleVoteClick = useCallback(() => {
     router.push('https://superciety.com/fellowships/ghostverse-dao');

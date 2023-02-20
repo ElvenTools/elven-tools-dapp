@@ -38,13 +38,19 @@ export const MainMenuButtons: FC<MainMenuButtonsProps> = ({ enabled }) => {
     router.push('https://docs.ghostverse.org/');
   }, [router]);
   const handleWalletClick = useCallback(() => {
+    router.push('/wallet');
+  }, [router]);
+  const handleGokaiWalletClick = useCallback(() => {
     router.push('https://explorer.multiversx.com/accounts/erd1xuf43l9v4d3lxhfg9ehzh244592gf2an7hmuw9h84gma7j8fdsws60rrqn');
   }, [router]);
+  const handleGhostverseWalletClick = useCallback(() => {
+    router.push('https://explorer.multiversx.com/accounts/erd1wwww2pa5hkxt6sn7ghf6uzglak2npe67q5k6tzjxu2s9ah25sxys77w0zc');
+  }, [router]);
   const handleVoteClick = useCallback(() => {
-    router.push('https://superciety.com/fellowships/ghostverse-dao');
+    router.push('https://peerme.io/peerings/ghostverse-dao');
   }, [router]);
   const handleTwitterClick = useCallback(() => {
-    router.push('https://twitter.com/GhostverseOrg');
+    router.push('https://twitter.com/GhostVerseOrg');
   }, [router]);
   const handleDiscordClick = useCallback(() => {
     router.push('https://discord.gg/tXSeJfVVnH');
@@ -124,6 +130,30 @@ export const MainMenuButtons: FC<MainMenuButtonsProps> = ({ enabled }) => {
             alt="GhostVerse Lightpaper Mr Ghost MxGhosts NFT DAO MultiversX"
           />
           Wallet
+        </ActionButtonXL>
+      )}
+      {enabled.includes('gokaiwallet') && (
+        <ActionButtonXL onClick={handleGokaiWalletClick}>
+          <Image
+            boxSize={{ base: '100px', md: '140px' }}
+            objectFit="contain"
+            my={4}
+            src="/media/ghostverse-wallet-mr-ghost-mxghosts-nft-dao-multiversx-blockchain.webp"
+            alt="GhostVerse Lightpaper Mr Ghost MxGhosts NFT DAO MultiversX"
+          />
+          Gokai Labs
+        </ActionButtonXL>
+      )}
+      {enabled.includes('ghostversewallet') && (
+        <ActionButtonXL onClick={handleGhostverseWalletClick}>
+          <Image
+            boxSize={{ base: '100px', md: '140px' }}
+            objectFit="contain"
+            my={4}
+            src="/media/ghostverse-wallet-mr-ghost-mxghosts-nft-dao-multiversx-blockchain.webp"
+            alt="GhostVerse Lightpaper Mr Ghost MxGhosts NFT DAO MultiversX"
+          />
+          GhostVerse
         </ActionButtonXL>
       )}
       {enabled.includes('github') && (

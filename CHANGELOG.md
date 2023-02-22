@@ -1,3 +1,7 @@
+### [5.0.0](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v5.0.0) (2023-02-21)
+- switch to [@useelven/core](https://www.useelven.com) when it comes to core functionality
+- update dependencies
+
 ### [4.2.0](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v4.2.0) (2023-01-28)
 - rebuilt in-app navigation using Next Link instead ActionButton that should be used only for triggering functions, and not navigation
 - `useScQuery` can now query more complex data using abi file and result parser from MultiversX sdk-core 

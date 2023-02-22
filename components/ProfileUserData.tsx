@@ -1,13 +1,13 @@
 import { Box, Avatar, Stack, Icon, Tooltip } from '@chakra-ui/react';
 import { BiLink } from 'react-icons/bi';
-import { avatarIdUrl, getActiveNetworkConfiguration } from '../config/network';
+import { avatarIdUrl } from '../config/dappCustoms';
 import { shortenHash } from '../utils/shortenHash';
 import { Account } from '../types/account';
-import { useApiCall } from '../hooks/interaction/useApiCall';
-import { useAccount } from '../hooks/auth/useAccount';
+import { useApiCall, useAccount, useConfig } from '@useelven/core';
 
 export const ProfileUserData = () => {
   const { address } = useAccount();
+  const { explorerAddress } = useConfig();
 
   const { data: accountData, isLoading: accountDataPending } =
     useApiCall<Account>({ url: `/accounts/${address}` });
@@ -58,9 +58,7 @@ export const ProfileUserData = () => {
               direction="row"
               alignItems="center"
               as="a"
-              href={`${
-                getActiveNetworkConfiguration().explorerAddress
-              }/address/${address}`}
+              href={`${explorerAddress}/address/${address}`}
               target="_blank"
               rel="noopener noreferrer"
             >

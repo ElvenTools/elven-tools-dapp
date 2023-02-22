@@ -1,17 +1,15 @@
 import { Box, Stack, Spinner, Card, CardBody, Text } from '@chakra-ui/react';
 import Link from 'next/link';
-import { useAccount } from '../hooks/auth/useAccount';
-import { useApiCall } from '../hooks/interaction/useApiCall';
+import { useAccount, useApiCall, SCQueryType, useConfig } from '@useelven/core';
 import { NFT } from '../types/nfts';
-import { SCQueryType } from '../hooks/interaction/useScQuery';
-import { useElvenScQuery } from '../hooks/interaction/elvenScHooks/useElvenScQuery';
+import { useElvenScQuery } from '../hooks/useElvenScQuery';
 import { NftImageHelper } from './NftImageHelper';
-import { getActiveNetworkConfiguration } from '../config/network';
 
 const SIZE_PER_PAGE = 10000;
 
 export const ProfileNFTsList = () => {
   const { address } = useAccount();
+  const { explorerAddress } = useConfig();
 
   const { data: collectionTicker, isLoading: collectionTickerLoading } =
     useElvenScQuery<number>({
@@ -71,9 +69,7 @@ export const ProfileNFTsList = () => {
                 <NftImageHelper
                   thumbnail={nft.media?.[0].thumbnailUrl}
                   multiversxIPFSGatewayUrl={nft.url}
-                  href={`${
-                    getActiveNetworkConfiguration().explorerAddress
-                  }/nfts/${nft.identifier}`}
+                  href={`${explorerAddress}/nfts/${nft.identifier}`}
                 />
               </Stack>
               <Box
@@ -83,9 +79,7 @@ export const ProfileNFTsList = () => {
                 textAlign="center"
               >
                 <a
-                  href={`${
-                    getActiveNetworkConfiguration().explorerAddress
-                  }/nfts/${nft.identifier}`}
+                  href={`${explorerAddress}/nfts/${nft.identifier}`}
                   rel="noopener noreferrer"
                   target="_blank"
                 >
@@ -94,9 +88,7 @@ export const ProfileNFTsList = () => {
               </Box>
               <Box color="elvenTools.white" textAlign="center">
                 <a
-                  href={`${
-                    getActiveNetworkConfiguration().explorerAddress
-                  }/nfts/${nft.identifier}`}
+                  href={`${explorerAddress}/nfts/${nft.identifier}`}
                   rel="noopener noreferrer"
                   target="_blank"
                 >

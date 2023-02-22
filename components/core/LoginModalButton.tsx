@@ -13,10 +13,8 @@ import {
 import { FC } from 'react';
 import { ActionButton } from '../ActionButton';
 import { LoginComponent } from './LoginComponent';
-import { useEffectOnlyOnUpdate } from '../../hooks/tools/useEffectOnlyOnUpdate';
-import { useLogin } from '../../hooks/auth/useLogin';
-import { useLogout } from '../../hooks/auth/useLogout';
-import { setLoggingInState } from '../../store/auth';
+import { useEffectOnlyOnUpdate } from '../../hooks/useEffectOnlyOnUpdate';
+import { useLogin, useLogout } from '@useelven/core';
 
 interface LoginModalButtonProps {
   onClose?: () => void;
@@ -43,10 +41,7 @@ export const LoginModalButton: FC<LoginModalButtonProps> = ({
     if (isLoggedIn) {
       close();
     }
-    if (!opened) {
-      setLoggingInState('error', '');
-    }
-  }, [opened, isLoggedIn]);
+  }, [isLoggedIn]);
 
   return (
     <>

@@ -10,7 +10,7 @@ import '@fontsource/poppins/900.css';
 
 import type { AppProps } from 'next/app';
 import { ChakraProvider } from '@chakra-ui/react';
-import { useNetworkSync } from '../hooks/auth/useNetworkSync';
+import { useNetworkSync } from '@useelven/core';
 import { theme } from '../config/chakraTheme';
 import { SWRConfig } from 'swr';
 import { useToast } from '@chakra-ui/react';
@@ -19,7 +19,7 @@ import { useCallback } from 'react';
 const toastId = 'elven-tools-error-toast';
 
 const ElvenToolsDapp = ({ Component, pageProps }: AppProps) => {
-  useNetworkSync();
+  useNetworkSync({ chainType: 'devnet' });
   const toast = useToast();
 
   const handleErrorToast = useCallback(() => {

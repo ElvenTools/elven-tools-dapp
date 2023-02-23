@@ -2,7 +2,7 @@
 // It uses the generic useScQuery hook
 // For docs on smart contract endpoints check: https://www.elven.tools/docs/sc-endpoints.html
 
-import { useScQuery, SCQueryType } from '../useScQuery';
+import { useScQuery, SCQueryType } from '@useelven/core';
 
 const smartContractAddress = process.env.NEXT_PUBLIC_NFT_SMART_CONTRACT;
 

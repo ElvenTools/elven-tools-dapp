@@ -6,10 +6,8 @@
 import { FC, CSSProperties, PropsWithChildren } from 'react';
 import { Box } from '@chakra-ui/react';
 import Image, { ImageProps } from 'next/image';
-import {
-  customIPFSGateway,
-  getActiveNetworkConfiguration,
-} from '../config/network';
+import { useConfig } from '@useelven/core';
+import { customIPFSGateway } from '../config/dappCustoms';
 
 const commonImageStyles: CSSProperties = {
   objectFit: 'contain',
@@ -39,11 +37,12 @@ const isDefaultThumbnail = (thumbnail: string) => {
 
 const getImageUrlFromIPFS = (
   multiversxIPFSGatewayUrl: string,
-  thumbnail: string
+  thumbnail: string,
+  IPFSGateway: string
 ) => {
   if (multiversxIPFSGatewayUrl) {
     const CIDandImageFileName = multiversxIPFSGatewayUrl.replace(
-      getActiveNetworkConfiguration().multiversIPFSGateway,
+      IPFSGateway,
       ''
     );
     return `${customIPFSGateway}${CIDandImageFileName}`;
@@ -81,12 +80,17 @@ export const NftImageHelper: FC<NftImageHelperProps> = ({
   multiversxIPFSGatewayUrl,
   href,
 }) => {
+  const { IPFSGateway } = useConfig();
   return (
     <>
-      {isDefaultThumbnail(thumbnail) ? (
+      {isDefaultThumbnail(thumbnail) && IPFSGateway ? (
         <MaybeWithHref href={href}>
           <Image
-            src={getImageUrlFromIPFS(multiversxIPFSGatewayUrl, thumbnail)}
+            src={getImageUrlFromIPFS(
+              multiversxIPFSGatewayUrl,
+              thumbnail,
+              IPFSGateway
+            )}
             alt=""
             {...commonImagesProps}
           />

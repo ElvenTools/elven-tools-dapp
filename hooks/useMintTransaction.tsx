@@ -1,19 +1,30 @@
-import { ContractFunction, TokenPayment, U32Value } from '@multiversx/sdk-core';
+import {
+  ContractFunction,
+  U32Value,
+  ContractCallPayloadBuilder,
+  TokenPayment,
+} from '@multiversx/sdk-core';
 import BigNumber from 'bignumber.js';
-import { useScTransaction, ScTransactionCb } from '../useScTransaction';
-import { useElvenScQuery } from '../elvenScHooks/useElvenScQuery';
-import { SCQueryType } from '../useScQuery';
+import { useElvenScQuery } from './useElvenScQuery';
+import {
+  SCQueryType,
+  useTransaction,
+  TransactionCallbackParams,
+} from '@useelven/core';
 
+const smartContractAddress = process.env.NEXT_PUBLIC_NFT_SMART_CONTRACT;
 const mintTxBaseGasLimit = Number(process.env.NEXT_PUBLIC_MINT_BASE_GAS_LIMIT);
 const mintFunctionName = process.env.NEXT_PUBLIC_MINT_FUNCTION_NAME;
 
-export function useMintTransaction(cb?: (params: ScTransactionCb) => void) {
+export function useMintTransaction(
+  cb?: (params: TransactionCallbackParams) => void
+) {
   const { data: tokenSellingPrice } = useElvenScQuery<number>({
     funcName: 'getNftPrice',
     type: SCQueryType.NUMBER,
   });
 
-  const { pending, triggerTx, transaction, error } = useScTransaction(cb);
+  const { pending, triggerTx, txResult, error } = useTransaction({ cb });
 
   const mint = async (tokensAmount: number) => {
     const tokens = tokensAmount || 1;
@@ -36,19 +47,32 @@ export function useMintTransaction(cb?: (params: ScTransactionCb) => void) {
       );
       return;
     }
+
+    if (!smartContractAddress) {
+      Promise.reject(
+        new Error('Plese provide the mint endpoint name using env variables!')
+      );
+      return;
+    }
+
+    const data = new ContractCallPayloadBuilder()
+      .setFunction(new ContractFunction(mintFunctionName))
+      .setArgs([new U32Value(tokens)])
+      .build();
+
     triggerTx({
-      func: new ContractFunction(mintFunctionName),
+      address: smartContractAddress,
       gasLimit:
         mintTxBaseGasLimit + (mintTxBaseGasLimit / 2) * (tokensAmount - 1),
-      args: [new U32Value(tokens)],
       value: TokenPayment.egldFromBigInteger(totalPayment),
+      data,
     });
   };
 
   return {
     pending,
     mint,
-    transaction,
+    txResult,
     error,
   };
 }

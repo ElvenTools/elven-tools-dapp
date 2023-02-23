@@ -1,7 +1,7 @@
 import { Box, Spinner, Text } from '@chakra-ui/react';
 import { FC } from 'react';
-import { useElvenScQuery } from '../hooks/interaction/elvenScHooks/useElvenScQuery';
-import { SCQueryType } from '../hooks/interaction/useScQuery';
+import { useElvenScQuery } from '../hooks/useElvenScQuery';
+import { SCQueryType } from '@useelven/core';
 
 interface NFTLeftToMintProps {
   data?: number;

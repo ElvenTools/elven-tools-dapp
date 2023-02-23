@@ -2,10 +2,9 @@ import { FC, useCallback, useState, useEffect, useRef } from 'react';
 import { Box, Text, Flex, Spinner } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
-import { LoginMethodsEnum } from '../../types/enums';
+import { LoginMethodsEnum, useLoginInfo } from '@useelven/core';
 import { ActionButton } from '../../components/ActionButton';
 import { shortenHash } from '../../utils/shortenHash';
-import { useLoginInfo } from '../../hooks/auth/useLoginInfo';
 import { errorParse } from '../../utils/errorParse';
 
 interface LedgerAccountsListProps {

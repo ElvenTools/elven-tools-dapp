@@ -1,9 +1,11 @@
-import { useMintTransaction } from '../hooks/interaction/elvenScHooks/useMintTransaction';
+import { useMintTransaction } from '../hooks/useMintTransaction';
 import { useCallback, FC, useState } from 'react';
 import { ActionButton } from './ActionButton';
-import { ScTransactionCb } from '../hooks/interaction/useScTransaction';
-import { useLoginInfo } from '../hooks/auth/useLoginInfo';
-import { LoginMethodsEnum } from '../types/enums';
+import {
+  useLoginInfo,
+  LoginMethodsEnum,
+  TransactionCallbackParams,
+} from '@useelven/core';
 import {
   NumberInput,
   NumberInputField,
@@ -16,12 +18,12 @@ import { TransactionPendingModal } from './core/TransactionPendingModal';
 
 interface MintFormProps {
   leftToMintForUser: number;
-  cb?: (params: ScTransactionCb) => void;
+  cb?: (params: TransactionCallbackParams) => void;
 }
 
 export const MintForm: FC<MintFormProps> = ({ leftToMintForUser, cb }) => {
   const [amount, setAmount] = useState(1);
-  const { mint, pending, transaction, error } = useMintTransaction(cb);
+  const { mint, pending, txResult, error } = useMintTransaction(cb);
   const { loginMethod } = useLoginInfo();
 
   const handleMint = useCallback(() => {
@@ -80,7 +82,7 @@ export const MintForm: FC<MintFormProps> = ({ leftToMintForUser, cb }) => {
       </Box>
       <TransactionPendingModal
         isOpen={pending}
-        successTxHash={transaction?.getHash().toString()}
+        successTxHash={txResult?.hash}
         txError={error}
         additionalMessage={getAdditionalPendingMessage()}
       />

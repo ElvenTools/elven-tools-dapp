@@ -3,11 +3,10 @@ import { Box, Text, useBreakpointValue } from '@chakra-ui/react';
 import Link from 'next/link';
 import { useCallback, useEffect } from 'react';
 import { Address } from '@multiversx/sdk-core';
-import { SCQueryType } from '../hooks/interaction/useScQuery';
-import { useElvenScQuery } from '../hooks/interaction/elvenScHooks/useElvenScQuery';
+import { SCQueryType, useAccount } from '@useelven/core';
+import { useElvenScQuery } from '../hooks/useElvenScQuery';
 import { MintForm } from './MintForm';
 import { Authenticated } from './core/Authenticated';
-import { useAccount } from '../hooks/auth/useAccount';
 import { LoginModalButton } from './core/LoginModalButton';
 import { NFTLeftToMint } from './NFTLeftToMint';
 import { NFTAllowlistEnabled } from './NFTAllowlistEnabled';
@@ -15,7 +14,6 @@ import { NFTMintedAlready } from './NFTMintedAlready';
 import { NFTLeftToMintPerAddress } from './NFTLeftToMintPerAddress';
 
 // TODO: Prepare separate components for the segments here
-// TODO: use Valtio for global smart contract config state + dispatchers to be able to trigger changes from each component
 
 export const MintHero = () => {
   const { address } = useAccount();

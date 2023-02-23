@@ -51,6 +51,16 @@ export const Footer = () => {
           <Text
             as="a"
             color="elvenTools.color3.base"
+            href="https://www.useElven.com"
+            target="_blank"
+            rel="noopener noreferrer nofollow"
+          >
+            {'useElven'}
+          </Text>
+          <Text fontWeight="hairline"> | </Text>
+          <Text
+            as="a"
+            color="elvenTools.color3.base"
             href="https://github.com/xdevguild/buildo-begins"
             target="_blank"
             rel="noopener noreferrer nofollow"

@@ -1,13 +1,13 @@
 import { Box, Text } from '@chakra-ui/react';
 import { CollectionInfoBox } from './CollectionInfoBox';
-import { getActiveNetworkConfiguration } from '../config/network';
 import { shortenHash } from '../utils/shortenHash';
-import { useElvenScQuery } from '../hooks/interaction/elvenScHooks/useElvenScQuery';
-import { SCQueryType } from '../hooks/interaction/useScQuery';
+import { useElvenScQuery } from '../hooks/useElvenScQuery';
+import { SCQueryType, useConfig } from '@useelven/core';
 
 const smartContractAddress = process.env.NEXT_PUBLIC_NFT_SMART_CONTRACT;
 
 export const Hero = () => {
+  const { explorerAddress } = useConfig();
   const { data: collectionSize, isLoading: collectionSizeLoading } =
     useElvenScQuery<number>({
       funcName: 'getTotalSupply',
@@ -91,9 +91,7 @@ export const Hero = () => {
           content={collectionTicker || '-'}
           label="Collection ticker. Click for details."
           isLoading={collectionTickerLoading}
-          href={`${
-            getActiveNetworkConfiguration().explorerAddress
-          }/collections/${collectionTicker}`}
+          href={`${explorerAddress}/collections/${collectionTicker}`}
         />
         <CollectionInfoBox
           content={
@@ -104,9 +102,7 @@ export const Hero = () => {
           label={`Minter smart contract. Click for details.`}
           href={
             smartContractAddress
-              ? `${
-                  getActiveNetworkConfiguration().explorerAddress
-                }/accounts/${smartContractAddress}`
+              ? `${explorerAddress}/accounts/${smartContractAddress}`
               : undefined
           }
         />

@@ -12,7 +12,7 @@ const nextConfig = {
     };
     return config;
   },
-  reactStrictMode: false, // will be handled in following releases, when enabled there are problems in development
+  reactStrictMode: true,
   async rewrites() {
     if (!process.env.MULTIVERSX_PRIVATE_API) {
       return [];

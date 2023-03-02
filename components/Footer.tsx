@@ -16,6 +16,54 @@ export const Footer = () => {
         textAlign="center"
       >
         <Box
+          as='h2'
+          borderRadius="0px"
+          mx="auto"
+          mb={{ base: '5' }}
+          mt={{ base: '20' }}
+          display="table"
+          zIndex="1"
+          position="relative"
+          fontSize="2xl"
+        >
+          New to MultiversX
+        </Box>
+        <Box
+          as="a"
+              height="68px"
+              borderColor="ghostVerse.blue.base"
+              borderWidth={1}
+              bgColor="ghostVerse.dark.lighter"
+              backdropFilter="blur(3px)"
+              color="white"
+              display="flex"
+              zIndex={10}
+              position="relative"
+              width="fit-content"
+          margin="auto"
+          mb={{ base: '20' }}
+              py={2}
+              px={6}
+              fontSize="xl"
+              alignItems="center"
+              href="https://xport.al/referral/7nvae7kpo1"
+              title="Install xPortal"
+              _hover={{
+                bg: 'ghostVerse.blue.lighter',
+              }}
+              transition="background-color .3s"
+        >
+          <Image
+            src="/media/logo-multiversx.webp"
+            alt="xPortal"
+            title="xPortal"
+            mr={2}
+            boxSize="40px"
+            objectFit="contain"
+          />
+          Install xPortal
+        </Box>
+        <Box
           borderRadius="0px"
           mx="auto"
           my={{ base: '5' }}

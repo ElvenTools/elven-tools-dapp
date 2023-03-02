@@ -246,48 +246,76 @@ export const MintHero = () => {
           fantastic world!
         </Text>
         {!mintingPaused ? (
-          <Box mt={6}>
-            <NFTLeftToMint
-              data={totalTokensLeft || 0}
-              dropData={dropData || 0}
-              dataLoading={dropActive ? dropIsLoading : totalIsLoading}
-            />
-            <Box>
-              <Authenticated
-                fallback={
-                  <Box
-                    mt={6}
-                    display="flex"
-                    justifyContent={isContentCentered ? 'center' : 'flex-start'}
-                  >
-                    <LoginModalButton />
-                  </Box>
-                }
-                spinnerCentered={isContentCentered}
-              >
-                {/* <NFTAllowlistEnabled
-                  data={allowlistCheckData}
-                  dataLoading={allowlistCheckLoading}
-                />
-                <NFTMintedAlready
-                  data={mintedData}
-                  dataLoading={mintedDataLoading}
-                /> */}
-                {!isLoadingTokensLimitPerAddressTotal &&
-                !tokensLimitPerAddressPerDropLoading &&
-                !Number.isNaN(tokensLeftPerUser) ? (
-                  <>
-                    {/* <NFTLeftToMintPerAddress
-                      leftToMintForUser={tokensLeftPerUser}
-                    /> */}
-                    <MintForm
-                      cb={handleRefreshData}
-                      leftToMintForUser={tokensLeftPerUser}
-                    />
-                  </>
-                ) : null}
-              </Authenticated>
-            </Box>
+          // <Box mt={6}>
+          //   <NFTLeftToMint
+          //     data={totalTokensLeft || 0}
+          //     dropData={dropData || 0}
+          //     dataLoading={dropActive ? dropIsLoading : totalIsLoading}
+          //   />
+          //   <Box>
+          //     <Authenticated
+          //       fallback={
+          //         <Box
+          //           mt={6}
+          //           display="flex"
+          //           justifyContent={isContentCentered ? 'center' : 'flex-start'}
+          //         >
+          //           <LoginModalButton />
+          //         </Box>
+          //       }
+          //       spinnerCentered={isContentCentered}
+          //     >
+          //       {/* <NFTAllowlistEnabled
+          //         data={allowlistCheckData}
+          //         dataLoading={allowlistCheckLoading}
+          //       />
+          //       <NFTMintedAlready
+          //         data={mintedData}
+          //         dataLoading={mintedDataLoading}
+          //       /> */}
+          //       {!isLoadingTokensLimitPerAddressTotal &&
+          //       !tokensLimitPerAddressPerDropLoading &&
+          //       !Number.isNaN(tokensLeftPerUser) ? (
+          //         <>
+          //           {/* <NFTLeftToMintPerAddress
+          //             leftToMintForUser={tokensLeftPerUser}
+          //           /> */}
+          //           <MintForm
+          //             cb={handleRefreshData}
+          //             leftToMintForUser={tokensLeftPerUser}
+          //           />
+          //         </>
+          //       ) : null}
+          //     </Authenticated>
+          //   </Box>
+          // </Box>
+          <Box>
+            <Text
+              fontSize="2xl"
+              fontWeight="bold"
+              mt={10}
+              mb={5}
+              color="ghostVerse.blue.base"
+              textAlign={{ base: 'center', md: 'left' }}
+            >
+              Drop #3 Sold Out! 
+            </Text>
+            <Text
+              fontSize="xl"
+              fontWeight="bold"
+              mt={10}
+              mb={5}
+              textAlign={{ base: 'center', md: 'left' }}
+            >
+              Drop #4 is being considered by the members. 
+            </Text>
+            <Text
+              fontSize="xl"
+              fontWeight="bold"
+              textAlign={{ base: 'center', md: 'left' }}
+            >
+              Join us in making a decision.
+            </Text>
           </Box>
         ) : (
           <Box>

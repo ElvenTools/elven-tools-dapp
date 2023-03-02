@@ -41,26 +41,27 @@ export const faq = [
 // Roadmap section data
 export const roadmap = [
   {
-    title: 'Done. Q1/Q2 2022',
+    title: 'Done. Q1/Q4 2022',
     points: [
       '✓ Create the most terrifying OG PFP DAO NFT collection in MultiversX history',
       '✓ Build an organic community populated by OGs',
       '✓ Collaborate with the largest builders',
       '✓ Create minting dApp',
       '✓ Airdrop the community',
-      '✓ Sold out Drop #1 & #2',
+      '✓ Sold out Drop #1 to #3',
       '✓ Airdrop Collector Vox01 & Vox02 NFT',
       '✓ Launch Monthly, Weekly Rewards and passive income',
       '✓ Get On-chain voting system',
     ],
   },
   {
-    title: 'In Progress. Q3/Q4 2022',
+    title: 'In Progress. Q1/Q2 2023',
     points: [
       '↻ Build a more amazing community',
       '↻ Meet awesome ghost clan members',
       '↻ Make our long-term partnerships stronger',
       '↻ Create a decentralized GhostVerse dApp',
+      '↻ Airdrop Collector Vox03',
       '↻ Open a cannabis shop',
       '↻ Passive income dashboard',
       '↻ Collection rarity',
@@ -69,12 +70,12 @@ export const roadmap = [
     ],
   },
   {
-    title: 'Planned. Q1/Q4 2023',
+    title: 'Planned. Q3/Q4 2023',
     points: [
       'Build the most amazing community',
       'Set up the multi-sig wallet with xSafe',
       'Launch a GhostVerse v2 with xFabric',
-      'Sold out Drop #3 to #13',
+      'Sold out Drop #4 to #13',
       'Run a validator node',
       'Lifetime passive income',
       'Build more',

@@ -4,7 +4,7 @@ import { useConfig } from '@useelven/core';
 
 export const Logo = () => {
   const { chainType } = useConfig();
-  
+
   return (
     <NextLink href="/">
       <Box

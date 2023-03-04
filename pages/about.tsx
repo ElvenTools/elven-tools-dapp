@@ -7,7 +7,7 @@ import { useConfig } from '@useelven/core';
 
 const About: NextPage = () => {
   const { chainType } = useConfig();
-  
+
   return (
     <MainLayout>
       <HeaderMenu>
@@ -47,8 +47,8 @@ const About: NextPage = () => {
         </Text>
         <Text mb={4}>
           This minting landing page will operate on proper collection on the
-          {chainType}. So you will be able to test it, and you will be able to mint
-          some NFTs with fake xEGLD money.
+          {chainType}. So you will be able to test it, and you will be able to
+          mint some NFTs with fake xEGLD money.
         </Text>
         <Text mb={4}>
           When the collection is depleted, I will redeploy another one and

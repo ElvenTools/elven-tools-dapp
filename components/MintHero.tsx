@@ -209,8 +209,8 @@ export const MintHero = () => {
       >
         To be able to mint you have to be logged in to be able to mint. Remember
         that it will mint only on the devent. If you want to do that, you need
-        to connect using one of the methods and the {chainType} address with some
-        xEGLD funds.
+        to connect using one of the methods and the {chainType} address with
+        some xEGLD funds.
       </Text>
       {!mintingPaused ? (
         <Box mt={6}>

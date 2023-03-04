@@ -3,8 +3,11 @@ import { Box, Text } from '@chakra-ui/react';
 import { MainLayout } from '../components/MainLayout';
 import { HeaderMenu } from '../components/HeaderMenu';
 import { HeaderMenuButtons } from '../components/HeaderMenuButtons';
+import { useConfig } from '@useelven/core';
 
 const About: NextPage = () => {
+  const { chainType } = useConfig();
+  
   return (
     <MainLayout>
       <HeaderMenu>
@@ -44,7 +47,7 @@ const About: NextPage = () => {
         </Text>
         <Text mb={4}>
           This minting landing page will operate on proper collection on the
-          devnet. So you will be able to test it, and you will be able to mint
+          {chainType}. So you will be able to test it, and you will be able to mint
           some NFTs with fake xEGLD money.
         </Text>
         <Text mb={4}>

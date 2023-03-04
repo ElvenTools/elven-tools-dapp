@@ -1,3 +1,6 @@
+### [5.1.0](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v5.1.0) (2023-03-04)
+- fix passing custom configuration, one should use .env variables for that, `useNetworkSync` will read from them
+
 ### [5.0.0](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v5.0.0) (2023-02-21)
 - switch to [@useelven/core](https://www.useelven.com) when it comes to core functionality
 - update dependencies

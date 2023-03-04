@@ -1,7 +1,10 @@
 import NextLink from 'next/link';
 import { Box, Text } from '@chakra-ui/react';
+import { useConfig } from '@useelven/core';
 
 export const Logo = () => {
+  const { chainType } = useConfig();
+  
   return (
     <NextLink href="/">
       <Box
@@ -21,7 +24,7 @@ export const Logo = () => {
           borderRadius="sm"
           color="elvenTools.color2.base"
         >
-          devnet
+          {chainType}
         </Text>
 
         <Text

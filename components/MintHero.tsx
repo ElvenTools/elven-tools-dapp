@@ -3,7 +3,7 @@ import { Box, Text, useBreakpointValue } from '@chakra-ui/react';
 import Link from 'next/link';
 import { useCallback, useEffect } from 'react';
 import { Address } from '@multiversx/sdk-core';
-import { SCQueryType, useAccount } from '@useelven/core';
+import { SCQueryType, useAccount, useConfig } from '@useelven/core';
 import { useElvenScQuery } from '../hooks/useElvenScQuery';
 import { MintForm } from './MintForm';
 import { Authenticated } from './core/Authenticated';
@@ -17,6 +17,7 @@ import { NFTLeftToMintPerAddress } from './NFTLeftToMintPerAddress';
 
 export const MintHero = () => {
   const { address } = useAccount();
+  const { chainType } = useConfig();
 
   const { data: mintingPaused } = useElvenScQuery<boolean>({
     funcName: 'isMintingPaused',
@@ -208,7 +209,7 @@ export const MintHero = () => {
       >
         To be able to mint you have to be logged in to be able to mint. Remember
         that it will mint only on the devent. If you want to do that, you need
-        to connect using one of the methods and the devnet address with some
+        to connect using one of the methods and the {chainType} address with some
         xEGLD funds.
       </Text>
       {!mintingPaused ? (

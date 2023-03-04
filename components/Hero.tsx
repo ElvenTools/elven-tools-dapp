@@ -7,7 +7,7 @@ import { SCQueryType, useConfig } from '@useelven/core';
 const smartContractAddress = process.env.NEXT_PUBLIC_NFT_SMART_CONTRACT;
 
 export const Hero = () => {
-  const { explorerAddress } = useConfig();
+  const { explorerAddress, chainType } = useConfig();
   const { data: collectionSize, isLoading: collectionSizeLoading } =
     useElvenScQuery<number>({
       funcName: 'getTotalSupply',
@@ -70,7 +70,7 @@ export const Hero = () => {
         The actual working example is connected to the Elven Tools smart
         contract deployed on the MultiversX blockchain{' '}
         <Text as="span" fontWeight="medium">
-          devnet
+          {chainType}
         </Text>
         ! You can play with it. I will redeploy it from time to time to keep the
         minting active. You can also use the template on the mainnet with a

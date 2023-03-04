@@ -19,7 +19,13 @@ import { useCallback } from 'react';
 const toastId = 'elven-tools-error-toast';
 
 const ElvenToolsDapp = ({ Component, pageProps }: AppProps) => {
-  useNetworkSync({ chainType: 'devnet' });
+  useNetworkSync({
+    chainType: process.env.NEXT_PUBLIC_MULTIVERSX_CHAIN,
+    ...(process.env.NEXT_PUBLIC_MULTIVERSX_API
+      ? { apiAddress: process.env.NEXT_PUBLIC_MULTIVERSX_API }
+      : {}),
+  });
+  
   const toast = useToast();
 
   const handleErrorToast = useCallback(() => {

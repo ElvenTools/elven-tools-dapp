@@ -21,77 +21,15 @@ The Dapp is built using Nextjs and a couple of helpful tools. It allows you to i
 - Preconfigured UI based on Chakra UI
 - The template with sections mainly used on minter dapps (it will be developed further)
 
-### Examples
+### @useelven/hooks
 
-Login with one of four methods.
+The template is based on `@useelven/core` npm library.
 
-```jsx
-const { login, isLoggedIn, error, walletConnectUri, getHWAccounts } = useLogin();
+- [@useelven/hooks docs](https://www.useElven.com) - React hooks for MultiversX blockchain
 
-(...)
+Besides that, there are custom React components and hooks that will help you with development.
 
-login(LoginMethodsEnum.ledger)
-```
-
-Custom mint transactions for the Elven Tools Smart Contract. There is also a more generic `useScTransaction` hook.
-
-```jsx
-const { mint, pending, transaction, error } = useMintTransaction();
-
-(...)
-
-mint(amount)
-```
-
-Query the Elven Tools Smart Contract. There is also a more generic `useScQuery` hook.
-
-```jsx
-const {
-  data,
-  fetch,
-  isLoading,
-} = useElvenScQuery<boolean>({
-  funcName: 'isAllowlistEnabled',
-  type: SCQueryType.BOOLEAN,
-  autoInit: false,
-});
-
-(...)
-
-fetch()
-```
-
-You can also query more complex data types. Then you  will need to provide the ABI JSON file.
-
-```jsx
-import { TypedOutcomeBundle } from '@multiversx/sdk-core';
-import abiJSON from '../config/abi.json';
-
-const { data } = useScQuery<TypedOutcomeBundle>({
-  type: SCQueryType.COMPLEX,
-  payload: {
-    scAddress: 'erd1qqq...',
-    funcName: 'yourScFunction',
-    args: [], // args in hex format, use erdjs for conversion, see above
-  },
-  autoInit: true,
-  abiJSON,
-});
-```
-
-The `data` here will be a `TypedOutcomeBundle`. Which is:
-
-```typescript
-interface TypedOutcomeBundle {
-  returnCode: ReturnCode;
-  returnMessage: string;
-  values: TypedValue[];
-  firstValue?: TypedValue;
-  secondValue?: TypedValue;
-  thirdValue?: TypedValue;
-  lastValue?: TypedValue;
-}
-```
+### Elven Tools Dapp docs
 
 For more docs on how to use it check the link above, and for more examples see: [elven.tools/docs/dapp-react-hooks-and-components.html](https://elven.tools/docs/dapp-react-hooks-and-components.html)
 
@@ -128,6 +66,7 @@ More docs on it: [Minter Dapp introduction](https://www.elven.tools/docs/minter-
 
 ### Other tools
 
+- [useElven](https://www.useElven.com) - React core hooks for MultiversX blockchain
 - [elven.js](https://www.elvenjs.com) - standalone lite SDK for browsers without build steps
 - [Buildo Begins](https://github.com/xdevguild/buildo-begins) - CLI helper tools - interaction with APIs, smart contracts and protocol
 - [Nextjs Dapp Template](https://github.com/xdevguild/nextjs-dapp-template) - Open source Dapp template for the MultiversX blockchain (more general one).

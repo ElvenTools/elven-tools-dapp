@@ -25,7 +25,7 @@ The Dapp is built using Nextjs and a couple of helpful tools. It allows you to i
 
 The template is based on `@useelven/core` npm library.
 
-- [@useelven/hooks docs](https://www.useElven.com) - React hooks for MultiversX blockchain
+- [@useelven/core docs](https://www.useElven.com) - React hooks for MultiversX blockchain
 
 Besides that, there are custom React components and hooks that will help you with development.
 

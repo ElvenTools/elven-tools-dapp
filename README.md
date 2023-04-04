@@ -21,7 +21,7 @@ The Dapp is built using Nextjs and a couple of helpful tools. It allows you to i
 - Preconfigured UI based on Chakra UI
 - The template with sections mainly used on minter dapps (it will be developed further)
 
-### @useelven/hooks
+### @useElven/core
 
 The template is based on `@useelven/core` npm library.
 

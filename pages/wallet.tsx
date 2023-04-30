@@ -14,7 +14,7 @@ const WalletPage: NextPage = () => {
       </HeaderMenu>
       <HomeSectionTitle title="Our funds are currently spread over 2 wallets, the MultiversX wallet from Gokai Labs and the Ledger wallet from GhostVerse." />
       <MainMenu>
-        <MainMenuButtons enabled={['gokaiwallet', 'ghostversewallet',]} />
+        <MainMenuButtons enabled={['gokaiwallet', 'ghostversewallet']} />
       </MainMenu>
     </MainLayout>
   );

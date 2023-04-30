@@ -298,7 +298,7 @@ export const MintHero = () => {
               color="ghostVerse.blue.base"
               textAlign={{ base: 'center', md: 'left' }}
             >
-              Drop #3 Sold Out! 
+              Drop #3 Sold Out!
             </Text>
             <Text
               fontSize="xl"
@@ -307,7 +307,7 @@ export const MintHero = () => {
               mb={5}
               textAlign={{ base: 'center', md: 'left' }}
             >
-              Drop #4 is being considered by the members. 
+              Drop #4 is being considered by the members.
             </Text>
             <Text
               fontSize="xl"

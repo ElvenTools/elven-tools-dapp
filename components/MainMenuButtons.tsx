@@ -31,7 +31,7 @@ export const MainMenuButtons: FC<MainMenuButtonsProps> = ({ enabled }) => {
   const handleFaqClick = useCallback(() => {
     router.push('/faq');
   }, [router]);
-  const handleGreenGardenClick = useCallback(() => {
+  const handleGreenGhostClick = useCallback(() => {
     router.push('https://green.gd/');
   }, [router]);
   const handleLightpaperClick = useCallback(() => {
@@ -41,10 +41,14 @@ export const MainMenuButtons: FC<MainMenuButtonsProps> = ({ enabled }) => {
     router.push('/wallet');
   }, [router]);
   const handleGokaiWalletClick = useCallback(() => {
-    router.push('https://explorer.multiversx.com/accounts/erd1xuf43l9v4d3lxhfg9ehzh244592gf2an7hmuw9h84gma7j8fdsws60rrqn');
+    router.push(
+      'https://explorer.multiversx.com/accounts/erd1xuf43l9v4d3lxhfg9ehzh244592gf2an7hmuw9h84gma7j8fdsws60rrqn'
+    );
   }, [router]);
   const handleGhostverseWalletClick = useCallback(() => {
-    router.push('https://explorer.multiversx.com/accounts/erd1wwww2pa5hkxt6sn7ghf6uzglak2npe67q5k6tzjxu2s9ah25sxys77w0zc');
+    router.push(
+      'https://explorer.multiversx.com/accounts/erd1wwww2pa5hkxt6sn7ghf6uzglak2npe67q5k6tzjxu2s9ah25sxys77w0zc'
+    );
   }, [router]);
   const handleVoteClick = useCallback(() => {
     router.push('https://peerme.io/peerings/ghostverse-dao');
@@ -228,16 +232,16 @@ export const MainMenuButtons: FC<MainMenuButtonsProps> = ({ enabled }) => {
           Faq
         </ActionButtonXL>
       )}
-      {enabled.includes('greengarden') && (
-        <ActionButtonXL onClick={handleGreenGardenClick}>
+      {enabled.includes('greenghost') && (
+        <ActionButtonXL onClick={handleGreenGhostClick}>
           <Image
             boxSize={{ base: '100px', md: '140px' }}
             objectFit="contain"
             my={4}
-            src="/media/ghostverse-greengarden-cannabis-shop-mr-ghost-mxghosts-nft-dao-multiversx-blockchain.png"
-            alt="GhostVerse GreenGarden Cannabis Shop Mr Ghost MxGhosts NFT DAO MultiversX"
+            src="/media/ghostverse-green-ghost-cannabis-shop-mr-ghost-mxghosts-nft-dao-multiversx-blockchain.png"
+            alt="GhostVerse Green Ghost Cannabis Shop Mr Ghost MxGhosts NFT DAO MultiversX"
           />
-          GreenGarden
+          Green Ghost
         </ActionButtonXL>
       )}
       {enabled.includes('egldcommunity') && (

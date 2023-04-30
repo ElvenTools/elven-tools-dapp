@@ -20,7 +20,7 @@ export const theme = extendTheme({
           backgroundColor: 'elvenTools.dark.base',
         },
         '&::-webkit-scrollbar-thumb': {
-          backgroundColor: 'elvenTools.light',
+          backgroundColor: 'ghostVerse.green.base',
           borderRadius: 1.5,
         },
         scrollbarWidth: 'auto',

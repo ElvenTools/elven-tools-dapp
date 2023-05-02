@@ -2,7 +2,7 @@ import {
   ContractFunction,
   U32Value,
   ContractCallPayloadBuilder,
-  TokenPayment,
+  TokenTransfer,
 } from '@multiversx/sdk-core';
 import BigNumber from 'bignumber.js';
 import { useElvenScQuery } from './useElvenScQuery';
@@ -64,7 +64,7 @@ export function useMintTransaction(
       address: smartContractAddress,
       gasLimit:
         mintTxBaseGasLimit + (mintTxBaseGasLimit / 2) * (tokensAmount - 1),
-      value: TokenPayment.egldFromBigInteger(totalPayment),
+      value: TokenTransfer.egldFromBigInteger(totalPayment),
       data,
     });
   };

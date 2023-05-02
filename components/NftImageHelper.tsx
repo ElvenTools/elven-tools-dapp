@@ -7,7 +7,10 @@ import { FC, CSSProperties, PropsWithChildren } from 'react';
 import { Box } from '@chakra-ui/react';
 import Image, { ImageProps } from 'next/image';
 import { useConfig } from '@useelven/core';
-import { customIPFSGateway } from '../config/dappCustoms';
+import {
+  customIPFSGateway,
+  getOldElrondIPFSGateway,
+} from '../config/dappCustoms';
 
 const commonImageStyles: CSSProperties = {
   objectFit: 'contain',
@@ -38,11 +41,14 @@ const isDefaultThumbnail = (thumbnail: string) => {
 const getImageUrlFromIPFS = (
   multiversxIPFSGatewayUrl: string,
   thumbnail: string,
-  IPFSGateway: string
+  IPFSGateway: string,
+  chainType?: string
 ) => {
   if (multiversxIPFSGatewayUrl) {
     const CIDandImageFileName = multiversxIPFSGatewayUrl.replace(
-      IPFSGateway,
+      multiversxIPFSGatewayUrl.includes('elrond')
+        ? getOldElrondIPFSGateway(chainType || 'devnet')
+        : IPFSGateway,
       ''
     );
     return `${customIPFSGateway}${CIDandImageFileName}`;
@@ -80,7 +86,7 @@ export const NftImageHelper: FC<NftImageHelperProps> = ({
   multiversxIPFSGatewayUrl,
   href,
 }) => {
-  const { IPFSGateway } = useConfig();
+  const { IPFSGateway, chainType } = useConfig();
   return (
     <>
       {isDefaultThumbnail(thumbnail) && IPFSGateway ? (
@@ -89,7 +95,8 @@ export const NftImageHelper: FC<NftImageHelperProps> = ({
             src={getImageUrlFromIPFS(
               multiversxIPFSGatewayUrl,
               thumbnail,
-              IPFSGateway
+              IPFSGateway,
+              chainType
             )}
             alt=""
             {...commonImagesProps}

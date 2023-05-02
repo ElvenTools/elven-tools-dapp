@@ -14,7 +14,8 @@ interface ScConfigDataArgs {
   abiJSON?: {
     name: string;
     endpoints: unknown[];
-    types: unknown;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    types: Record<string, any> | undefined;
   };
 }
 

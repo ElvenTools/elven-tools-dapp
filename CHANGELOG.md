@@ -1,3 +1,7 @@
+### [6.1.0](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v6.1.0) (2023-05-02)
+- update `useElven` and `sdk-core`, adjust the code
+- update other dependencies
+
 ### [6.0.0](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v6.0.0) (2023-03-05)
 - switch to v0.1.0 of [useElven](https://www.useelven.com/) with support for xPortal when signing
 - changes for Wallet Connect pairings list

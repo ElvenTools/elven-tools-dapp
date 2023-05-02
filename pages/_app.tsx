@@ -38,7 +38,7 @@ const ElvenToolsDapp = ({ Component, pageProps }: AppProps) => {
         variant: 'subtle',
         title: 'API error!',
         description:
-          'The API is not responding at the moment. Please try later. Also, make sure that you are using the proper chain type.',
+          'The API is not responding at the moment. Please try later. Also, make sure that you are using the proper chain type when connecting locally',
         status: 'error',
         duration: 10000,
         isClosable: true,

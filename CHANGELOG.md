@@ -1,3 +1,7 @@
+### [6.2.0](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v6.2.0) (2023-05-07)
+- update [useElven](https://www.useelven.com/)
+- fix HW integration when strict mode is enabled
+
 ### [6.1.0](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v6.1.0) (2023-05-02)
 - update `useElven` and `sdk-core`, adjust the code
 - update other dependencies

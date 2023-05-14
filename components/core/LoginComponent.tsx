@@ -1,7 +1,7 @@
 // Login component wraps all auth services in one place
 // You can always use only one of them if needed
 import { useCallback, memo, useState } from 'react';
-import { Box, Stack } from '@chakra-ui/react';
+import { Box, Stack, Text } from '@chakra-ui/react';
 import { useLogin, LoginMethodsEnum } from '@useelven/core';
 import { WalletConnectQRCode } from './WalletConnectQRCode';
 import { WalletConnectPairings } from './WalletConnectPairings';
@@ -17,7 +17,6 @@ export const LoginComponent = memo(() => {
     error,
     walletConnectUri,
     getHWAccounts,
-    setLoggingInState,
     walletConnectPairings,
     walletConnectPairingLogin,
     walletConnectRemovePairing,
@@ -41,17 +40,13 @@ export const LoginComponent = memo(() => {
     setLoginMethod(undefined);
   }, []);
 
-  const backToOptions = useCallback(() => {
-    setLoggingInState('error', '');
-  }, [setLoggingInState]);
-
   if (error)
     return (
       <Stack>
         <Box textAlign="center">{error}</Box>
-        <ActionButton isFullWidth onClick={backToOptions}>
-          Back
-        </ActionButton>
+        <Text textAlign="center" pt={4} fontWeight={700}>
+          Close and try again
+        </Text>
       </Stack>
     );
 

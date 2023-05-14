@@ -1,3 +1,7 @@
+### [6.2.1](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v6.2.1) (2023-05-14)
+- update [useElven](https://www.useelven.com/)
+- fix problems with initialization of the HW provider
+
 ### [6.2.0](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v6.2.0) (2023-05-07)
 - update [useElven](https://www.useelven.com/)
 - fix HW integration when strict mode is enabled

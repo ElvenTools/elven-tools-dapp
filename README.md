@@ -70,7 +70,3 @@ More docs on it: [Minter Dapp introduction](https://www.elven.tools/docs/minter-
 - [elven.js](https://www.elvenjs.com) - standalone lite SDK for browsers without build steps
 - [Buildo Begins](https://github.com/xdevguild/buildo-begins) - CLI helper tools - interaction with APIs, smart contracts and protocol
 - [Nextjs Dapp Template](https://github.com/xdevguild/nextjs-dapp-template) - Open source Dapp template for the MultiversX blockchain (more general one).
-
-### Community
-
-- Example with auth verification on the backend side: [elven-tools-dapp-with-auth](https://github.com/borispoehland/elven-tools-dapp-with-auth) thanks to [@borispoehland](https://github.com/borispoehland)

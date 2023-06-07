@@ -1,3 +1,7 @@
+### [7.1.1](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v7.1.1) (2023-06-07)
+- update useElven - fix native auth login token handling
+- update dependencies
+
 ### [7.1.0](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v7.1.0) (2023-06-04)
 - update useElven and dependencies
 

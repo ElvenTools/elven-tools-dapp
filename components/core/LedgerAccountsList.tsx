@@ -162,7 +162,9 @@ export const LedgerAccountsList: FC<LedgerAccountsListProps> = ({
         </Box>
         {loginToken && (
           <Box mt={3}>
-            <Box fontWeight="bold" textAlign="center">Login token:</Box> 
+            <Box fontWeight="bold" textAlign="center">
+              Login token:
+            </Box>
             <Box wordBreak="break-word">{loginToken}</Box>
           </Box>
         )}

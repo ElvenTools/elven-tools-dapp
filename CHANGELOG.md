@@ -1,3 +1,7 @@
+### [7.3.0](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v7.3.0) (2023-07-31)
+- update useElven (support for guardians)
+- update dependencies
+
 ### [7.2.0](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v7.2.0) (2023-06-22)
 - update useElven (new useTokenTransfer hook)
 - update dependencies

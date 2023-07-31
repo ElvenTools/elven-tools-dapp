@@ -9,16 +9,17 @@ The Dapp is built using Nextjs and a couple of helpful tools. It allows you to i
 
 ### It provides:
 
-- Auth with 4 MultiversX blockchain providers
+- Signing with 4 MultiversX blockchain [providers](https://docs.multiversx.com/sdk-and-tools/sdk-js/)
   - Web Wallet
   - xPortal mobile app
   - MultiversX DeFi browser extension
   - Ledger Nano
+- [Guarderd transactions](https://docs.multiversx.com/sdk-and-tools/sdk-dapp/internal-processes/guardians/#specifications-of-a-guarded-transaction)
 - React hooks for making transactions
 - React hooks for querying smart contracts
 - Tools and React hooks for app state synchronization
-- API endpoint rewrites and 'guard' middleware
-- Preconfigured UI based on Chakra UI
+- Optional API endpoint rewrites
+- Preconfigured UI based on [Chakra UI](https://chakra-ui.com/)
 - The template with sections mainly used on minter dapps (it will be developed further)
 
 ### @useElven/core

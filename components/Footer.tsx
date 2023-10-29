@@ -35,7 +35,7 @@ export const Footer = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Elven Tools ⚡
+            Elven Tools
           </Text>
           <Text fontWeight="hairline"> | </Text>
           <Text
@@ -56,6 +56,16 @@ export const Footer = () => {
             rel="noopener noreferrer nofollow"
           >
             {'useElven'}
+          </Text>
+          <Text fontWeight="hairline"> | </Text>
+          <Text
+            as="a"
+            color="elvenTools.color3.base"
+            href="https://www.buildo.dev"
+            target="_blank"
+            rel="noopener noreferrer nofollow"
+          >
+            {'Buildo.dev'}
           </Text>
           <Text fontWeight="hairline"> | </Text>
           <Text

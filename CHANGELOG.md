@@ -1,3 +1,8 @@
+### [7.4.0](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v7.4.0) (2023-10-29)
+- add support for xAlias
+- update Next.js to v14 (min Node version is now 18.7.0)
+- update other dependencies
+
 ### [7.3.0](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v7.3.0) (2023-07-31)
 - update useElven (support for guardians)
 - update dependencies

@@ -73,7 +73,7 @@ export const team = [
     bio: 'Web designer and artist',
     imageUrl: '/john.svg',
     socialMediaLinks: [
-      'https://www.twitter.com',
+      'https://www.x.com',
       'https://www.behance.net',
       'https://www.dribbble.com',
     ],
@@ -82,14 +82,14 @@ export const team = [
     name: 'Mark Doe',
     bio: 'Smart Contract programmer',
     imageUrl: '/mark.svg',
-    socialMediaLinks: ['https://www.twitter.com', 'https://www.github.com'],
+    socialMediaLinks: ['https://www.x.com', 'https://www.github.com'],
   },
   {
     name: 'Jack Doe',
     bio: 'Community relations and marketing',
     imageUrl: '/jack.svg',
     socialMediaLinks: [
-      'https://www.twitter.com',
+      'https://www.x.com',
       'https://www.discord.com',
       'https://www.telegram.me',
       'https://www.medium.com',

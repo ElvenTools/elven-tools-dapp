@@ -70,4 +70,5 @@ More docs on it: [Minter Dapp introduction](https://www.elven.tools/docs/minter-
 - [useElven](https://www.useElven.com) - React core hooks for MultiversX blockchain
 - [elven.js](https://www.elvenjs.com) - standalone lite SDK for browsers without build steps
 - [Buildo Begins](https://github.com/xdevguild/buildo-begins) - CLI helper tools - interaction with APIs, smart contracts and protocol
+- [Buildo.dev](https://www.buildo.dev) - the app that helps with blockchain interactions, like issuing tokens and querying smart contracts.
 - [Nextjs Dapp Template](https://github.com/xdevguild/nextjs-dapp-template) - Open source Dapp template for the MultiversX blockchain (more general one).

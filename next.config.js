@@ -29,14 +29,19 @@ const nextConfig = {
     dirs: ['components', 'config', 'hooks', 'pages', 'store', 'types', 'utils'],
   },
   images: {
-    domains: [
-      'nftstorage.link',
-      'media.multiversx.com',
-      'devnet-media.multiversx.com',
-      'testnet-media.multiversx.com',
-      'media.elrond.com',
-      'devnet-media.elrond.com',
-      'testnet-media.elrond.com',
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**.elrond.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.multiversx.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.nftstorage.link',
+      },
     ],
   },
 };

@@ -1,3 +1,6 @@
+### [7.4.2](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v7.4.2) (2024-01-11)
+- update useElven and dependencies
+
 ### [7.4.1](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v7.4.1) (2023-12-12)
 - update useElven and dependencies
 

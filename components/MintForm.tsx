@@ -23,7 +23,8 @@ interface MintFormProps {
 
 export const MintForm: FC<MintFormProps> = ({ leftToMintForUser, cb }) => {
   const [amount, setAmount] = useState(1);
-  const { mint, pending, txResult, error } = useMintTransaction(cb);
+  const { mint, pending, transaction, txResult, error } =
+    useMintTransaction(cb);
   const { loginMethod } = useLoginInfo();
 
   const handleMint = useCallback(() => {
@@ -37,12 +38,12 @@ export const MintForm: FC<MintFormProps> = ({ leftToMintForUser, cb }) => {
 
   const getAdditionalPendingMessage = () => {
     if (loginMethod === LoginMethodsEnum.walletconnect) {
-      return 'Sign the transaction using xPortal mobile app. It will take some time to finish. You can always close this message. You will get the transaction hash when finished.';
+      return 'Sign the transaction using xPortal mobile app. It will take some time to finish. You can always close this message. You can check the transaction in the explorer.';
     }
     if (loginMethod === LoginMethodsEnum.ledger) {
-      return 'Sign the transaction using Ledger HW. It will take some time to finish. You can always close this message. You will get the transaction hash when finished.';
+      return 'Sign the transaction using Ledger HW. It will take some time to finish. You can always close this message. You can check the transaction in the explorer.';
     }
-    return 'It will take some time to finish. You can always close this message. You will get the transaction hash when finished.';
+    return 'It will take some time to finish. You can always close this message. You can check the transaction in the explorer.';
   };
 
   return (
@@ -83,6 +84,7 @@ export const MintForm: FC<MintFormProps> = ({ leftToMintForUser, cb }) => {
       <TransactionPendingModal
         isOpen={pending}
         successTxHash={txResult?.hash}
+        txHash={transaction?.getHash().hex()}
         txError={error}
         additionalMessage={getAdditionalPendingMessage()}
       />

@@ -18,6 +18,7 @@ interface TransactionPendingModalProps {
   isOpen: boolean;
   successTxHash?: string;
   txError?: string;
+  txHash?: string;
   additionalMessage?: string;
 }
 
@@ -29,6 +30,7 @@ export const TransactionPendingModal: FC<TransactionPendingModalProps> = ({
   isOpen = false,
   successTxHash,
   txError,
+  txHash,
   additionalMessage,
 }) => {
   const { explorerAddress } = useConfig();
@@ -81,6 +83,20 @@ export const TransactionPendingModal: FC<TransactionPendingModalProps> = ({
           <Text textAlign="center" fontWeight="semibold" fontSize="xl">
             {txTitle()}
           </Text>
+          {txHash && !successTxHash ? (
+            <Text
+              as="a"
+              textAlign="center"
+              textDecoration="underline"
+              display="inline-block"
+              width="100%"
+              mt={5}
+              href={`${explorerAddress}/transactions/${txHash}`}
+              target="_blank"
+            >
+              {shortenHash(txHash, 12)}
+            </Text>
+          ) : null}
 
           {!txError && (
             <Flex alignItems="center" justifyContent="center" mt={8}>

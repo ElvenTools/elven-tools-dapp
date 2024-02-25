@@ -33,14 +33,22 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: '**.elrond.com',
+        port: '',
       },
       {
         protocol: 'https',
         hostname: '**.multiversx.com',
+        port: '',
       },
       {
         protocol: 'https',
         hostname: '**.nftstorage.link',
+        port: '',
+      },
+      {
+        protocol: 'https',
+        hostname: 'nftstorage.link',
+        port: '',
       },
     ],
   },

@@ -1,3 +1,7 @@
+### [7.5.0](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v7.5.0) (2024-02-25)
+- update useElven - changes in callback urls naming, configuration for tx watcher timeout and patience
+- add transaction hash in UI even when the transaction is not finalized yet
+
 ### [7.4.2](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v7.4.2) (2024-01-11)
 - update useElven and dependencies
 

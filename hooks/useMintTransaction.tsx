@@ -24,7 +24,9 @@ export function useMintTransaction(
     type: SCQueryType.NUMBER,
   });
 
-  const { pending, triggerTx, txResult, error } = useTransaction({ cb });
+  const { pending, triggerTx, transaction, txResult, error } = useTransaction({
+    cb,
+  });
 
   const mint = async (tokensAmount: number) => {
     const tokens = tokensAmount || 1;
@@ -73,6 +75,7 @@ export function useMintTransaction(
     pending,
     mint,
     txResult,
+    transaction,
     error,
   };
 }

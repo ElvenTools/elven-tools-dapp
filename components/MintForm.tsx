@@ -22,17 +22,20 @@ interface MintFormProps {
 }
 
 export const MintForm: FC<MintFormProps> = ({ leftToMintForUser, cb }) => {
-  const [amount, setAmount] = useState(1);
+  const [amount, setAmount] = useState<number | ''>(1);
   const { mint, pending, transaction, txResult, error } =
     useMintTransaction(cb);
   const { loginMethod } = useLoginInfo();
 
   const handleMint = useCallback(() => {
-    mint(amount);
+    if (amount) {
+      mint(amount);
+    }
   }, [amount, mint]);
 
   const setAmountHandler = useCallback(
-    (valueAsString: string, valueAsNumber: number) => setAmount(valueAsNumber),
+    (valueAsString: string, valueAsNumber: number) =>
+      setAmount(valueAsString !== '' ? valueAsNumber : ''),
     []
   );
 

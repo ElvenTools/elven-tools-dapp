@@ -1,3 +1,7 @@
+### [7.7.0](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v7.7.0) (2024-07-14)
+- better support for multiple tabs opened
+- update dependencies 
+
 ### [7.6.0](https://github.com/ElvenTools/elven-tools-dapp/releases/tag/v7.6.0) (2024-04-14)
 - update useElven - sdk-core v13 integration
 - update dependencies
